@@ -1,0 +1,78 @@
+# Teleseismic MT + FFI pipeline
+
+A reproducible, battle-tested workflow for determining the **point-source moment tensor**
+(MTUQ) and a **kinematic finite-fault model** (WISP, the USGS operational code) of any
+moderate-to-large earthquake from openly available teleseismic data — from data fetching to
+publication-grade figures and a PDF report.
+
+Built and validated on three real cases in 2026, each of which broke the standard workflow in
+a different, instructive way. Every failure mode found along the way is encoded in the scripts
+or documented in the cookbook, so the next event starts from here instead of rediscovering
+them.
+
+## What's here
+
+```
+scripts/      the pipeline (numbered MTUQ runners, WISP helpers, figure generators)
+notebooks/    23 = the step-by-step COOKBOOK (start here)
+              24 = case study: 2026 Calama M6.9 intraslab, 109 km deep (executed, all figures)
+              22 = case study: 2026 Sanriku-oki M6.9 under wavetrain interference (executed)
+reports/      self-contained PDF reports for both case studies (tectonic context, methods
+              primer for non-specialists, full inversion narrative, reproducibility appendix)
+```
+
+## Quickstart
+
+1. Install [MTUQ](https://github.com/mtuqorg/mtuq) (conda env `mtuq`, with `mpi4py`) and the
+   USGS [neic-finitefault / WISP](https://github.com/usgs/neic-finitefault) (env `ff-env`).
+   Neither is vendored here.
+2. Copy `scripts/config_template.py` to your project root as `config.py`; edit paths.
+3. Open `notebooks/23_mtuq_wisp_cookbook.ipynb` and follow it top to bottom for your event:
+   USGS metadata check → MTUQ data prep → full-MT / DC / DC+depth searches → VR + Kagan
+   comparison → WISP data fetch → auto model both planes → fair refinement → figures.
+
+## The rules the hard way taught us
+
+| situation | rule (and where it came from) |
+|---|---|
+| any event | tag data `type:displacement`; remove response with `water_level=None`; keep data ≥2 Hz for syngine (nb19–21) |
+| any event | compare mechanisms with the Kagan angle via `pyrocko.moment_tensor.kagan_angle` — never plane-by-plane angles, never hand-rolled Kagan code |
+| any event | evaluate the *reference* (GCMT/USGS) mechanism's VR on your own data — if the accepted answer fits terribly, your protocol is broken, not the Earth |
+| deep events (≳60–70 km) | the default 10–33 s body band mixes P/pP/sP and fails *confidently* (~90° mechanism rotation). Move the body band up: `--bwband 25,60,120,10` (validated: body VR −80% → +72%). Depth must be read from the body-only misfit-vs-depth curve; the surface-wave band has no depth resolution |
+| deep events + WISP | the surface-wave GF bank ends near 126 km; a fault extending below it makes WISP **silently** drop all surface waves for that plane, faking a plane discrimination. The refine script auto-trims the fault; always grep the pipeline log for "Maximum depth" |
+| plane discrimination | refine BOTH nodal planes with identical wave types, channels, QC and alignment before comparing misfits; for compact ruptures expect indistinguishability and argue planes from regional precedent / near-field data |
+| near-nodal stations | unmodelled clean first motions at a few stations can discriminate mechanisms less than 10° apart — check the radiation coefficient before blaming the data |
+| interfering events | a large earthquake within ~2 h contaminates long teleseismic windows; compute per-station group-velocity overlap windows and zero swept channels (nb22 method, empirically validated) |
+| depth scans | a minimum on the EDGE of the searched range is not a minimum; MTUQ misfit arrays are (sources, origins) — origins LAST — when reshaping |
+| MPI | `grid_search` returns None on non-root ranks; guard before combining results |
+
+## Case studies
+
+**2026 Calama M6.9 (us6000t04s), 109 km deep intraslab, N Chile** — `notebooks/24`,
+`reports/calama_2026/report.pdf`. Final MT 194/16/−83 (Kagan 8.4° from USGS Mww, better VR
+than the reference on both wave types); slip model: thin subhorizontal lens, 0.70 m peak at
+105–113 km, ~15 s, subshear; centroid ~105–115 km from four depth-phase estimators; shallow
+nodal plane weakly preferred (fit + Tarapacá-2005 precedent). No USGS finite-fault model
+exists for this event.
+
+**2026 Sanriku-oki M6.9 (us6000t7zq), Japan Trench interface** — `notebooks/22`,
+`reports/sanriku_2026/report.pdf`. Same-magnitude shallow counterpart: MT robust (centroid
+depth 46 km recovered independently); FFI marginal exactly as the duration/period criterion
+predicts; quantifies how the Venezuela M7.2+M7.5 doublet's wavetrain swept 69% of the
+surface-wave windows — a plausible operational explanation for the missing USGS finite-fault
+product.
+
+## Data & code availability
+
+Waveform data are open (IRIS/EarthScope, GEOFON et al.) and fetched by the scripts
+(`wisp_fetch_fallback.py` replaces the deprecated `ffm get-data teleseismic` discovery).
+Green's functions: syngine (ak135) for MTUQ; WISP's own banks for the FFI. No waveforms or
+Green's functions are stored in this repository.
+
+MTUQ: Modrak et al.; uses the cut-and-paste strategy of Zhu & Helmberger (1996).
+WISP / neic-finitefault: USGS NEIC operational finite-fault code (Goldberg et al.).
+Please cite the upstream packages when using this pipeline.
+
+## License
+
+MIT (this repository's scripts and documents). Upstream packages carry their own licenses.

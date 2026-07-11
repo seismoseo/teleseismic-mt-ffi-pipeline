@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{graphicx,booktabs,float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\title{\textbf{The 2026-06-24 Sanriku-oki M\textsubscript{w} 6.9 earthquake (us6000t7zq):\\
+moment tensor and finite-fault analysis under interference\\from the Venezuela doublet}}
+\author{M.-S. Seo (analysis pipeline: MTUQ + WISP)}
+\date{10 July 2026}
+\begin{document}\maketitle
+\begin{abstract}
+We determine the point-source moment tensor (full and double-couple constrained, with a depth
+search) and a kinematic finite-fault model for the 2026-06-24 22:30:12 UTC M\textsubscript{w}~6.9
+Sanriku-oki earthquake, for which USGS published moment tensors but no finite-fault model. The
+event occurred 25 minutes after the Venezuela M7.2+M7.5 doublet; we show quantitatively that the
+doublet's global surface wavetrain sweeps 18 of 26 teleseismic surface-wave windows and 6 of 26
+body-wave windows for this event, while W-phase/body-wave MT windows close before the interference
+arrives --- a plausible operational explanation for the missing routine finite-fault product.
+After contamination-aware quality control, the moment tensor is robust (M\textsubscript{w} 6.90,
+interface thrust 184/24/65, centroid depth 46~km, in agreement with the USGS W-phase 177/31.5/60
+at 45.5~km) and a marginal but coherent finite-fault model is recovered on the Japan Trench
+interface plane (M\textsubscript{w} 6.92, peak slip 1.3~m, 23--44~km depth).
+\end{abstract}
+
+\section{Event and the interference problem}
+The M\textsubscript{w}~6.9 (Mww) thrust occurred at 40.2515$^\circ$N, 142.1614$^\circ$E
+(33~km ENE of Noda, Iwate), catalog depth 34~km, on the Japan Trench subduction interface.
+It followed the Venezuela M7.2 (22:04:33) + M7.5 (22:05:11) doublet by 25 minutes. Figure~1
+shows, per station, the Sanriku body- and surface-wave analysis windows against the arrival of
+the Venezuela wavetrain (Love-wave onset to Rayleigh tail): 18/26 surface windows and 6/26 body
+windows are contaminated; only eight southern-azimuth stations retain clean surface waves.
+The W-phase and body-wave MT windows close by $\sim$22:45, before the earliest interference
+($\sim$22:48), explaining why moment tensors were published while the long windows required by a
+finite-fault inversion are compromised.
+\begin{figure}[H]\centering
+\includegraphics[width=.9\textwidth]{../contamination_timeline.png}
+\caption{Venezuela doublet wavetrain (red) vs Sanriku analysis windows (blue = body;
+green/orange = clean/contaminated surface windows), seconds after the Sanriku origin.}
+\end{figure}
+
+\section{Moment tensor (MTUQ)}
+Teleseismic GSN three-component data (25--75$^\circ$), displacement, instrument response removed
+without a water level; body waves 10--33~s (20 clean stations), surface waves 50--100~s (8 clean
+stations); syngine ak135 Green's functions; contamination encoded as CAP weights. Grid searches:
+full moment tensor (1.05M sources on the lune), double-couple (64k orientations $\times$ 5
+magnitudes), and DC with depth as a search dimension (26--50~km).
+\begin{table}[H]\centering\small
+\begin{tabular}{lllll}\toprule
+run & M\textsubscript{w} & strike/dip/rake & depth & note\\\midrule
+full MT & 6.90 & 198/18/81 & 34 km (fixed) & thrust, interface family\\
+DC & 6.90 & 194/16/74 & 34 km (fixed) & \\
+DC + depth & 6.90 & 184/24/65 & \textbf{46 km (best)} & clear misfit minimum\\
+USGS Mww & 6.9 & 177/31.5/60 & 45.5 km & reference\\\bottomrule
+\end{tabular}
+\caption{Moment-tensor results. The depth search independently recovers the W-phase centroid
+depth; the mechanism converges toward the USGS solution as depth is freed.}
+\end{table}
+Variance reduction on clean stations: surface waves 64.7\%, body waves 8.5\%. Body-wave
+\emph{shapes} correlate well (cc 0.7--0.9) but synthetic amplitudes are systematically low,
+consistent with high-Q slab-path amplification unmodelled by 1-D ak135f; the mechanism is carried
+by the surface waves and body waveform shapes.
+\begin{figure}[H]\centering
+\includegraphics[width=.42\textwidth]{../../results/mtuq_dcz_2026sanriku/2026sanriku_misfit_depth.png}
+\includegraphics[width=.44\textwidth]{../../results/mtuq_dc_sanriku_d46/sanriku_d46_beachball.png}
+\caption{Left: DC misfit vs depth (minimum 46 km). Right: best DC (184/24/65) and stations.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.72\textwidth]{../../results/mtuq_dc_sanriku_d46/sanriku_d46_misfit_dc.png}
+\caption{DC misfit surfaces (strike--dip--rake) at 46 km.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.8\textwidth]{../../results/mtuq_dc_sanriku_d46/sanriku_d46_waveforms.png}
+\caption{MTUQ waveform fits at the best DC (black = observed, red = synthetic).}
+\end{figure}
+
+\section{Finite-fault model (WISP)}
+Strict WISP CLI pipeline (auto model, both nodal planes; 54$\times$44~km fault, both misfit
+0.166, M\textsubscript{w} 6.91--6.92 --- conjugate planes are teleseismically indistinguishable;
+the 31$^\circ$-dipping interface plane NP2 (177/31) is the tectonically required choice).
+A key operational finding: WISP's SNR-based station selection rejected \emph{all} 74 processed P
+channels (SNR $<$ 5) --- M6.9 teleseismic P sits at the microseism noise floor, independently
+corroborating that this magnitude is marginal for teleseismic finite-fault inversion. The refined
+model (NP2\_ref) force-includes 14 MTUQ-validated contamination-clean P stations, applies the
+contamination QC to SH and surface channels (8 SH + 3 surface survive), and re-inverts after
+cross-correlation alignment: final misfit 0.211.
+\begin{table}[H]\centering\small
+\begin{tabular}{llllll}\toprule
+model & plane & M\textsubscript{w} & peak slip & depth extent & misfit\\\midrule
+auto NP1 & 32/63 & 6.91 & 1.37 m & -- & 0.166\\
+auto NP2 & 177/31 & 6.92 & 1.32 m & -- & 0.166\\
+\textbf{NP2\_ref (preferred)} & \textbf{177/31} & \textbf{6.92} & \textbf{1.33 m} &
+\textbf{23--44 km} & 0.211 (clean data)\\\bottomrule
+\end{tabular}
+\caption{WISP finite-fault results.}
+\end{table}
+\begin{figure}[H]\centering
+\includegraphics[width=.75\textwidth]{../20260624223012/ffm.0/NP2_ref/plots/SlipDist_plane0_5s.png}
+\caption{Preferred slip model (WISP native style, 5-s rupture-front isochrones).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.95\textwidth]{../20260624223012/ffm.0/NP2_ref/plots/SlipIsochrone_trueScale.png}
+\caption{True-scale (1:1) slip, slip vectors, and isochrones on the interface plane.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.55\textwidth]{../20260624223012/ffm.0/NP2_ref/plots/MomentRate.png}
+\caption{Moment-rate function ($\sim$13 s, consistent with the USGS source-time duration).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.9\textwidth]{../20260624223012/ffm.0/NP2_ref/plots/P_body_waves.png}
+\caption{P-wave fits, refined model (faded = rejected by QC).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.9\textwidth]{../20260624223012/ffm.0/NP2_ref/plots/Rayleigh_surf_waves.png}
+\caption{Rayleigh-wave fits (only contamination-clean channels are active).}
+\end{figure}
+
+\section{Discussion and verdict}
+(1) \textbf{Moment tensor: robust.} M\textsubscript{w} 6.90 interface thrust within
+$\sim$10--15$^\circ$ of the USGS Mww; centroid depth 46 km independently recovered. The MT
+survives because its windows precede the interference. (2) \textbf{Finite fault: obtainable but
+marginal}, as predicted by the source-duration/usable-period criterion (T$\approx$13 s at M6.9):
+first-order content --- a compact $\sim$30--40 km interface patch, peak $\sim$1.3 m, 23--44 km
+depth --- is robust; internal detail, extent, and directivity are not resolved, and the plane
+choice is tectonic rather than data-driven. (3) \textbf{Why USGS has no FFM for this event:} the
+Venezuela doublet sweeps 69\% of surface-wave and 23\% of body-wave windows, and M6.9 P sits at
+the noise floor of operational SNR criteria; a routine FFM would face the same data starvation
+quantified here.
+\end{document}
