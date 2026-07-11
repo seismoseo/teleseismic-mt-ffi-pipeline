@@ -8,7 +8,8 @@ from ffm.inversion_chen_new import manual_modelling
 
 EV = pathlib.Path(os.path.expanduser(
     "~/works/17.Venezuela_2026/event_2026_calama/20260525215220/ffm.1"))
-SRC, DST = EV / "NP1_ref2", EV / "NP1_ref3"
+NP = sys.argv[1] if len(sys.argv) > 1 else "NP1"
+SRC, DST = EV / f"{NP}_ref2", EV / f"{NP}_ref3"
 CONFIG = os.path.expanduser("~/works/neic-finitefault/config.ini")
 ZERO = {("EDA", "BHZ"), ("EDA", "BHT"), ("PTCN", "BHT")}
 
@@ -38,5 +39,5 @@ default_dirs = mng.default_dirs(config_path=CONFIG)
 manual_modelling(tensor_info, ["body", "surf"], default_dirs, seg_data, directory=DST)
 m = re.search(r"averaged misfit error\s+([\d.]+)",
               open(DST / "modelling_summary.txt").read()).group(1)
-print(f"NP1_ref3 misfit {float(m):.4f}")
+print(f"{NP}_ref3 misfit {float(m):.4f}")
 print("DONE")
