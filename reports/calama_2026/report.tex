@@ -286,6 +286,43 @@ $3.17\times10^{19}$~N\,m). The steep-plane alternative (7/74) distributes the sa
 over 94--121~km of depth with 0.89~m peak; all four mechanism/plane variants agree on the
 moment, duration and centroid depth to within a few km (Table~\ref{tab:planes}).
 
+\subsection{Source dimensions and stress drop}
+\label{sec:stressdrop}
+From the slip models directly (rigidity $\mu = 67.5$~GPa from the inversion's own shear
+model at source depth; effective dimensions from a slip threshold; Eshelby circular-crack
+$\Delta\sigma = \frac{7}{16}\,M_0^{\mathrm{eff}}/R^3$, $R=\sqrt{A_{\mathrm{eff}}/\pi}$):
+\begin{table}[H]\centering\footnotesize
+\begin{tabular}{lcccccc}\toprule
+model (threshold) & $A_{\mathrm{eff}}$ & $L$ & $W$ & $\bar{D}$ & $M_0^{\mathrm{eff}}/M_0$ & $\Delta\sigma$\\\midrule
+shallow, final (15\%) & 1093 km$^2$ & 39 km & 35 km & 0.34 m & 0.90 & 1.7 MPa\\
+shallow (30\%) & 744 km$^2$ & 34 km & 28 km & 0.43 m & 0.77 & 2.6 MPa\\
+steep (15\%) & 850 km$^2$ & 34 km & 32 km & 0.44 m & 0.90 & 2.5 MPa\\
+steep (30\%) & 577 km$^2$ & 30 km & 25 km & 0.55 m & 0.77 & 3.8 MPa\\\bottomrule
+\end{tabular}
+\caption{Effective source dimensions and static stress drop. A width-limited estimate
+($\Delta\sigma \approx 2.5\,\mu\bar{D}/W$) agrees with the Eshelby values to within
+0.2~MPa in every row.}
+\label{tab:stress}
+\end{table}
+
+\textbf{Reading and caveats.} (i) Smoothed teleseismic finite-fault models systematically
+\emph{overestimate} rupture area, so these $\Delta\sigma\approx$~1.7--2.6~MPa (preferred
+plane; threshold sensitivity shown) are best read as lower bounds of order a few MPa. An
+independent, smoothing-free check supports the moderate size: the $\sim$10--15~s moment-rate
+duration with $V_r\approx2.5$~km/s implies $R\approx$~13--19~km, matching the model's
+effective radius --- so the source really is $\sim$30--40~km across, and the stress drop is
+genuinely of order a few MPa, not tens. (ii) \textbf{Against global scaling:} at
+M\textsubscript{w}~6.9 the Wells \& Coppersmith (1994) normal-fault relation (crustal)
+predicts $\sim$650~km$^2$; our effective areas (740--1100~km$^2$) sit modestly above, i.e.,
+this event is \emph{ordinary to slightly low} in stress drop relative to crustal norms and
+clearly \emph{not} in the elevated tens-of-MPa class reported by spectral studies for many
+intermediate-depth events --- consistent with its unremarkable rise times (2--7~s) and
+subshear rupture velocity. (iii) \textbf{Aspect ratio:} $L/W\approx1.1$, an equant rupture.
+Crustal normal faults at this magnitude are width-limited by the seismogenic layer
+($W\lesssim$~15--20~km, forcing $L/W\gtrsim2$); an intraslab rupture at 107~km has no such
+free-surface constraint, and the near-circular shape is the expected geometry --- a small but
+tidy consistency argument for the intraslab setting.
+
 \begin{figure}[H]\centering
 \includegraphics[width=.75\textwidth]{../20260525215220/ffm.1/NP1_ref3/plots/SlipDist_plane0_5s.png}
 \caption{Preferred slip model (shallow plane 194/16, this study's mechanism; WISP native
@@ -410,11 +447,13 @@ shallow plane --- weakly preferred here by fit and strongly by the Tarapac\'a 20
 newly-formed subhorizontal shear zones (as proposed for Tarapac\'a), i.e., that the
 subhorizontal orientation is systematically the weak one in this slab. A growing regional
 pattern of subhorizontal intraslab ruptures would be mechanically significant and testable
-event by event. (iii) \emph{Hazard:} the plane choice changes rupture area by a factor
-$\sim$3 for the same moment (thin 8-km lens vs 27-km-tall plane), i.e., stress drop and
-high-frequency radiation --- directly relevant to shaking estimates for the mining region
-around Calama, since intraslab events are efficient high-frequency radiators (Tarapac\'a
-2005 caused damage despite its 95-km depth).
+event by event. (iii) \emph{Hazard:} intraslab events are efficient high-frequency radiators
+(Tarapac\'a 2005 caused damage despite its 95-km depth), and the finite-fault dimensions and
+stress drop (\S\ref{sec:stressdrop}) anchor regional shaking estimates for the mining region
+around Calama. Note that although the two planes differ strongly in slip \emph{depth extent}
+(8 vs 27~km), their along-dip widths and areas are comparable (the shallow plane's 8~km of
+depth spans $\sim$30~km measured on the 16$^\circ$-dipping plane), so the stress drop is
+nearly plane-independent.
 
 \textbf{Improving the models with regional data.} The event sits under one of the
 best-instrumented forearcs on Earth: the open IPOC network (CX, $\sim$20 broadband +
