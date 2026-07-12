@@ -5,8 +5,8 @@ A reproducible, battle-tested workflow for determining the **point-source moment
 moderate-to-large earthquake from openly available teleseismic data — from data fetching to
 publication-grade figures and a PDF report.
 
-Built and validated on three real cases in 2026, each of which broke the standard workflow in
-a different, instructive way. Every failure mode found along the way is encoded in the scripts
+Built and validated on four real cases (2024–2026), each of which broke the standard workflow
+in a different, instructive way. Every failure mode found along the way is encoded in the scripts
 or documented in the cookbook, so the next event starts from here instead of rediscovering
 them.
 
@@ -16,6 +16,8 @@ them.
 scripts/      the pipeline (numbered MTUQ runners, WISP helpers, figure generators)
 notebooks/    23 = the step-by-step COOKBOOK (start here)
               24 = case study: 2026 Calama M6.9 intraslab, 109 km deep (executed, all figures)
+              25 = case study: 2024 San Pedro de Atacama M7.4, 127 km deep — teleseismic
+                   plane discrimination on a disputed event (executed)
               22 = case study: 2026 Sanriku-oki M6.9 under wavetrain interference (executed)
 reports/      self-contained PDF reports for both case studies (tectonic context, methods
               primer for non-specialists, full inversion narrative, reproducibility appendix)
@@ -40,7 +42,7 @@ reports/      self-contained PDF reports for both case studies (tectonic context
 | any event | evaluate the *reference* (GCMT/USGS) mechanism's VR on your own data — if the accepted answer fits terribly, your protocol is broken, not the Earth |
 | deep events (≳60–70 km) | the default 10–33 s body band mixes P/pP/sP and fails *confidently* (~90° mechanism rotation). Move the body band up: `--bwband 25,60,120,10` (validated: body VR −80% → +72%). Depth must be read from the body-only misfit-vs-depth curve; the surface-wave band has no depth resolution |
 | deep events + WISP | the surface-wave GF bank ends near 126 km; a fault extending below it makes WISP **silently** drop all surface waves for that plane, faking a plane discrimination. The refine script auto-trims the fault; always grep the pipeline log for "Maximum depth" |
-| plane discrimination | refine BOTH nodal planes with identical wave types, channels, QC and alignment before comparing misfits; for compact ruptures expect indistinguishability and argue planes from regional precedent / near-field data |
+| plane discrimination | refine BOTH nodal planes with identical wave types, channels, QC and alignment before comparing misfits. Whether teleseismic data can discriminate is a function of rupture size: a ~10-km rupture gave a 1.6% near-tie (2026 Calama, nb24); a ~50-km rupture gave a decisive 10% preference (2024 M7.4, nb25). For compact ruptures argue planes from regional precedent / near-field data |
 | near-nodal stations | unmodelled clean first motions at a few stations can discriminate mechanisms less than 10° apart — check the radiation coefficient before blaming the data |
 | interfering events | a large earthquake within ~2 h contaminates long teleseismic windows; compute per-station group-velocity overlap windows and zero swept channels (nb22 method, empirically validated) |
 | depth scans | a minimum on the EDGE of the searched range is not a minimum; MTUQ misfit arrays are (sources, origins) — origins LAST — when reshaping |
@@ -54,6 +56,16 @@ than the reference on both wave types); slip model: thin subhorizontal lens, 0.7
 105–113 km, ~15 s, subshear; centroid ~105–115 km from four depth-phase estimators; shallow
 nodal plane weakly preferred (fit + Tarapacá-2005 precedent). No USGS finite-fault model
 exists for this event.
+
+**2024 San Pedro de Atacama M7.4 (us7000n05d), 127 km deep intraslab, N Chile** —
+`notebooks/25`. The published rupture models disagree on the fault plane (USGS finite fault:
+shallow 172/21; Jia et al. 2025 Nat. Comms., with strong motion + GNSS + aftershocks: steep
+341/71). Our teleseismic-only pipeline: MT 176/20/−70 first-try under both protocol variants
+(conjugate 7.8° from Jia's plane); with the hypocentre below the 125-km surface-wave GF cap
+on *both* planes, the body-only two-plane comparison is fair by construction — and the
+**steep plane wins by 10%** (0.1099 vs 0.1224), its slip at 81–170 km independently
+reproducing Jia's 120–180 km subevent depths. Together with the 2026 near-tie, the pair
+brackets the rupture size at which teleseismic plane discrimination turns on.
 
 **2026 Sanriku-oki M6.9 (us6000t7zq), Japan Trench interface** — `notebooks/22`,
 `reports/sanriku_2026/report.pdf`. Same-magnitude shallow counterpart: MT robust (centroid
