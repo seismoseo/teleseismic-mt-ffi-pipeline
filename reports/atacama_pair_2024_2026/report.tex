@@ -5,16 +5,27 @@
 \usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
 \usepackage{tcolorbox}
 \newcommand{\Mw}{M\textsubscript{w}}
-\title{\textbf{The 2026-05-25 Calama earthquake (\Mw~6.9, us6000t04s):\\
-moment tensor and finite-fault analysis of an intraslab rupture\\at 109 km depth}}
+\title{\textbf{Two large intraslab earthquakes of the Calama--San Pedro de Atacama
+cluster:\\the 2026 \Mw~6.9 and 2024 \Mw~7.4 events\\
+\large moment tensors, finite-fault models, and the nodal-plane question at 109--127 km depth}}
 \author{M.-S. Seo\\ \small analysis pipeline: MTUQ (point-source moment tensor) + WISP (kinematic finite fault)}
-\date{11 July 2026}
+\date{12 July 2026}
 \begin{document}\maketitle
 
 \begin{abstract}
-We determine the point-source moment tensor (MT) and a kinematic finite-fault model (FFM) for
-the 2026-05-25 21:52:20 UTC \Mw~6.9 earthquake that struck 109~km beneath Calama, northern
-Chile --- an intraslab normal-faulting rupture inside the subducted Nazca plate for which USGS
+We determine point-source moment tensors (MT) and kinematic finite-fault models (FFM) for the
+two most recent large earthquakes of the Calama--San Pedro de Atacama intermediate-depth
+cluster in northern Chile: the 2026-05-25 \Mw~6.9 Calama event (109~km deep; Part~I) and the
+2024-07-19 \Mw~7.4 San Pedro de Atacama event (127~km deep; Part~II), using identical
+teleseismic-only protocols. The pair turns out to be a controlled experiment in what
+teleseismic data can and cannot resolve at these depths: for the compact 2026 rupture the two
+nodal planes are indistinguishable (misfits within 1.6\%), whereas for the $\sim$4$\times$
+larger 2024 rupture the body waves alone discriminate decisively --- the steep plane fits
+$\sim$10\% better, independently confirming the near-field-based verdict of Jia et~al.\ (2025)
+against the plane adopted by the USGS operational finite-fault model.
+
+Part~I in detail: for the 2026 event ---
+an intraslab normal-faulting rupture inside the subducted Nazca plate for which USGS
 published moment tensors but no finite-fault model. Using 26 teleseismic GSN stations, our
 final moment tensor (\Mw~6.90, strike/dip/rake $=$ 194/16/$-$83, with conjugate plane
 7/74/$-$92) lies 8.4$^\circ$ (Kagan angle) from the USGS W-phase solution and fits both the
@@ -47,6 +58,7 @@ produced confident but wrong answers --- are documented step by step, with the c
 caught them, so that the workflow can be reused by non-specialists on future events.
 \end{tcolorbox}
 
+\part*{Part I --- The 2026-05-25 Calama \Mw~6.9 (us6000t04s)}
 \section{Tectonic setting}
 Beneath northern Chile the oceanic Nazca plate converges with South America at roughly
 7~cm/yr and subducts along the Chile trench, dipping eastward beneath the Atacama forearc
@@ -388,6 +400,15 @@ with the same completeness as the preferred model.}
 94--121~km depth, centroid 106.7~km, \Mw~6.93 --- same moment, duration and centroid as the
 preferred model, redistributed on the conjugate geometry.}
 \end{figure}
+
+\textbf{Boundary check.} This fault is trimmed at 121~km by the surface-wave
+Green's-function cap, and its bottom row carries 23\% of the peak slip --- raising the
+question of whether real slip is being truncated. A body-only sensitivity inversion on a
+fault extended four rows deeper (bottom at $\sim$134~km) answers it: the significant slip
+stays at 98--121~km, the bottom-edge slip collapses to 2\% of peak, and the centroid moves by
+$<$2~km. The edge slip in the capped model is boundary \emph{compression}, not truncated
+deeper slip; the depth extent is genuine. (The preferred shallow plane has no such issue ---
+its edge slip is $\leq$4\% of peak on all sides.)
 \begin{figure}[H]\centering
 \includegraphics[width=.9\textwidth]{../20260525215220/ffm.1/NP2_ref3/plots/P_body_waves.png}
 \caption{P-wave fits of the steep-plane model --- compare with the preferred model's fits
@@ -397,6 +418,10 @@ plane ambiguity.}
 \begin{figure}[H]\centering
 \includegraphics[width=.9\textwidth]{../20260525215220/ffm.1/NP2_ref3/plots/Rayleigh_surf_waves.png}
 \caption{Rayleigh-wave fits of the steep-plane model (grey = zero-weighted EDA).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.9\textwidth]{../20260525215220/ffm.1/NP2_ref3/plots/Love_surf_waves.png}
+\caption{Love-wave fits of the steep-plane model (grey = zero-weighted EDA and PTCN).}
 \end{figure}
 \begin{figure}[H]\centering
 \includegraphics[width=.55\textwidth]{../20260525215220/ffm.1/NP1_ref3/plots/MomentRate.png}
@@ -534,6 +559,276 @@ of magnitude larger in moment: the 2005 Tarapac\'a \Mw~7.8 ($\sim$30$\times$ thi
 \emph{was} measurably recorded by regional GPS. For \Mw$\lesssim$7 intermediate-depth
 events, seismology --- teleseismic plus regional --- carries all the information.
 
+
+\part*{Part II --- The 2024-07-19 San Pedro de Atacama \Mw~7.4 (us7000n05d)}
+
+\section{The 2024 event and the published plane dispute}
+The 2024-07-19 01:50:48 UTC \Mw~7.4 earthquake, 127~km beneath San Pedro de Atacama and
+$\sim$80~km ESE of the 2026 epicentre, is the largest member of this cluster since 1950 ---
+and the only one whose rupture has been studied with modern near-field data. It is also the
+subject of a live disagreement about the most basic property of the rupture: which of the two
+nodal planes slipped.
+\begin{itemize}
+\item The \textbf{USGS operational finite-fault model} places the slip on the
+  \textbf{shallow plane} (strike 172$^\circ$, dip 21$^\circ$ --- NP1 of the USGS W-phase
+  tensor, whose Mww solution is 171.85/21.14/$-$79.92, \Mw~7.4, centroid 120.5~km).
+\item \textbf{Jia et~al.\ (2025, \emph{Nature Communications})}, inverting 54 teleseismic and
+  47 strong-motion stations plus GNSS (up to $\sim$1~cm of static offset at 250~km) and using
+  relocated aftershocks and directivity, conclude the opposite: rupture on the
+  \textbf{steep, eastward-dipping plane} (341$^\circ$/71$^\circ$), as five subevents between
+  120 and 180~km depth, with rupture initiating by dehydration embrittlement in the cold slab
+  core and transitioning to \emph{thermal runaway} beyond the $\sim$650$^\circ$C isotherm.
+\end{itemize}
+For the 2026 event (Part~I) we showed that teleseismic data \emph{cannot} discriminate the
+planes of a compact deep rupture. The 2024 rupture is $\sim$4$\times$ larger in linear
+dimension: the pair therefore asks a sharp question --- does plane discriminability switch on
+with rupture size, and if so, which side of the published dispute do the teleseismic data
+take? We analysed the 2024 event with the identical pipeline and protocols as Part~I.
+
+\section{Moment tensor}
+The deep-event MTUQ protocol of Part~I transfers with one scaling: the source duration is
+$\sim$40~s, so the long-period body band moves from 25--60~s to \textbf{35--80~s}
+(\texttt{--bwband 35,80,150,12}: a 150-s window holding the P$+$pP$+$sP group, $\pm$12~s
+shifts). Surface waves: 100--250~s (the \Mw$\geq$7 mantle-wave setting). 26 GSN stations.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lllll}
+\toprule
+run & data & \Mw & mechanism & Kagan vs.\ USGS Mww \\
+\midrule
+SW-only & surface waves 100--250 s & 7.40 & 176/20/$-$70 & 6.3$^\circ$ \\
+joint & body 35--80 s $+$ surface waves & 7.25 & 166/20/$-$83 & \textbf{3.4$^\circ$} \\
+\bottomrule
+\end{tabular}
+\caption{2024 moment-tensor runs. The two protocols agree with each other to 5.0$^\circ$
+(Kagan); adding body waves moves the mechanism \emph{closer} to the USGS W-phase solution.
+The joint conjugate plane, 338.6/70.2/$-$92.5, lies 5.8$^\circ$ from Jia et~al.'s steep plane.}
+\label{tab:mt2024}
+\end{table}
+
+\textbf{Full disclosure of a bug this event exposed.} Our runner's magnitude-dependent
+defaults disable body waves for \Mw$\geq$7 (surface-wave-only is the safe default at these
+magnitudes); passing \texttt{--bwband} did not re-enable them, so our first ``joint'' run was
+silently a duplicate of the SW-only run. The bug was found when preparing the waveform-fit
+figures (no body-wave panels existed to plot), fixed (an explicit band now implies
+\texttt{use\_bw=True}), and the joint inversion re-run --- the corrected result is the one in
+Table~\ref{tab:mt2024}. The lesson is the same one Part~I teaches twice: \emph{always look at
+the waveform fits; a missing panel is a missing dataset.}
+
+\textbf{On the magnitude difference.} The SW-only \Mw~7.40 matches the USGS Mww exactly; the
+joint run prefers \Mw~7.25 because the 35--80-s body waves systematically favour a smaller
+moment for this long (40~s) source. We adopt the surface-wave-anchored \Mw~7.40 as the
+moment estimate and read the joint run as the better \emph{mechanism} constraint (3.4$^\circ$
+from Mww) --- consistent with our WISP models, whose moment (1.4$\times$10$^{20}$~N$\cdot$m,
+\Mw~7.37) sits at the surface-wave value.
+
+\begin{figure}[H]\centering
+\includegraphics[width=.72\textwidth,height=.88\textheight,keepaspectratio]{../../results/mtuq_dc_spda_lpbody/spda_lpbody_waveforms.png}
+\caption{Joint moment-tensor waveform fits for the 2024 event: body waves 35--80~s (left Z/R
+pairs) and surface waves 100--250~s (right Z/R/T). Black observed, red synthetic.}
+\end{figure}
+
+\section{Finite-fault models: the plane test}
+\label{sec:planetest2024}
+WISP auto-modelling was run on both nodal planes of the USGS W-phase tensor (172/21 and
+341/69 --- within 6$^\circ$ of our own planes). Here the depth that broke Part~I's first
+comparison enforces fairness \emph{by construction}: with the hypocentre at 127.3~km, every
+plane through it exceeds the 125-km limit of the surface-wave Green's-function bank, so WISP
+drops surface waves \emph{identically on both planes}. What remains is a controlled
+experiment on \textbf{62 identical teleseismic body channels} (39~P, 23~SH; zero stations
+dropped; identical weights, discretisation, annealing settings and velocity model), where the
+only difference between the two runs is the plane orientation.
+
+The auto faults (15$\times$15 subfaults of 8.25$\times$6.8~km) left significant slip pinned
+against the fault edges (up to 41\% of peak slip in the bottom row of the steep plane ---
+visible as clipping in the slip distributions). Both planes were therefore re-inverted on an
+enlarged \textbf{21$\times$22 grid (173$\times$150~km)}, extended identically on both planes
+(3 columns each side along strike; 3 rows up-dip, 4 rows down-dip), with Green's functions
+recomputed. Edge slip drops below $\sim$16\% of peak on every boundary and the misfits and
+slip geometry are essentially unchanged --- the discrimination result is not an artefact of
+the fault domain.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{llllll}
+\toprule
+plane & misfit (auto) & re-anneal & extended fault & peak slip & slip depth ($>$15\% peak) \\
+\midrule
+shallow 172/21 (USGS FFM) & 0.1224 & 0.1224 & 0.1236 & 0.80 m & 104--144 km \\
+\textbf{steep 341/69 (Jia)} & \textbf{0.1099} & \textbf{0.1099} & \textbf{0.1127} & 1.17 m & 119--163 km \\
+\bottomrule
+\end{tabular}
+\caption{The 2024 plane test. The steep plane fits $\sim$10\% better under every treatment;
+independent re-anneals reproduce the misfits to four decimals, and enlarging the fault domain
+(identically on both planes) does not change the ordering.}
+\label{tab:plane2024}
+\end{table}
+
+\textbf{The teleseismic verdict agrees with Jia et~al.} The steep plane is preferred by
+$\sim$10\% in misfit --- far outside both the annealing scatter (zero to four decimals) and
+the 1.6\% plane difference of the 2026 event. Moreover the steep-plane slip model ruptures
+\emph{down-dip} from the 127-km hypocentre to $\sim$170~km --- independently reproducing the
+120--180~km depth extent of Jia et~al.'s subevents, which our inversion was never told about
+--- while the shallow plane, geometrically confined near the hypocentral depth by its
+21$^\circ$ dip, cannot reach those depths. Two independent lines (misfit and slip-depth
+consistency), using none of Jia et~al.'s near-field data, support the steep plane against the
+USGS operational choice.
+
+\begin{figure}[H]\centering
+\includegraphics[width=.9\textwidth]{../../event_2024_spda/20240719015048/ffm.0/NP2_ext/plots/SlipDist_plane0_5s.png}
+\caption{Preferred 2024 slip model: steep plane (341/69), extended fault. Star $=$
+hypocentre; contours $=$ rupture front every 5~s; arrows $=$ slip direction (normal,
+down-dip). Slip runs from the hypocentre down-dip to $\sim$170~km depth.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.9\textwidth]{../../event_2024_spda/20240719015048/ffm.0/NP2_ext/plots/SlipIsochrone_trueScale.png}
+\caption{Steep-plane slip in true-scale fault coordinates with rupture-time isochrones.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.9\textwidth]{../../event_2024_spda/20240719015048/ffm.0/NP1_ext/plots/SlipDist_plane0_5s.png}
+\caption{Alternative 2024 slip model: shallow plane (172/21), extended fault --- shown with
+equal completeness. Fits 10\% worse (Table~\ref{tab:plane2024}).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.55\textwidth]{../../event_2024_spda/20240719015048/ffm.0/NP2_ext/plots/MomentRate.png}
+\caption{2024 moment-rate function (steep plane): multi-pulse --- main episodes at
+$\sim$10 and $\sim$18~s and a minor one near 35~s, $\sim$40~s total --- consistent with the
+complexity in the USGS moment-rate function and Jia et~al.'s five-subevent rupture.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.92\textwidth]{../../event_2024_spda/20240719015048/ffm.0/NP2_ext/plots/P_body_waves.png}
+\caption{P-wave fits of the preferred (steep-plane, extended) 2024 model. The depth-phase
+group (pP/sP, $\sim$40--60~s after P at this depth) carries the discriminating information.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.92\textwidth]{../../event_2024_spda/20240719015048/ffm.0/NP2_ext/plots/SH_body_waves.png}
+\caption{SH-wave fits of the preferred 2024 model.}
+\end{figure}
+
+\textbf{Why no surface-wave fits for 2024?} They do not exist, for a physical reason: the
+source lies below the maximum depth of WISP's surface-wave Green's-function bank (125~km), so
+surface-wave synthetics cannot be computed for \emph{any} plane through the hypocentre. (For
+the 2026 event, whose fault straddles the limit, Part~I shows Rayleigh \emph{and} Love fits;
+the same figures are impossible here, and their absence is symmetric between the planes ---
+which is precisely what makes the 2024 comparison fair by construction.) The moment tensor,
+however, \emph{is} surface-wave-anchored (Table~\ref{tab:mt2024}), so the long-period moment
+is still pinned by data WISP cannot use.
+
+\section{Source dimensions and stress drop (2024)}
+\label{sec:stress2024}
+Same recipe as Part~I (\S\ref{sec:stressdrop}): $\mu = 67.5$~GPa from WISP's shear model at
+source depth; Eshelby circular crack on the threshold-trimmed effective area; every threshold
+disclosed. On the preferred steep plane (extended fault):
+\begin{table}[H]\centering\small
+\begin{tabular}{llllll}
+\toprule
+trim (\% of peak) & $A_{\rm eff}$ (km$^2$) & $L$ (km) & $W$ (km) & $\bar D$ (m) & $\Delta\sigma$ (MPa) \\
+\midrule
+10 & 3315 & 91 & 75 & 0.52 & 1.5 \\
+15 & 2753 & 66 & 54 & 0.60 & 1.9 \\
+20 & 2416 & 58 & 54 & 0.65 & 2.2 \\
+30 & 1966 & 50 & 48 & 0.73 & 2.7 \\
+\bottomrule
+\end{tabular}
+\caption{2024 source dimensions and Eshelby stress drop (steep plane, extended fault; model
+moment $1.44\times10^{20}$~N$\cdot$m). The shallow plane gives 0.9--1.1~MPa at the same trims
+--- the plane choice does not qualitatively change $\Delta\sigma$.}
+\label{tab:stress2024}
+\end{table}
+
+Jia et~al.\ do not report a stress drop for this event (they cite only the general tendency
+of intermediate-depth earthquakes toward high stress drop), so this is, to our knowledge, a
+new number: $\Delta\sigma \approx$ 1.9--2.2~MPa (15--20\% trim), similar to the 2026 event
+($\sim$2~MPa) and at the gentle end of the cluster's documented range (Tarapac\'a 2005
+$\sim$15~MPa; 1950 $\sim$10~MPa). Finite-fault-based stress drops are smoothed lower bounds;
+even so, a factor-of-several contrast with Tarapac\'a survives any plausible trimming choice.
+
+\part*{Part III --- The pair compared}
+
+\section{Plane discriminability switches on with rupture size}
+\begin{table}[H]\centering\small
+\begin{tabular}{lll}
+\toprule
+ & 2026 Calama \Mw~6.9 & 2024 San Pedro de Atacama \Mw~7.4 \\
+\midrule
+hypocentre depth & 109 km & 127 km \\
+our MT (preferred) & 194/16/$-$83, \Mw~6.90 & 166/20/$-$83 (joint), \Mw~7.40 (SW) \\
+Kagan vs.\ USGS Mww & 8.4$^\circ$ & 3.4$^\circ$ \\
+surface waves in FFI & yes (after GF-cap repair) & impossible (both planes $>$ cap) \\
+plane discrimination & \textbf{no} --- 0.1402 vs 0.1424 (1.6\%) & \textbf{yes} --- 0.1236 vs 0.1127 ($\sim$10\%) \\
+preferred plane & shallow (marginal) & \textbf{steep} --- with Jia, against USGS FFM \\
+slip depth extent & 105--113 km (compact lens) & 119--163 km (down-dip elongated) \\
+peak slip / duration & 0.70 m / $\sim$15 s & 1.17 m / $\sim$40 s \\
+stress drop (Eshelby) & $\sim$2 MPa & $\sim$2 MPa \\
+\bottomrule
+\end{tabular}
+\caption{The pair at a glance.}
+\label{tab:pair}
+\end{table}
+
+Teleseismic plane discrimination requires the rupture to be extended enough that the two
+conjugate geometries predict measurably different depth-phase move-out across the fault. At
+25--80-s periods a $\sim$10-km rupture (2026) is a point source and the planes tie to 1.6\%;
+a $\sim$50-km-down-dip rupture (2024) is not, and the planes separate by 10\%. The pair
+brackets the threshold empirically --- a directly reusable rule for future deep events: below
+$\sim$\Mw~7, do not expect teleseismic waveform fits to choose the plane; argue from regional
+precedent or near-field data instead.
+
+\section{Did the two events rupture different fault planes?}
+The two mechanisms differ by 30.9$^\circ$ (Kagan) --- so \emph{no common plane exists}
+regardless of which conjugates are chosen: these are two distinct structures within the same
+seismic volume, not repeat ruptures of one fault. What can and cannot be said about each:
+\begin{itemize}
+\item \textbf{2024: steep plane, with confidence.} Our teleseismic misfit and slip-depth
+  consistency (Part~II) independently agree with Jia et~al.'s near-field verdict. Strike
+  341$^\circ$, dipping $\sim$70$^\circ$ east --- consistent with reactivated outer-rise
+  normal-fault fabric.
+\item \textbf{2026: undetermined.} Fit is a 1.6\% tie with the shallow plane marginally ahead;
+  the regional precedent cuts both ways (Tarapac\'a 2005 ruptured a subhorizontal plane;
+  2024 --- and suggestively 1950 --- ruptured steep planes). If one insists on the cluster
+  precedent now strengthened by 2024, the steep plane (7/74) becomes the more likely guess ---
+  but even then its strike differs from the 2024 plane by $\sim$26$^\circ$.
+\end{itemize}
+The honest conclusion: the cluster does not host a single master fault. Its large events
+occur on variably oriented planes (subhorizontal Tarapac\'a, steep N-striking 2024, either a
+subhorizontal or a steep NNE-striking plane in 2026) within a $\sim$25--30-km-thick
+seismogenic volume --- consistent with distributed reactivation of inherited slab fabric
+under a common down-dip extensional stress state (every T-axis in the family is
+slab-down-dip), rather than with a single through-going structure.
+
+\section{How can a normal-faulting rupture run at (or above) the shear-wave speed?}
+\label{sec:supershear}
+Jia et~al.'s directivity analysis gives an \emph{average} rupture velocity of 4.2~km/s
+$\approx$ 0.93$V_S$ --- inside the theoretically forbidden zone between the Rayleigh and
+shear speeds for steady in-plane rupture --- which they interpret as a \emph{mixed} rupture:
+sub-shear segments alternating with \textbf{episodic supershear} bursts. (Note this is a
+claim of intermittent, not sustained, supershear.) The intuition that supershear is a
+strike-slip phenomenon conflates the faulting \emph{style} with the crack \emph{mode}, and it
+is the mode that matters:
+\begin{itemize}
+\item Rupture propagating \textbf{parallel to the slip vector} is \textbf{mode II} (in-plane
+  shear). Mode II cracks can pass the Burridge--Andrews transition and propagate between the
+  Eshelby speed $\sqrt{2}V_S$ and $V_P$. Rupture propagating \emph{perpendicular} to the slip
+  vector is mode III (anti-plane) and is capped at $V_S$.
+\item On a strike-slip fault the slip vector is horizontal, so the \emph{along-strike}
+  direction is mode II --- long unilateral strike-slip ruptures are therefore the classic
+  supershear observations (Kunlun 2001, Denali 2002, Palu 2018).
+\item On a \textbf{dip-slip fault the slip vector points down-dip}, so the \textbf{down-dip
+  direction is mode II}. The 2024 rupture propagated down-dip on a steep normal fault with
+  rake $-$93 --- almost pure mode II in its propagation direction. Supershear episodes are
+  therefore \emph{mechanically natural} for exactly this geometry; what is rare is the
+  \emph{observation}, because dip-slip faults offer limited mode-II run distance (here
+  $\sim$50--80~km) compared to great strike-slip ruptures.
+\item Deep precedent exists: supershear rupture was documented for the deep (640~km)
+  \Mw~6.7 aftershock of the 2013 Sea of Okhotsk earthquake (Zhan et~al., 2014, \emph{Science})
+  --- a dip-slip event --- showing that neither shallow depth, a free surface, nor
+  strike-slip geometry is required.
+\item Physically, Jia et~al.'s thermal-runaway interpretation and the fast rupture are two
+  faces of the same coin: runaway weakening (frictional heating outpacing diffusion) collapses
+  the fault strength behind the front, boosting the energy-release rate that drives the
+  transition to supershear --- plausibly in episodic bursts wherever the weakening is
+  strongest.
+\end{itemize}
+
 \section{Conclusions and reusable lessons}
 \begin{enumerate}
 \item \textbf{Source parameters.} \Mw~6.90 normal-faulting intraslab rupture; mechanism
@@ -557,6 +852,19 @@ types, same channels), and read the pipeline log, not just the result.
 \item \textbf{First motions at near-nodal stations are a sharp, free diagnostic} --- here they
 discriminated mechanisms 8.4$^\circ$ apart and identified which of two published-quality
 solutions the data prefer.
+\item \textbf{The 2024 \Mw~7.4 (Part~II): the same pipeline, first-try, takes a side in a
+published dispute.} MT 166/20/$-$83 (joint; 3.4$^\circ$ from USGS Mww); under a
+fair-by-construction body-only comparison the \textbf{steep plane (341/69) fits $\sim$10\%
+better} than the shallow plane adopted by the USGS finite-fault model, and its slip
+(119--163~km depth, 1.17~m peak) independently reproduces the subevent depths of Jia
+et~al.\ (2025) --- teleseismic-only confirmation of their near-field verdict. Stress drop
+$\sim$2~MPa (new; Jia et~al.\ report none), gentle like the 2026 event.
+\item \textbf{The pair brackets when teleseismic plane discrimination works} (Part~III):
+$\sim$10-km rupture $\to$ 1.6\% tie; $\sim$50-km rupture $\to$ 10\% separation. And the two
+events, 30.9$^\circ$ apart in mechanism, cannot share a plane: the cluster fails on variably
+oriented structures under a common slab-pull stress state. Jia et~al.'s episodic-supershear
+claim is mechanically natural for down-dip (mode~II) rupture on a dip-slip fault
+(\S\ref{sec:supershear}).
 \end{enumerate}
 
 \appendix
@@ -593,6 +901,16 @@ generic-response heuristic that zeroed 4 stations was found too aggressive and d
 their gains are consistent with neighbours and their fits are good). Fault: 15$\times$12
 subfaults of 3.5$\times$3.5~km; simulated annealing as shipped; velocity model: WISP default
 (ak135-based) at source, PREM-based Green's-function banks.
+
+\textbf{2024 event runs (Part II).} Data: \texttt{scripts/wisp\_fetch\_fallback.py} (183
+channels, 64 stations) $+$ 26-station MTUQ set. MT: \texttt{15\_run\_mtuq\_dc.py --event
+2024spda --nobody} (SW-only) and \texttt{--event spda\_lpbody --bwband 35,80,150,12} (joint;
+after the \texttt{use\_bw} fix). WISP: \texttt{scripts/run\_wisp\_2024.sh} (auto, both
+planes) $\to$ \texttt{rerun\_spda\_refine.py} (re-anneal robustness $+$ plots) $\to$
+\texttt{extend\_fault\_rerun.py} (21$\times$22 grid, 173$\times$150~km, both planes
+identically) $\to$ \texttt{make\_spda\_figs.py} (slip figures, stress drop). Surface waves
+impossible (hypocentre 127.3~km $>$ 125-km GF cap on both planes); 62 body channels, zero
+drops.
 
 \textbf{Known pitfalls encoded in the scripts} (each cost real time here): syngine rejects
 1-Hz data; MTUQ's resampler has an npts-dependent off-by-one (trim to 12800 samples at 4~Hz);
