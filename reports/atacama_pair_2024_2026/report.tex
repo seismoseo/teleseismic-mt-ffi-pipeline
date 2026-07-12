@@ -871,6 +871,49 @@ seismogenic volume --- consistent with distributed reactivation of inherited sla
 under a common down-dip extensional stress state (every T-axis in the family is
 slab-down-dip), rather than with a single through-going structure.
 
+\section{Adding regional strong motion: can 1-D modelling work at these depths?}
+\label{sec:regional}
+Following Jia et~al.'s use of near-field data, we added regional strong-motion stations
+(networks C/C1/CX/IU, acquired with \texttt{ffm manage acquire -t strong}) and re-ran WISP
+jointly (\texttt{-t body -t strong}) for both events. The motivating caveat: regional 1-D
+Green's-function modelling \emph{totally fails} for shallow strike-slip ruptures (as for the
+2026 Venezuela doublet), where near-surface paths run through heterogeneous crust, basins and
+strong scattering. Would it succeed for a \emph{deep intraslab} source, whose rays leave
+steeply and traverse the near-1-D mantle? Two facts make the test clean: WISP computes the
+near-field Green's functions on the fly (no depth cap, unlike the surface-wave bank,
+\S\ref{sec:planetest2024}), and the strong-motion band (0.01--0.125~Hz) matches the low-frequency
+regime where 1-D GFs are usable.
+
+\textbf{It works --- unlike the shallow case.} Both events give a clearly positive
+strong-motion variance reduction (2024: median $+0.36$; 2026: $+0.21$), capturing the
+low-frequency near-field pulse and its timing (the high-frequency wiggles are not fit --- the
+1-D-GF limit of \S\ref{sec:resolution2024}). This is a concrete, physically expected contrast
+with the shallow Venezuela failure.
+
+\textbf{The near-field payoff scales with depth.} The 2026 event (109~km) keeps 10 near-field
+stations within WISP's $\sim$2$^\circ$ cutoff and the joint slip model \emph{sharpens}
+markedly --- the diffuse teleseismic asperity ($\sim$35~km down-dip, 0.70~m peak) collapses to
+a compact patch at the hypocentre ($\sim$25~km down-dip, 108--113~km, 0.98~m peak;
+Figure~\ref{fig:reg2026}). The 2024 event (127~km) keeps only 3 (a deeper source has fewer
+stations in the near-field cone above it); its joint slip merely \emph{confirms} the
+teleseismic model (centroid 138$\to$134~km, same geometry). Pushing the 2024 cutoff to
+4.5$^\circ$ (16 stations) does not help but \emph{hurts} --- median VR $+0.36\to+0.12$ ---
+because stations at 2--4.5$^\circ$ cannot be 1-D-modelled for a deep source and drag the
+inversion. The default near-field selection is therefore physically correct, and the deep-source
+near-field constraint is inherently limited by geometry.
+
+\textbf{A plane tie-breaker for 2026.} The regional data fit the \emph{shallow} plane better
+(strong-motion VR $+0.21$ shallow vs.\ $+0.08$ steep), independently reinforcing the weak
+shallow preference from the teleseismic fit and the Tarapac\'a-2005 precedent --- the first
+data-driven tie-breaker for the otherwise-ambiguous 2026 plane.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{fig_regional_2026_compare.png}
+\caption{2026 slip model, teleseismic-only (left) vs.\ body\,$+$\,regional (right, 10
+near-field stations): the near-field geometry localises the rupture into a compact asperity.}
+\label{fig:reg2026}
+\end{figure}
+
 \section{How can a normal-faulting rupture run at (or above) the shear-wave speed?}
 \label{sec:supershear}
 Jia et~al.'s directivity analysis gives an \emph{average} rupture velocity of 4.2~km/s
