@@ -23,7 +23,7 @@ from mtuq import read, download_greens
 from mtuq.event import Origin
 from mtuq.graphics import (plot_data_greens2, plot_beachball, plot_misfit_lune,
                            plot_likelihood_lune)
-from mtuq.grid import FullMomentTensorGridSemiregular
+from mtuq.grid import FullMomentTensorGridSemiregular, DeviatoricGridSemiregular
 from mtuq.grid_search import grid_search
 from mtuq.misfit import Misfit
 from mtuq.misfit.waveform import estimate_sigma
@@ -53,11 +53,11 @@ def bands(mw):
                 bwts=8., swts=40., use_bw=False)            # surface-wave only
 
 
-def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=None, swts=None):
+def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=None, swts=None, deviatoric=False):
     data_dir = os.path.join(C.DATA_DIR, "mtuq", event_id)
     path_data = os.path.join(data_dir, "*.[zrt]")
     path_weights = os.path.join(data_dir, "weights.dat")
-    out = os.path.join(C.RESULTS_DIR, f"mtuq_sota_{event_id}")
+    out = os.path.join(C.RESULTS_DIR, f"mtuq_{'dev' if deviatoric else 'sota'}_{event_id}")
     os.makedirs(out, exist_ok=True)
 
     origin = Origin({"time": str(time), "latitude": float(lat), "longitude": float(lon),
@@ -81,7 +81,8 @@ def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=
 
     station_id_list = parse_station_codes(path_weights)
     mags = [round(mag + d, 1) for d in (-0.3, -0.15, 0.0, 0.15, 0.3)]
-    grid = FullMomentTensorGridSemiregular(npts_per_axis=npts, magnitudes=mags)
+    grid = (DeviatoricGridSemiregular(npts_per_axis=npts, magnitudes=mags) if deviatoric
+            else FullMomentTensorGridSemiregular(npts_per_axis=npts, magnitudes=mags))
     wavelet = Trapezoid(magnitude=mag)
 
     from mpi4py import MPI
@@ -161,12 +162,13 @@ def main():
     ap.add_argument("--npts", type=int, default=10)
     ap.add_argument("--swband", default=None, help="Tmin,Tmax,winlen override for surface waves")
     ap.add_argument("--swts", type=float, default=None, help="override surface-wave time-shift range (s)")
+    ap.add_argument("--deviatoric", action="store_true", help="constrain to zero trace (CLVD allowed, no isotropic)")
     a = ap.parse_args()
     if a.lat is None:                                  # pull from ComCat CSV
         ev = pd.read_csv(C.COMCAT_CSV).set_index("event_id").loc[a.event]
         a.lat, a.lon, a.depth, a.time = (float(ev["latitude"]), float(ev["longitude"]),
                                          float(ev["depth"]), str(ev["time"]))
-    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts)
+    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, deviatoric=a.deviatoric)
 
 
 if __name__ == "__main__":
