@@ -47,11 +47,14 @@ reports/      self-contained PDF reports for both case studies (tectonic context
 | interfering events | a large earthquake within ~2 h contaminates long teleseismic windows; compute per-station group-velocity overlap windows and zero swept channels (nb22 method, empirically validated) |
 | depth scans | a minimum on the EDGE of the searched range is not a minimum; MTUQ misfit arrays are (sources, origins) — origins LAST — when reshaping |
 | MPI | `grid_search` returns None on non-root ranks; guard before combining results |
+| Mw ≥ 7 | magnitude-dependent defaults silently disable body waves; an explicit `--bwband` now re-enables them (a "joint" run that was secretly SW-only was caught because the waveform figure had no body panels — always look at the fits; a missing panel is a missing dataset) |
+| any FFM | check slip at the fault edges (>~15–20% of peak in an edge row = domain too small); re-invert on an enlarged fault — extended *identically* on both planes if a plane comparison is at stake (nb25: edge slip 41% → ≤16%, conclusion unchanged) |
 
 ## Case studies
 
 **2026 Calama M6.9 (us6000t04s), 109 km deep intraslab, N Chile** — `notebooks/24`,
-`reports/calama_2026/report.pdf`. Final MT 194/16/−83 (Kagan 8.4° from USGS Mww, better VR
+`reports/atacama_pair_2024_2026/report.pdf` (Part I; the same PDF covers both Chile events
+plus the comparative Part III with the supershear-mechanics discussion). Final MT 194/16/−83 (Kagan 8.4° from USGS Mww, better VR
 than the reference on both wave types); slip model: thin subhorizontal lens, 0.70 m peak at
 105–113 km, ~15 s, subshear; centroid ~105–115 km from four depth-phase estimators; shallow
 nodal plane weakly preferred (fit + Tarapacá-2005 precedent). No USGS finite-fault model

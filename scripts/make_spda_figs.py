@@ -8,8 +8,8 @@ import fig_fault_isochrone as fi
 
 BASE = os.path.join(os.path.dirname(HERE), "event_2024_spda/20240719015048/ffm.0")
 RUNS = {
-    "NP1_ref": "2024 San Pedro de Atacama M7.4 — shallow plane (172/21, USGS FFM choice)",
-    "NP2_ref": "2024 San Pedro de Atacama M7.4 — steep plane (341/69, Jia et al. choice)",
+    "NP1_ext": "2024 San Pedro de Atacama M7.4 — shallow plane (172/21, USGS FFM choice), extended fault",
+    "NP2_ext": "2024 San Pedro de Atacama M7.4 — steep plane (341/69, Jia et al. choice), extended fault",
 }
 for rel, title in RUNS.items():
     d = os.path.join(BASE, rel)

@@ -56,6 +56,7 @@ def run(event_id, lat, lon, depth_km, time, mag, npts=40, model="ak135", swband=
         p = [float(x) for x in bwband.split(",")]
         b["bwf"] = (1.0 / p[1], 1.0 / p[0]); b["bww"] = p[2]
         b["bwts"] = p[3] if len(p) > 3 else p[0] / 4.
+        b["use_bw"] = True   # explicit band = explicit intent (bands() disables bw for Mw>=7)
     if nobody:
         b["use_bw"] = False
     process_bw = ProcessData(filter_type="Bandpass", freq_min=b["bwf"][0], freq_max=b["bwf"][1],
