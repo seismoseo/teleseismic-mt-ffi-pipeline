@@ -749,6 +749,46 @@ tensor already fixes, not the finite slip. The moment tensor \emph{is} surface-w
 long-period moment is fully pinned by data WISP cannot use. The absence is also symmetric
 between the two planes, which is what makes the body-only comparison fair by construction.
 
+\section{Resolution: band, first pulses, and smoothness}
+\label{sec:resolution2024}
+Three questions about the body-wave fit quality, each settled by a direct test.
+
+\textbf{Frequency band.} WISP band-passes the teleseismic P/SH at 0.006--1.0~Hz and inverts
+8 dyadic wavelet scales, fitting scales 2--8 and zero-weighting only scale~1 ($>$1.25~Hz,
+above the filter); the effective band is $\sim$0.01--1~Hz. Jia et~al.\ used 0.02--0.2~Hz for
+teleseismic data --- our inversion already reaches to \emph{higher} frequency, not lower. The
+band is physics-limited: the low corner passes periods longer than the $\sim$40-s source (to
+capture the full moment); the high corner is bounded by 1-D Green's-function validity for
+teleseismic P ($\sim$0.2--0.5~Hz, above which 3-D structure dominates) and by the subfault
+Nyquist (8-km subfaults at $\sim$4~km/s cannot radiate coherent detail above $\sim$0.5~Hz).
+
+\textbf{First pulses.} The under-fit first P pulses at some stations are a \emph{near-nodal
+radiation} effect, identical to the 2026 case: correlating each station's first-pulse misfit
+with its P-radiation coefficient $|F_P|$ gives $r=-0.55$; the ten worst-fit onsets all have
+$|F_P|<0.2$ (BOSA, LBTB, SUR, PAB, TSUM, CMLA, TAM, FDFM, BBGH, MACI). Near a P node the
+modelled first motion is $\sim$0, so the sharp observed onset is under-predicted while the
+later, non-nodal P group fits well (Figure~\ref{fig:resolution}a). This is information (the
+near-nodal discriminant), not a defect.
+
+\textbf{Smoothness.} The model is as rough as the data allow, not over-regularised.
+(i) 96\% of the observed P energy is below 0.2~Hz and is well fit (median variance reduction
+$+0.51$); the $\sim$4\% above 0.2~Hz is essentially unfittable ($+0.02$), being incoherent 3-D
+path effects (Figure~\ref{fig:resolution}b). (ii) Cutting the slip- and time-smoothness
+penalties $5\times$ barely changes the misfit (0.1127$\to$0.1090) and does not recover the high
+band ($+0.02\to+0.04$), but inflates slip roughness by $\sim$50\% --- unconstrained roughness
+that fits noise. Jia et~al.\ resolved fine complexity from \emph{near-field strong motion} plus
+back-projection, not from teleseismic high frequencies; our teleseismic-only model is correctly
+the smooth, robust envelope of that rupture (same moment, duration, depth extent, plane).
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{fig_resolution_2024.png}
+\caption{2024 resolution diagnostics. (a) First-pulse misfit vs.\ P-radiation coefficient:
+the unfit onsets are near-nodal ($r=-0.55$). (b) Per-station variance reduction below
+0.2~Hz (green; Jia's teleseismic band) vs.\ 0.2--1.0~Hz (red): the low band fits, the high
+band does not.}
+\label{fig:resolution}
+\end{figure}
+
 \section{Source dimensions and stress drop (2024)}
 \label{sec:stress2024}
 Same recipe as Part~I (\S\ref{sec:stressdrop}): $\mu = 67.5$~GPa from WISP's shear model at
