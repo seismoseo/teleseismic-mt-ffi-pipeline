@@ -630,16 +630,31 @@ pairs) and surface waves 100--250~s (right Z/R/T). Black observed, red synthetic
 
 \subsection{Beyond the double couple}
 Deep events are the classic setting for non-double-couple components, and the USGS solutions
-for this event are only 62--69\% DC. A full-MT lune search (1.05M sources, surface waves) and
-a deviatoric variant, compared \emph{nested on the identical grid}: DC 0.1509 $\to$
-deviatoric 0.1480 (CLVD $\gamma=-9.1^\circ$, 66\% DC --- matching the USGS percent-DC)
-$\to$ full MT 0.1323 ($\delta=+23.5^\circ$), best orientation 162/18/$-$81 in all three.
-The CLVD is credible and has a natural reading: a composite rupture whose subevents rotate
-mechanism (Jia et~al.'s ``mechanism transition'') sums to a non-DC tensor. The large positive
-volumetric component, which carries most of the improvement, should not be over-interpreted:
-at 100--250~s with 26 stations and 1-D Green's functions the isotropic axis readily absorbs
-structure error, and the variance-based lune likelihood failed to converge --- the defensible
-statement is the deviatoric one, $\sim$66\% DC with a modest $-9^\circ$ CLVD.
+for this event are only 62--69\% DC. We ran full-MT and deviatoric lune searches in two data
+configurations to separate signal from artefact --- surface-wave-only, and (following the
+principle that more independent data is better) \emph{joint} with the safe 35--80~s body
+band added. Both give the same non-DC \emph{shape}:
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lllll}
+\toprule
+data & best mechanism & CLVD $\gamma$ & isotropic $\delta$ & \%DC (deviatoric) \\
+\midrule
+surface waves only & 162/18/$-$81 & $-9.1^\circ$ & $+23.5^\circ$ & 66\% \\
+joint (body 35--80 s $+$ SW) & 342/63/$-$81 & $\mathbf{-9.1^\circ}$ & $\mathbf{+15.6^\circ}$ & \textbf{66\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The \textbf{CLVD ($\gamma=-9.1^\circ$, 66\% DC) is identical in both} and matches the USGS
+percent-DC; it is the credible, physical non-DC signal --- a composite rupture whose subevents
+rotate mechanism (Jia et~al.'s ``mechanism transition'') sums to a non-DC tensor. The
+\textbf{isotropic component is not robust}: adding body waves shrank it from
+$\delta=+23.5^\circ$ to $+15.6^\circ$, confirming it was largely 1-D-structure error absorbed
+by the free isotropic axis (and the variance-based likelihood did not converge). The
+defensible statement is $\sim$66\% DC with a modest $-9^\circ$ CLVD, no trustworthy isotropic
+term --- and the joint best plane (342/63) is the steep one, consistent with the finite-fault
+discrimination below.
 
 \section{Finite-fault models: the plane test}
 \label{sec:planetest2024}

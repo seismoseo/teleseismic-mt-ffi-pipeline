@@ -53,7 +53,7 @@ def bands(mw):
                 bwts=8., swts=40., use_bw=False)            # surface-wave only
 
 
-def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=None, swts=None, deviatoric=False):
+def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=None, swts=None, deviatoric=False, bwband=None):
     data_dir = os.path.join(C.DATA_DIR, "mtuq", event_id)
     path_data = os.path.join(data_dir, "*.[zrt]")
     path_weights = os.path.join(data_dir, "weights.dat")
@@ -68,6 +68,11 @@ def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=
         b["swf"] = (1.0/t2, 1.0/t1); b["sww"] = win; b["swts"] = t1/4.
     if swts:
         b["swts"] = swts
+    if bwband:                       # enable + set body band, e.g. "35,80,150,12" (deep events)
+        p = [float(x) for x in bwband.split(",")]
+        b["bwf"] = (1.0/p[1], 1.0/p[0]); b["bww"] = p[2]
+        b["bwts"] = p[3] if len(p) > 3 else p[0]/4.
+        b["use_bw"] = True
     process_bw = ProcessData(filter_type="Bandpass", freq_min=b["bwf"][0], freq_max=b["bwf"][1],
         pick_type="taup", taup_model=model, window_type="body_wave",
         window_length=b["bww"], capuaf_file=path_weights)
@@ -163,12 +168,13 @@ def main():
     ap.add_argument("--swband", default=None, help="Tmin,Tmax,winlen override for surface waves")
     ap.add_argument("--swts", type=float, default=None, help="override surface-wave time-shift range (s)")
     ap.add_argument("--deviatoric", action="store_true", help="constrain to zero trace (CLVD allowed, no isotropic)")
+    ap.add_argument("--bwband", default=None, help="Tmin,Tmax,winlen[,ts] to ENABLE body waves (deep events)")
     a = ap.parse_args()
     if a.lat is None:                                  # pull from ComCat CSV
         ev = pd.read_csv(C.COMCAT_CSV).set_index("event_id").loc[a.event]
         a.lat, a.lon, a.depth, a.time = (float(ev["latitude"]), float(ev["longitude"]),
                                          float(ev["depth"]), str(ev["time"]))
-    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, deviatoric=a.deviatoric)
+    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, deviatoric=a.deviatoric, bwband=a.bwband)
 
 
 if __name__ == "__main__":
