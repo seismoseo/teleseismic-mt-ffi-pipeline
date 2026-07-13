@@ -117,11 +117,29 @@ the correct oblique-reverse thrust.}
 \includegraphics[width=0.92\textwidth,height=0.9\textheight,keepaspectratio]{../../results/mtuq_dc_2023morocco/2023morocco_waveforms.png}
 \caption{Body-wave fits of the adopted DC solution (black observed, red synthetic).}
 \end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth,height=0.9\textheight,keepaspectratio]{../../results/mtuq_sota_2023morocco/2023morocco_waveforms.png}
+\caption{Body-wave fits of the full moment tensor (270/63/63, 66\% DC), shown for completeness;
+the adopted solution is the better-constrained DC.}
+\end{figure}
+
+\section{Depth}
+The catalogue (19~km), Mwc (26~km), USGS finite fault (25~km) and Mww centroid (30.5~km)
+disagree. A joint depth search is unreliable here (the surface-wave flip contaminates it), so we
+run a \textbf{body-only} DC+depth search: its global misfit minimum is at $\sim$33~km (a broad
+30--34~km trough), independently supporting the \textbf{deeper centroid} ($\sim$30--33~km,
+matching the USGS Mww 30.5~km) over the 19-km catalogue hypocentre, with a weaker secondary
+minimum near 10--14~km from the depth-phase trade-off. The WISP slip (below) spreads over
+17--37~km, consistent with this mid-to-deep-crustal centroid.
+\begin{figure}[H]\centering
+\includegraphics[width=0.7\textwidth]{../../results/mtuq_bodydepth_morocco/2023morocco_misfit_depth.png}
+\caption{Body-only misfit versus source depth (best $\sim$33~km).}
+\end{figure}
 
 \section{Finite fault: validation against the USGS model}
 We ran WISP \texttt{auto\_model} on both nodal planes of \emph{our own} MTUQ mechanism (internal
 consistency: the fault planes come from our moment tensor, not an external CMT). Being shallow,
-surface waves are fully used.
+surface waves are fully used, together with teleseismic P (35 channels) and \textbf{SH} (26 channels) body waves.
 
 \begin{table}[H]\centering\small
 \begin{tabular}{llllll}
@@ -150,6 +168,11 @@ arrows: slip direction (reverse). Peak 1.46~m, slip at 17--37~km depth.}
 \begin{figure}[H]\centering
 \includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/P_body_waves.png}
 \caption{WISP P-wave fits (steep plane).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/SH_body_waves.png}
+\caption{WISP SH-wave fits (steep plane): teleseismic SH (transverse, 26 channels) are used
+alongside the 35 P channels.}
 \end{figure}
 \begin{figure}[H]\centering
 \includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/Rayleigh_surf_waves.png}

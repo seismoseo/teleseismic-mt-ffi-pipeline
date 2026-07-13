@@ -37,7 +37,7 @@ from importlib import import_module
 bands = import_module("12_run_mtuq_sota").bands
 
 
-def run(event_id, lat, lon, depth_km, time, mag, npts=40, model="ak135", swband=None, swts=None, nobody=False, bwband=None, onlybody=False):
+def run(event_id, lat, lon, depth_km, time, mag, npts=40, model="ak135", swband=None, swts=None, nobody=False, bwband=None, onlybody=False, sh=False):
     data_dir = os.path.join(C.DATA_DIR, "mtuq", event_id)
     path_data = os.path.join(data_dir, "*.[zrt]")
     path_weights = os.path.join(data_dir, "weights.dat")
@@ -66,7 +66,7 @@ def run(event_id, lat, lon, depth_km, time, mag, npts=40, model="ak135", swband=
         pick_type="taup", taup_model=model, window_type="surface_wave",
         window_length=b["sww"], capuaf_file=path_weights)
     misfit_bw = Misfit(norm="L2", time_shift_min=-b["bwts"], time_shift_max=b["bwts"],
-        time_shift_groups=["ZR"], normalize=True)
+        time_shift_groups=(["ZR","T"] if sh else ["ZR"]), normalize=True)
     misfit_sw = Misfit(norm="L2", time_shift_min=-b["swts"], time_shift_max=b["swts"],
         time_shift_groups=["ZR", "T"], normalize=True)
 
@@ -144,7 +144,7 @@ def main():
     ap.add_argument("--nobody", action="store_true", help="surface waves only")
     ap.add_argument("--bwband", default=None, help="body band override: Tmin,Tmax,winlen[,ts]")
     a = ap.parse_args()
-    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, nobody=a.nobody, bwband=a.bwband, onlybody=a.onlybody)
+    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, nobody=a.nobody, bwband=a.bwband, onlybody=a.onlybody, sh=a.sh)
 
 
 if __name__ == "__main__":
