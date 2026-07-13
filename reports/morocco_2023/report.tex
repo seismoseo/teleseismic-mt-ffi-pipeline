@@ -19,9 +19,10 @@ mostly-unstudied events we analysed previously, this one has a USGS moment tenso
 finite-fault model, so we use it to \emph{validate} the pipeline and to document every data,
 frequency-band and processing parameter for reproducibility. Our double-couple moment tensor,
 $256/67/65$ (\Mw~6.95), lies 5.1$^\circ$ (Kagan angle) from the USGS W-phase solution; our WISP
-finite fault on the steep plane (peak slip 1.46~m at 17--37~km, $\sim$43$\times$38~km) closely
-reproduces the USGS model (1.88~m, 25~km, 45$\times$30~km) on the steep plane (though the
-teleseismic fit marginally, non-decisively, favours the shallow conjugate). The study also yields a methodological result that mirrors our deep-event work: for a
+finite fault on the steep plane (peak slip 1.62~m, centroid $\sim$25~km, $\sim$39$\times$38~km;
+with the \texttt{shift\_match} cross-correlation step applied) closely reproduces the USGS model
+(1.88~m, 25~km, 45$\times$30~km) on the steep plane (though the teleseismic fit marginally,
+non-decisively, favours the shallow conjugate), and gives an ordinary stress drop of $\sim$3~MPa. The study also yields a methodological result that mirrors our deep-event work: for a
 \emph{shallow} source the joint body-plus-surface-wave inversion returns a \emph{confidently
 wrong} (flipped, normal-faulting) mechanism, because surface waves are dip-slip-indeterminate at
 shallow depth (Kanamori \& Given, 1981) and mismatched by 1-D dispersion; the body waves, through
@@ -140,45 +141,72 @@ minimum near 10--14~km from the depth-phase trade-off. The WISP slip (below) spr
 We ran WISP \texttt{auto\_model} on both nodal planes of \emph{our own} MTUQ mechanism (internal
 consistency: the fault planes come from our moment tensor, not an external CMT). Being shallow,
 surface waves are fully used, together with teleseismic P (35 channels) and \textbf{SH} (26 channels) body waves.
+The adopted models apply the \textbf{cross-correlation time-shift step} (\texttt{shift\_match}; see
+below), which every other event in this study used but the first Morocco pass had skipped.
 
 \begin{table}[H]\centering\small
-\begin{tabular}{llllll}
+\begin{tabular}{lllll}
 \toprule
-plane & misfit & peak slip & slip depth ($>$15\%) & $L\times W$ & USGS finite fault \\
+plane & misfit (pre $\to$ post shift) & peak slip & $L\times W$ & USGS finite fault \\
 \midrule
-NP1 = \textbf{steep 256/67} (= USGS FF plane) & 0.1402 & 1.50~m & 11--44~km & 39$\times$38~km & 251/69, 1.88~m, 25~km, 45$\times$30~km \\
-NP2 = shallow 126/33 (WISP-preferred) & \textbf{0.1365} & 1.46~m & 17--37~km & 43$\times$38~km & --- \\
+NP1 = \textbf{steep 256/67} (= USGS FF plane) & 0.1402 $\to$ \textbf{0.1235} & 1.50 $\to$ 1.62~m & 39$\times$38~km & 251/69, 1.88~m, 25~km, 45$\times$30~km \\
+NP2 = shallow 126/33 (WISP-preferred) & 0.1376 $\to$ \textbf{0.1196} & 1.46 $\to$ 1.71~m & 43$\times$38~km & --- \\
 \bottomrule
 \end{tabular}
-\caption{Plane discrimination is an honest ambiguity: WISP's teleseismic fit \emph{marginally}
-prefers the shallow plane (0.1365 vs 0.1402, $\sim$3\%), \emph{disagreeing} with USGS's
-finite-fault steep-plane choice. As for the Chile events, teleseismic fit is a weak plane
-discriminant; USGS's steep choice rests on aftershocks and InSAR. We show the steep plane (NP1,
-$=$ the USGS finite-fault plane) for validation: its slip reproduces the USGS model.}
+\caption{Plane discrimination is an honest ambiguity: after the shift WISP's teleseismic fit still
+\emph{marginally} prefers the shallow plane (0.1196 vs 0.1235, $\sim$3\%), \emph{disagreeing} with
+USGS's finite-fault steep-plane choice --- the shift does not flip the preference. As for the Chile
+events, teleseismic fit is a weak plane discriminant; USGS's steep choice rests on aftershocks and
+InSAR. We show the steep plane (NP1, $=$ the USGS finite-fault plane) for validation.}
 \end{table}
 
+\subsection*{The cross-correlation time-shift step}
+WISP provides \texttt{shift\_match2} (auto cross-correlation, $\pm$5~s body / $\pm$12~s surface) and
+\texttt{manual\_shift} (user-entered per-station) to remove the residual timing mismatch left by a
+1-D velocity model and centroid mislocation. Each sets a trace's alignment index once and holds it
+fixed during the annealing (it is not a free inversion parameter). Applied here as auto
+cross-correlation for body (P$+$SH) and surface (Rayleigh$+$Love), then re-inverting, it cuts the
+misfit $\sim$12--13\% on both planes and visibly aligns the SH peaks (TLY, YAK, KBS, PALK) while
+leaving $M_w$ unchanged and merely sharpening the slip.
+
 \begin{figure}[H]\centering
-\includegraphics[width=0.9\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/SlipDist_plane0_5s.png}
-\caption{Preferred (steep-plane) slip model. Star: hypocentre; contours: rupture front every 5~s;
-arrows: slip direction (reverse). Peak 1.46~m, slip at 17--37~km depth.}
+\includegraphics[width=0.9\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_shift/plots/Map.png}
+\caption{Map view of the preferred (steep-plane) slip model: fault slip projected to the surface,
+with the epicentre (star) and coastlines. WISP \texttt{PlotMap}.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.55\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/MomentRate.png}
+\includegraphics[width=0.9\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_shift/plots/SlipDist_plane0_5s.png}
+\caption{On-fault slip model (steep plane, with time shift). Star: hypocentre; contours: rupture
+front every 5~s; arrows: slip direction (reverse). Peak 1.62~m, centroid $\sim$25~km depth.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_shift/plots/MomentRate.png}
 \caption{Moment-rate function (steep plane).}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/P_body_waves.png}
-\caption{WISP P-wave fits (steep plane).}
+\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_shift/plots/P_body_waves.png}
+\caption{WISP P-wave fits (steep plane, with time shift).}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/SH_body_waves.png}
-\caption{WISP SH-wave fits (steep plane): teleseismic SH (transverse, 26 channels) are used
-alongside the 35 P channels.}
+\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_shift/plots/SH_body_waves.png}
+\caption{WISP SH-wave fits (steep plane, with time shift): teleseismic SH (transverse, 26 channels)
+alongside the 35 P channels. Compared to the un-shifted run, the synthetic peaks now align with the
+observed at TLY, YAK, KBS and PALK.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/Rayleigh_surf_waves.png}
+\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_shift/plots/Rayleigh_surf_waves.png}
 \caption{WISP Rayleigh-wave fits (steep plane).}
 \end{figure}
+
+\subsection*{Stress drop and moment magnitude}
+From the shifted slip distribution (Eshelby circular crack $\Delta\sigma = \frac{7}{16}M_0/R^3$,
+effective area from the slip participation ratio), the stress drop is \textbf{3.15~MPa} (steep) /
+3.26~MPa (shallow) --- $\sim$3~MPa, an ordinary value for a continental crustal reverse earthquake
+(global median $\sim$3--4~MPa), independent of the plane. Both the MT and the finite fault give
+\textbf{$M_w \approx 6.94$}, i.e.\ $\sim$0.15 units ($\times$1.6 in moment) above the USGS $M_{ww}$ 6.8;
+the W-phase $M_{ww}$ is the more authoritative long-period moment, and our body-wave-driven estimate
+runs higher. Since $\Delta\sigma \propto M_0$, normalising to $M_{ww}$ would lower the stress drop to
+$\sim$2~MPa, so the defensible statement is \textbf{$\sim$2--3~MPa, ordinary}.
 
 \section{Summary}
 \begin{enumerate}
@@ -189,6 +217,9 @@ event --- a clean end-to-end validation across a new tectonic regime (shallow co
 dip-slip-indeterminate at shallow depth and flip the solution. Mirror of the deep-event rule.
 \item \textbf{Use the DC constraint} for shallow sources --- the full MT is destabilised by the
 same indeterminacy (66\% vs USGS 94\% DC).
+\item \textbf{Apply the \texttt{shift\_match} cross-correlation step} (as every other event did):
+it cut the WISP misfit $\sim$12--13\%, aligned the SH peaks, and sharpened the slip without changing
+$M_w$. Stress drop $\sim$3~MPa (ordinary); $M_w$ 6.94, $\sim$0.15 above the USGS $M_{ww}$ 6.8.
 \item Every parameter is tabulated; the analysis re-runs deterministically from the archived
 waveforms. Pipeline is CPU-parallel (MPI $+$ OpenMP), no GPU.
 \end{enumerate}
