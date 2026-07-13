@@ -253,12 +253,14 @@ $\sim$2~MPa, so the defensible statement is \textbf{$\sim$2--3~MPa, ordinary}.
 Our teleseismic model has a longer source (T$_{5-95}\approx$12~s, tail to $\sim$17~s) than USGS
 ($\sim$10--15~s); the moment-rate function shows a dominant pulse at $\sim$5~s plus a distinct
 second pulse at $\sim$15~s carrying our excess moment. From the USGS finite-fault product,
-their model uses a \emph{smaller} fault (45$\times$30~km vs our 54$\times$44~km) and \emph{faster}
-rupture velocity (2.64 vs 2.16~km/s); rise time and time-window count are essentially identical.
-Total STF $\approx$ (front crossing the fault) $+$ rise, so our $\times$1.76 larger area and
-$\times$0.82 slower V$_r$ multiply to $\sim\times$1.6 in propagation time --- exactly the
-$\sim$10~s~$\to\sim$16~s difference. The long tail is weakly constrained: capping the source
-duration at 10~s re-inverts to an essentially identical misfit (0.1239 vs 0.1235).
+their model uses a \emph{smaller} fault (45$\times$30~km vs our 54$\times$44~km), a \emph{faster}
+rupture velocity (2.64 vs 2.16~km/s), and a \emph{lower} seed moment ($M_{ww}$ 6.8 vs our
+body-wave 6.95); rise time and time-window count are essentially identical. The long tail is
+weakly constrained: capping the source duration at 10~s re-inverts to an essentially identical
+misfit (0.1239 vs 0.1235).
+
+\emph{Which of these actually causes the long source? An ablation (\S9) settles it: not the fault
+size, not the location, not the InSAR --- it is the \textbf{seed moment}. See \S9.}
 
 \subsection*{Progressive evolution: adding geodetic data}
 USGS also inverted three Sentinel-1 interferograms. We fetched the \emph{same} USGS resampled
@@ -285,11 +287,12 @@ duration T$_{5-95}$ & 12.3~s & 12.3~s (unchanged) & $\sim$10--15~s \\
 slip compactness $N_{\rm eff}$ & 82/225 & 84/225 (unchanged) & --- \\
 \bottomrule
 \end{tabular}
-\caption{Adding the InSAR fits the interferograms (penalization 2.05$\to$0.18) with no teleseismic
-penalty, but leaves moment, duration and extent unchanged --- our seismic-only model already
-satisfies the geodesy. The duration and moment differences from USGS are therefore a
-\emph{parameterization} effect (larger fault template $+$ slower $V_r$ $+$ seed), not an InSAR-data
-effect: both models fit the same interferograms.}
+\caption{Adding the InSAR at this stage fits the interferograms (penalization 2.05$\to$0.18) with no
+teleseismic penalty, but leaves moment, duration and extent unchanged. The reason is \emph{not} that
+the geodesy is uninformative: \S8--\S9 show the InSAR could not improve the model while the seed
+moment was wrong (and the fault mislocated/over-sized) --- the InSAR was stuck at a mediocre VR of
+55\%. Fix the seed and the geometry, and the same data reaches VR 85\% and pulls the model into
+agreement with USGS.}
 \end{table}
 
 \section{Doing it better: the Yeck et al.\ (2023) recipe}
@@ -353,6 +356,44 @@ python scripts/wisp_yeck_recipe.py <run>/NP1_shift <run>/NP1_v2 \
     --centroid 30.978,-8.332,25.0 --mww 6.8 --grid 15,10,3.0 --insar <insar_dir>
 \end{verbatim}
 
+\section{Ablation: which change produced which improvement?}
+The recipe alters four things at once. To attribute the improvements we change \textbf{exactly one}
+at a time from the initial model and re-invert (teleseismic only, so nothing is confounded).
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lllll}
+\toprule
+variant (one change from baseline) & tele.\ misfit & \Mw & T$_{5-95}$ & moment $>$10~s \\
+\midrule
+baseline (initial model) & 0.1235 & 6.94 & 12.3~s & 32\% \\
+$+$ InSAR only & 0.1236 & 6.94 & 12.3~s & 32\% \\
+right-size only (45$\times$30~km) & 0.1239 & 6.94 & 12.6~s & 29\% \\
+relocate only (InSAR centroid) & 0.1242 & 6.94 & 12.7~s & 33\% \\
+\textbf{seed moment only ($M_{ww}$ 6.8)} & \textbf{0.1043} & \textbf{6.80} & \textbf{9.4~s} & \textbf{17\%} \\
+full recipe (all four) & 0.1045 & 6.80 & 8.5~s & 11\% \\
+\bottomrule
+\end{tabular}
+\caption{Attribution. The \textbf{seed moment} does essentially all of the work: on its own it drops
+\Mw\ to 6.80, collapses the late tail, shortens the source, and delivers virtually the \emph{entire}
+misfit improvement (0.1235$\to$0.1043). Right-sizing, relocation and the InSAR each change almost
+nothing in isolation; together they add only a modest final tightening (9.4$\to$8.5~s).}
+\end{table}
+
+\textbf{Why the seed moment is the key tweak.} WISP's annealing carries a \emph{moment
+penalization} that pulls the total moment towards the seed value. With a seed 1.6$\times$ too large
+(our body-wave \Mw~6.95 versus the true $M_{ww}$~6.8), the inversion is \emph{forced to manufacture
+moment that the waveforms do not want} --- and it deposits that excess in the only place the data
+cannot object: \textbf{low-amplitude, late-arriving slip}, which surfaces as the spurious
+$\sim$15~s second pulse. Correct the seed and the model stops inventing moment: the tail vanishes,
+the duration shortens, \emph{and the waveform fit improves}, because the model is no longer
+distorting itself to hit a wrong moment target.
+
+\textbf{The transferable lesson: a long, low-amplitude STF tail is a symptom of an over-estimated
+seed moment, not necessarily of real late rupture.} Seed the moment from the most authoritative
+long-period estimate (the W-phase $M_{ww}$), and treat such a tail as a diagnostic. (This also
+corrects our own earlier reasoning, which had attributed the long source to the larger fault
+template and slower $V_r$ --- the ablation refutes that: resizing alone changes nothing.)
+
 \section{Summary}
 \begin{enumerate}
 \item The pipeline \textbf{reproduces the USGS moment tensor to 5.1$^\circ$ and the USGS
@@ -365,11 +406,14 @@ same indeterminacy (66\% vs USGS 94\% DC).
 \item \textbf{Apply the \texttt{shift\_match} cross-correlation step} (as every other event did):
 it cut the WISP misfit $\sim$12--13\%, aligned the SH peaks, and sharpened the slip without changing
 $M_w$. Stress drop $\sim$3~MPa (ordinary); $M_w$ 6.94, $\sim$0.15 above the USGS $M_{ww}$ 6.8.
-\item \textbf{Rupture duration vs USGS is a parameterization effect, not a data effect.} A joint
-teleseismic$+$InSAR inversion using USGS's own interferograms fits the geodesy (penalization
-2.05$\to$0.18) but leaves our moment/duration/extent unchanged --- the seismic model already
-satisfies the InSAR. The $\sim\times$2 duration and $M_w$ 6.94 vs 6.84 come from the larger fault
-template $+$ slower $V_r$ $+$ seed, not the InSAR.
+\item \textbf{The over-long source was caused by the SEED MOMENT} (ablation, \S9). Not the fault
+size, not the location, not the InSAR --- each of those changes nothing on its own. WISP's moment
+penalization pulls the total moment to the seed; a seed 1.6$\times$ too large (our body-wave \Mw~6.95
+vs the true $M_{ww}$~6.8) \emph{forces the inversion to manufacture moment}, which it deposits as
+low-amplitude \emph{late} slip --- the spurious $\sim$15~s second pulse. Correcting the seed alone
+drops \Mw\ to 6.80, collapses the tail, shortens the source to 9.4~s, \emph{and} delivers nearly the
+entire misfit improvement. \textbf{A long, low-amplitude STF tail is a symptom of an over-estimated
+seed moment, not necessarily real late rupture.}
 \item \textbf{Better slip modeling (Yeck \emph{et al.}\ 2023 recipe).} Relocate to the
 \emph{geodetic centroid} and nucleate there; \emph{right-size} the fault; seed the moment from
 $M_{ww}$; invert \emph{jointly} with InSAR. Result: \Mw~6.80, an 8.5~s source, InSAR VR 85\%, and a
