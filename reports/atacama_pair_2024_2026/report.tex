@@ -907,6 +907,30 @@ near-field constraint is inherently limited by geometry.
 shallow preference from the teleseismic fit and the Tarapac\'a-2005 precedent --- the first
 data-driven tie-breaker for the otherwise-ambiguous 2026 plane.
 
+\textbf{Optimising the fit: shift-matching.} WISP's automatic pipeline aligns strong-motion
+traces on theoretical arrivals only; cross-correlation shift-matching
+(\texttt{ffm process shift-match}) removes the residual 1-D-velocity timing error and improves
+the fit where it matters --- the 2026 median strong-motion variance reduction rises from $+0.21$
+to $+0.31$ (fraction of channels above 0.3: 33\%\,$\to$\,53\%). The gain is real but bounded:
+the vertical and radial main pulses then align well, while the transverse (SH) components stay
+imperfect --- radiation-pattern sensitivity and the 1-D-Green's-function amplitude limit, not
+timing. (For the 2024 event shift-matching is neutral, $+0.36\to+0.34$: its three stations are
+so close that their timing was already correct.)
+
+\textbf{Regional point-source MT is not reliable here (a negative result worth stating).}
+Regional data can also, in principle, be inverted for the point-source moment tensor with MTUQ
+(the CAP method's native regime). We did so for both events (24 regional broadband stations
+each, syngine ak135 Green's functions). The result is a cautionary one: the regional
+mechanisms land 32$^\circ$ (2026) and 71$^\circ$ (2024) in Kagan angle from the
+well-constrained teleseismic solutions, with inflated magnitudes (\Mw~7.05, 7.10). The cause is
+geometric --- every available station sits in the forearc, leaving a \textbf{$\sim$145$^\circ$
+azimuthal gap} over the ocean and back-arc, which a point-source inversion cannot tolerate.
+The lesson is consistent with the finite-fault result: regional data usefully constrains
+rupture \emph{geometry} (a differential measurement, robust to the gap and to 1-D-GF errors ---
+it sharpens the slip model), but \emph{not} the absolute point-source mechanism, which needs the
+azimuthal coverage only teleseismic distances provide. The teleseismic moment tensor remains
+authoritative; regional data is a complement for finite-fault detail, not a substitute.
+
 \begin{figure}[H]\centering
 \includegraphics[width=\textwidth]{fig_regional_2026_compare.png}
 \caption{2026 slip model, teleseismic-only (left) vs.\ body\,$+$\,regional (right, 10
