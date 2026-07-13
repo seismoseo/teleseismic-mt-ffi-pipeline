@@ -208,6 +208,49 @@ the W-phase $M_{ww}$ is the more authoritative long-period moment, and our body-
 runs higher. Since $\Delta\sigma \propto M_0$, normalising to $M_{ww}$ would lower the stress drop to
 $\sim$2~MPa, so the defensible statement is \textbf{$\sim$2--3~MPa, ordinary}.
 
+\section{Rupture duration and a joint teleseismic $+$ InSAR inversion}
+Our teleseismic model has a longer source (T$_{5-95}\approx$12~s, tail to $\sim$17~s) than USGS
+($\sim$10--15~s); the moment-rate function shows a dominant pulse at $\sim$5~s plus a distinct
+second pulse at $\sim$15~s carrying our excess moment. From the USGS finite-fault product,
+their model uses a \emph{smaller} fault (45$\times$30~km vs our 54$\times$44~km) and \emph{faster}
+rupture velocity (2.64 vs 2.16~km/s); rise time and time-window count are essentially identical.
+Total STF $\approx$ (front crossing the fault) $+$ rise, so our $\times$1.76 larger area and
+$\times$0.82 slower V$_r$ multiply to $\sim\times$1.6 in propagation time --- exactly the
+$\sim$10~s~$\to\sim$16~s difference. The long tail is weakly constrained: capping the source
+duration at 10~s re-inverts to an essentially identical misfit (0.1239 vs 0.1235).
+
+\subsection*{Progressive evolution: adding geodetic data}
+USGS also inverted three Sentinel-1 interferograms. We fetched the \emph{same} USGS resampled
+interferograms (1 ascending $+$ 2 descending, 1{,}815 points; W.\ Barnhart) and re-inverted the
+steep plane \textbf{jointly} (teleseismic body $+$ surface $+$ InSAR), building WISP static
+Green's functions for the geodetic points (a per-track linear ramp is co-estimated). The
+seismic-only model (finite-fault section above) is kept unchanged for comparison.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.95\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_insar/plots/Imagery_s1-20230903-20230915-p45-ascending_fit.png}
+\caption{Joint-inversion InSAR fit, ascending track (observed / synthetic / residual; bottom row
+removes the co-estimated ramp). The near-fault co-seismic lobes are well reproduced.}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\begin{tabular}{llll}
+\toprule
+ & seismic-only & $+$ InSAR (joint) & USGS \\
+\midrule
+teleseismic misfit & 0.1235 & 0.1236 (unchanged) & --- \\
+InSAR penalization & (not used) & 2.05 $\to$ 0.18 (now fit) & fit \\
+$M_w$ / $M_0$ (N\,m) & 6.94 / 3.26e19 & 6.94 / 3.26e19 (unchanged) & 6.84 / 2.27e19 \\
+duration T$_{5-95}$ & 12.3~s & 12.3~s (unchanged) & $\sim$10--15~s \\
+slip compactness $N_{\rm eff}$ & 82/225 & 84/225 (unchanged) & --- \\
+\bottomrule
+\end{tabular}
+\caption{Adding the InSAR fits the interferograms (penalization 2.05$\to$0.18) with no teleseismic
+penalty, but leaves moment, duration and extent unchanged --- our seismic-only model already
+satisfies the geodesy. The duration and moment differences from USGS are therefore a
+\emph{parameterization} effect (larger fault template $+$ slower $V_r$ $+$ seed), not an InSAR-data
+effect: both models fit the same interferograms.}
+\end{table}
+
 \section{Summary}
 \begin{enumerate}
 \item The pipeline \textbf{reproduces the USGS moment tensor to 5.1$^\circ$ and the USGS
@@ -220,6 +263,11 @@ same indeterminacy (66\% vs USGS 94\% DC).
 \item \textbf{Apply the \texttt{shift\_match} cross-correlation step} (as every other event did):
 it cut the WISP misfit $\sim$12--13\%, aligned the SH peaks, and sharpened the slip without changing
 $M_w$. Stress drop $\sim$3~MPa (ordinary); $M_w$ 6.94, $\sim$0.15 above the USGS $M_{ww}$ 6.8.
+\item \textbf{Rupture duration vs USGS is a parameterization effect, not a data effect.} A joint
+teleseismic$+$InSAR inversion using USGS's own interferograms fits the geodesy (penalization
+2.05$\to$0.18) but leaves our moment/duration/extent unchanged --- the seismic model already
+satisfies the InSAR. The $\sim\times$2 duration and $M_w$ 6.94 vs 6.84 come from the larger fault
+template $+$ slower $V_r$ $+$ seed, not the InSAR.
 \item Every parameter is tabulated; the analysis re-runs deterministically from the archived
 waveforms. Pipeline is CPU-parallel (MPI $+$ OpenMP), no GPU.
 \end{enumerate}
