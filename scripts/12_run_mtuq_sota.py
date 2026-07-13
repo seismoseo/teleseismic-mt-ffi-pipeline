@@ -53,7 +53,7 @@ def bands(mw):
                 bwts=8., swts=40., use_bw=False)            # surface-wave only
 
 
-def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=None, swts=None, deviatoric=False, bwband=None):
+def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=None, swts=None, deviatoric=False, bwband=None, onlybody=False):
     data_dir = os.path.join(C.DATA_DIR, "mtuq", event_id)
     path_data = os.path.join(data_dir, "*.[zrt]")
     path_weights = os.path.join(data_dir, "weights.dat")
@@ -120,16 +120,18 @@ def run(event_id, lat, lon, depth_km, time, mag, npts=10, model="ak135", swband=
 
     if rank == 0:
         print("Grid search (surface waves)...", flush=True)
-    results_sw = grid_search(data_sw, greens_sw, misfit_sw, origin, grid)
+    results_sw = None if onlybody else grid_search(data_sw, greens_sw, misfit_sw, origin, grid)
     results_bw = None
-    if b["use_bw"]:
+    if b["use_bw"] or onlybody:
         if rank == 0:
             print("Grid search (body waves)...", flush=True)
         results_bw = grid_search(data_bw, greens_bw, misfit_bw, origin, grid)
-
     if rank != 0:
         return
-    results = results_sw if results_bw is None else results_sw + results_bw
+    if onlybody:
+        results = results_bw
+    else:
+        results = results_sw if results_bw is None else results_sw + results_bw
 
     idx = results.source_idxmin()
     best = grid.get(idx)
@@ -169,12 +171,13 @@ def main():
     ap.add_argument("--swts", type=float, default=None, help="override surface-wave time-shift range (s)")
     ap.add_argument("--deviatoric", action="store_true", help="constrain to zero trace (CLVD allowed, no isotropic)")
     ap.add_argument("--bwband", default=None, help="Tmin,Tmax,winlen[,ts] to ENABLE body waves (deep events)")
+    ap.add_argument("--onlybody", action="store_true", help="body waves only (shallow-event dip-slip surface-wave-indeterminate)")
     a = ap.parse_args()
     if a.lat is None:                                  # pull from ComCat CSV
         ev = pd.read_csv(C.COMCAT_CSV).set_index("event_id").loc[a.event]
         a.lat, a.lon, a.depth, a.time = (float(ev["latitude"]), float(ev["longitude"]),
                                          float(ev["depth"]), str(ev["time"]))
-    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, deviatoric=a.deviatoric, bwband=a.bwband)
+    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, deviatoric=a.deviatoric, bwband=a.bwband, onlybody=a.onlybody)
 
 
 if __name__ == "__main__":

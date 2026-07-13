@@ -37,7 +37,7 @@ from importlib import import_module
 bands = import_module("12_run_mtuq_sota").bands
 
 
-def run(event_id, lat, lon, depth_km, time, mag, npts=40, model="ak135", swband=None, swts=None, nobody=False, bwband=None):
+def run(event_id, lat, lon, depth_km, time, mag, npts=40, model="ak135", swband=None, swts=None, nobody=False, bwband=None, onlybody=False):
     data_dir = os.path.join(C.DATA_DIR, "mtuq", event_id)
     path_data = os.path.join(data_dir, "*.[zrt]")
     path_weights = os.path.join(data_dir, "weights.dat")
@@ -97,11 +97,14 @@ def run(event_id, lat, lon, depth_km, time, mag, npts=40, model="ak135", swband=
     greens_bw = greens.map(process_bw)
     greens_sw = greens.map(process_sw)
 
-    results_sw = grid_search(data_sw, greens_sw, misfit_sw, origin, grid)
-    results_bw = grid_search(data_bw, greens_bw, misfit_bw, origin, grid) if b["use_bw"] else None
+    results_sw = None if onlybody else grid_search(data_sw, greens_sw, misfit_sw, origin, grid)
+    results_bw = grid_search(data_bw, greens_bw, misfit_bw, origin, grid) if (b["use_bw"] or onlybody) else None
     if rank != 0:
         return
-    results = results_sw if results_bw is None else results_sw + results_bw
+    if onlybody:
+        results = results_bw
+    else:
+        results = results_sw if results_bw is None else results_sw + results_bw
 
     idx = results.source_idxmin()
     best = grid.get(idx)
@@ -136,11 +139,12 @@ def main():
     ap.add_argument("--mag", type=float, required=True)
     ap.add_argument("--npts", type=int, default=40)
     ap.add_argument("--swband", default=None)
+    ap.add_argument("--onlybody", action="store_true", help="body waves only (shallow-event dip-slip is surface-wave-indeterminate)")
     ap.add_argument("--swts", type=float, default=None)
     ap.add_argument("--nobody", action="store_true", help="surface waves only")
     ap.add_argument("--bwband", default=None, help="body band override: Tmin,Tmax,winlen[,ts]")
     a = ap.parse_args()
-    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, nobody=a.nobody, bwband=a.bwband)
+    run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, nobody=a.nobody, bwband=a.bwband, onlybody=a.onlybody)
 
 
 if __name__ == "__main__":
