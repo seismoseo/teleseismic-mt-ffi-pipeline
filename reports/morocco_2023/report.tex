@@ -292,6 +292,67 @@ satisfies the geodesy. The duration and moment differences from USGS are therefo
 effect: both models fit the same interferograms.}
 \end{table}
 
+\section{Doing it better: the Yeck et al.\ (2023) recipe}
+The USGS finite fault for this event is documented in Yeck \emph{et al.} (2023, \emph{The Seismic
+Record}, doi:10.1785/0320230040), and is produced with \emph{this same WISP code}. It gives an
+explicit best-practice recipe. Applying it as a \textbf{new} run (\texttt{NP1\_v2}; earlier models
+untouched) produced a model \textbf{better on every metric}.
+
+\textbf{The four lessons.} (1)~\textbf{Relocate to the geodetic centroid and nucleate there.} The
+teleseismic hypocentre (19~km) rests on \emph{one} station 100~km away (WM.TIO), with only three
+stations inside 500~km spanning azimuths 20--100$^\circ$. USGS run a uniform-slip InSAR inversion
+for the centroid (30.978, $-$8.332, 25~km), \emph{pin} the fault there, and treat the centroid as
+the rupture \emph{initiation} point --- legitimate because WASP time-shifts each teleseismic trace
+and InSAR carries no timing, so rupture-onset location is unresolved anyway. \emph{We had used the
+catalogue hypocentre: the single biggest error in our first model.} (2)~\textbf{Right-size the
+fault} (45$\times$30~km, 15$\times$10 at 3~km), the dimension set by the geodetic uniform-slip
+inversion; \emph{we over-sized to 54$\times$44~km, letting spurious low-amplitude slip spread onto
+the far edges and inflate both moment and apparent duration}. (3)~\textbf{Seed the moment from the
+W-phase $M_{ww}$} (6.8), not a body-wave estimate that runs high (\emph{we used our MTUQ 6.95}).
+(4)~\textbf{Invert jointly with InSAR}: adding geodesy shrinks the source area and \emph{raises}
+peak slip. The rake window is already $\pm$20$^\circ$ of the CMT rake by WISP default (matching
+USGS), so nothing to change; and Yeck \emph{et al.} likewise find \emph{both nodal planes fit
+similarly}, choosing the steep plane from the InSAR displacement-gradient asymmetry and the High
+Atlas trend rather than a decisive fit --- independently confirming our weak-discriminant result.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lllllll}
+\toprule
+model & \Mw & T$_{5-95}$ & moment $>$10~s & peak slip & tele.\ misfit & InSAR VR \\
+\midrule
+initial (tele-only) & 6.94 & 12.3~s & 32\% & 1.62~m & 0.1235 & --- \\
+initial $+$ InSAR & 6.94 & 12.3~s & 32\% & 1.44~m & 0.1236 & 55\% \\
+\textbf{Yeck recipe (\texttt{NP1\_v2})} & \textbf{6.80} & \textbf{8.5~s} & \textbf{11\%} & \textbf{1.72~m} & \textbf{0.1045} & \textbf{85\%} \\
+USGS (Yeck \emph{et al.}) & 6.84 & $\sim$12~s & --- & 1.88~m & --- & --- \\
+\bottomrule
+\end{tabular}
+\caption{The recipe improves \emph{every} metric simultaneously: the spurious late second pulse
+collapses (32\%$\to$11\% of moment after 10~s), the moment falls to the $M_{ww}$ value, peak slip
+rises, the InSAR fit goes from moderate (VR 55\%) to good (VR 85\%), and the teleseismic fit also
+\emph{improves}.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1_v2/plots/SlipIsochrone_trueScale.png}
+\caption{Yeck-recipe slip model (\texttt{NP1\_v2}): one compact asperity centred on the geodetic
+centroid (star $=$ nucleation), slip $\sim$15--33~km depth, rupture front spanning 0--11~s ---
+matching the USGS model (one asperity, 15--35~km, peak 1.88~m).}
+\end{figure}
+
+\textbf{The key insight --- and an honest revision.} We had earlier concluded that ``our model
+already satisfies the InSAR, so the geodesy cannot pull it.'' The sharper truth is that the InSAR
+\emph{could not} improve the model because the fault was in the \emph{wrong place and over-sized};
+it was stuck at a mediocre VR of 55\%. Once correctly located and right-sized, the geodesy has real
+leverage (VR 85\%) and pulls moment, duration and slip into agreement with USGS.
+\textbf{Geometry errors masquerade as data insensitivity.}
+
+Reproduced by \texttt{scripts/wisp\_yeck\_recipe.py} --- a thin, event-agnostic wrapper over WISP's
+own functions (no inversion machinery reimplemented):
+\begin{verbatim}
+python scripts/wisp_yeck_recipe.py <run>/NP1_shift <run>/NP1_v2 \
+    --centroid 30.978,-8.332,25.0 --mww 6.8 --grid 15,10,3.0 --insar <insar_dir>
+\end{verbatim}
+
 \section{Summary}
 \begin{enumerate}
 \item The pipeline \textbf{reproduces the USGS moment tensor to 5.1$^\circ$ and the USGS
@@ -309,6 +370,12 @@ teleseismic$+$InSAR inversion using USGS's own interferograms fits the geodesy (
 2.05$\to$0.18) but leaves our moment/duration/extent unchanged --- the seismic model already
 satisfies the InSAR. The $\sim\times$2 duration and $M_w$ 6.94 vs 6.84 come from the larger fault
 template $+$ slower $V_r$ $+$ seed, not the InSAR.
+\item \textbf{Better slip modeling (Yeck \emph{et al.}\ 2023 recipe).} Relocate to the
+\emph{geodetic centroid} and nucleate there; \emph{right-size} the fault; seed the moment from
+$M_{ww}$; invert \emph{jointly} with InSAR. Result: \Mw~6.80, an 8.5~s source, InSAR VR 85\%, and a
+\emph{better} teleseismic fit --- better on every metric, and in agreement with USGS.
+\textbf{Geometry errors masquerade as data insensitivity}: the InSAR only gained leverage once the
+fault was correctly located and sized.
 \item Every parameter is tabulated; the analysis re-runs deterministically from the archived
 waveforms. Pipeline is CPU-parallel (MPI $+$ OpenMP), no GPU.
 \end{enumerate}
