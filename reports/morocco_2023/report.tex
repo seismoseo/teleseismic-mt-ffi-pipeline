@@ -20,8 +20,8 @@ finite-fault model, so we use it to \emph{validate} the pipeline and to document
 frequency-band and processing parameter for reproducibility. Our double-couple moment tensor,
 $256/67/65$ (\Mw~6.95), lies 5.1$^\circ$ (Kagan angle) from the USGS W-phase solution; our WISP
 finite fault on the steep plane (peak slip 1.46~m at 17--37~km, $\sim$43$\times$38~km) closely
-reproduces the USGS model (1.88~m, 25~km, 45$\times$30~km) and prefers the same steep nodal
-plane. The study also yields a methodological result that mirrors our deep-event work: for a
+reproduces the USGS model (1.88~m, 25~km, 45$\times$30~km) on the steep plane (though the
+teleseismic fit marginally, non-decisively, favours the shallow conjugate). The study also yields a methodological result that mirrors our deep-event work: for a
 \emph{shallow} source the joint body-plus-surface-wave inversion returns a \emph{confidently
 wrong} (flipped, normal-faulting) mechanism, because surface waves are dip-slip-indeterminate at
 shallow depth (Kanamori \& Given, 1981) and mismatched by 1-D dispersion; the body waves, through
@@ -146,36 +146,37 @@ surface waves are fully used, together with teleseismic P (35 channels) and \tex
 \toprule
 plane & misfit & peak slip & slip depth ($>$15\%) & $L\times W$ & USGS finite fault \\
 \midrule
-\textbf{steep 256/67 (preferred)} & \textbf{0.1364} & 1.46~m & 17--37~km & 43$\times$38~km & 251/69, 1.88~m, 25~km, 45$\times$30~km \\
-shallow 127/25 & 0.1402 & 1.50~m & 11--44~km & 39$\times$38~km & --- \\
+NP1 = \textbf{steep 256/67} (= USGS FF plane) & 0.1402 & 1.50~m & 11--44~km & 39$\times$38~km & 251/69, 1.88~m, 25~km, 45$\times$30~km \\
+NP2 = shallow 126/33 (WISP-preferred) & \textbf{0.1365} & 1.46~m & 17--37~km & 43$\times$38~km & --- \\
 \bottomrule
 \end{tabular}
-\caption{The steep plane is preferred (agreeing with the USGS choice), and its slip model closely
-reproduces the USGS finite fault in amplitude, depth and dimension. As for the Chile events the
-teleseismic \emph{fit} difference between planes is small; the steep-plane preference is
-corroborated by USGS aftershocks and InSAR.}
+\caption{Plane discrimination is an honest ambiguity: WISP's teleseismic fit \emph{marginally}
+prefers the shallow plane (0.1365 vs 0.1402, $\sim$3\%), \emph{disagreeing} with USGS's
+finite-fault steep-plane choice. As for the Chile events, teleseismic fit is a weak plane
+discriminant; USGS's steep choice rests on aftershocks and InSAR. We show the steep plane (NP1,
+$=$ the USGS finite-fault plane) for validation: its slip reproduces the USGS model.}
 \end{table}
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.9\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/SlipDist_plane0_5s.png}
+\includegraphics[width=0.9\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/SlipDist_plane0_5s.png}
 \caption{Preferred (steep-plane) slip model. Star: hypocentre; contours: rupture front every 5~s;
 arrows: slip direction (reverse). Peak 1.46~m, slip at 17--37~km depth.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.55\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/MomentRate.png}
+\includegraphics[width=0.55\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/MomentRate.png}
 \caption{Moment-rate function (steep plane).}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/P_body_waves.png}
+\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/P_body_waves.png}
 \caption{WISP P-wave fits (steep plane).}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/SH_body_waves.png}
+\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/SH_body_waves.png}
 \caption{WISP SH-wave fits (steep plane): teleseismic SH (transverse, 26 channels) are used
 alongside the 35 P channels.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP2/plots/Rayleigh_surf_waves.png}
+\includegraphics[width=0.92\textwidth]{../../event_2023_morocco_mtuq/20230908221101/ffm.0/NP1/plots/Rayleigh_surf_waves.png}
 \caption{WISP Rayleigh-wave fits (steep plane).}
 \end{figure}
 
