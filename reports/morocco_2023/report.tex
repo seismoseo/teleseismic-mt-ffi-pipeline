@@ -95,6 +95,42 @@ depth phases, resolve it. We therefore invert \textbf{body-only} (a \texttt{-{}-
 added to the runners). This is the mirror image of the deep-event rule, where short-period body
 waves fail and the surface/long-period waves are reliable.
 
+\subsection*{The Kanamori--Given shallow indeterminacy --- what it is, and how common}
+A moment tensor has six independent numbers. Two of them, $M_{rt}$ and $M_{rp}$ (the
+``vertical dip-slip'' components), describe shear on a near-horizontal plane with a vertical slip
+direction. The Earth's surface is stress-free, and the long-period surface-wave radiation from
+\emph{these two components vanishes as the source approaches the free surface}. So for a shallow
+earthquake, long-period surface waves carry almost no information about $M_{rt}$ and $M_{rp}$ ---
+yet those are exactly the components that set the \textbf{dip} and the up-versus-down sense of a
+dip-slip fault. Long-period surface waves therefore cannot distinguish a shallow thrust from its
+flipped, normal-faulting counterpart: the strike and the scalar moment (the $M_{rr}$-dominated
+part) stay well-resolved, but the dip-slip sense lies in a near-null direction of the inversion.
+This is the Kanamori \& Given (1981) result.
+
+Why it \emph{flips} rather than merely being uncertain: with the dip-slip sense nearly
+unconstrained, any small \emph{systematic} data error tips the balance. Here the culprit is the
+1-D velocity model, which mis-predicts surface-wave dispersion by a few seconds; the search then
+prefers whichever mechanism absorbs that mismatch with marginally lower $L_2$ misfit --- and it
+picked the flipped one \emph{confidently} (a deep, narrow minimum). That false confidence is the
+dangerous part: the fit looks good and the wrong answer looks certain.
+
+\textbf{Does it happen often? Yes --- routinely, for most crustal earthquakes.} Any shallow
+($\lesssim$ few tens of km) dip-slip source, thrust or normal, is exposed to it whenever
+long-period surface waves dominate. It is why the Global CMT catalogue, for very shallow events,
+constrains the poorly-resolved vertical-dip-slip components (fixing $M_{rt}=M_{rp}=0$ or clamping
+depth) and reports large dip uncertainties: for shallow events the robust outputs are strike and
+moment, not dip. \textbf{How it is handled}, in rough order: (1)~\emph{use body waves, especially
+the depth phases $pP$ and $sP$} --- their timing fixes depth and their amplitude/polarity fix the
+dip-slip sense surface waves cannot (the primary cure, and what \texttt{-{}-onlybody} does);
+(2)~\emph{constrain the source} --- impose a deviatoric or pure double-couple mechanism and/or fix
+depth, so the null directions cannot run away; (3)~\emph{add near-field data} --- regional
+waveforms and static geodesy (InSAR/GPS), which sample the source directly and break the
+degeneracy (the vanishing-at-the-surface argument is a long-period far-field statement);
+(4)~\emph{diagnose and report it} --- inspect the flat (null) direction of the misfit and treat a
+``confident'' shallow surface-wave mechanism with suspicion. The reassuring part: this is a
+\emph{known, diagnosable} trap, not a mysterious failure --- once recognized, the body-only
+inversion gives the right answer (5.1$^\circ$ from USGS).
+
 \begin{table}[H]\centering\small
 \begin{tabular}{lllll}
 \toprule
@@ -116,7 +152,12 @@ the correct oblique-reverse thrust.}
 \end{figure}
 \begin{figure}[H]\centering
 \includegraphics[width=0.92\textwidth,height=0.9\textheight,keepaspectratio]{../../results/mtuq_dc_2023morocco/2023morocco_waveforms.png}
-\caption{Body-wave fits of the adopted DC solution (black observed, red synthetic).}
+\caption{Fits of the adopted DC (body-only) solution (black observed, red synthetic). The
+\emph{body-wave} windows were used in the inversion; the \emph{surface-wave} windows are
+\textbf{forward-predicted} from the body-only mechanism --- they were \emph{not} inverted. That the
+body-derived mechanism, blind to the surface waves, nonetheless predicts them well confirms the
+surface waves were consistent with the correct solution all along; they simply could not, by
+themselves, choose the dip-slip sense (the Kanamori--Given indeterminacy above).}
 \end{figure}
 \begin{figure}[H]\centering
 \includegraphics[width=0.92\textwidth,height=0.9\textheight,keepaspectratio]{../../results/mtuq_sota_2023morocco/2023morocco_waveforms.png}
