@@ -78,39 +78,43 @@ subduction thrust, consistent with the W-phase.}
 \section{Finite fault (WISP), both nodal planes}
 WISP \texttt{auto\_model} on both W-phase nodal planes, \textbf{seeded from the W-phase moment}
 (the key lesson from our Al Haouz ablation: seed from the authoritative $M_{ww}$). Teleseismic body
-$+$ surface waves.
+$+$ surface waves. We then applied the \textbf{cross-correlation time-shift step}
+(\texttt{shift\_match}; \emph{not} run by \texttt{auto\_model} --- a separate manual step) and
+re-inverted, which cut the misfit \textbf{13--16\%} on both planes with \Mw\ unchanged (as on Al
+Haouz). Values below are the shifted models.
 
 \begin{table}[H]\centering\small
 \begin{tabular}{llllll}
 \toprule
-plane & strike/dip & \Mw & misfit & $L\times W$ / peak slip & slip depth / T$_{5-95}$ \\
+plane & strike/dip & \Mw & misfit (pre$\to$post shift) & $L\times W$ / peak slip & slip depth / T$_{5-95}$ \\
 \midrule
-NP1 steep & 123/64 & 7.29 & 0.1120 & 82$\times$41 km / 2.83 m & 1--34 km / 19.9 s \\
-\textbf{NP2 shallow (interface)} & \textbf{286/27} & \textbf{7.29} & \textbf{0.1114} & 82$\times$68 km / 2.29 m & 3--30 km / 20.8 s \\
+NP1 steep & 123/64 & 7.29 & 0.1120 $\to$ \textbf{0.0940} & 82$\times$41 km / 3.43 m & 1--34 km / 19.2 s \\
+\textbf{NP2 shallow (interface)} & \textbf{286/27} & \textbf{7.29} & 0.1114 $\to$ \textbf{0.0969} & 82$\times$68 km / 2.54 m & 3--24 km / 20.3 s \\
 \bottomrule
 \end{tabular}
-\caption{Both planes fit almost identically (0.1120 vs 0.1114) --- teleseismic waveforms are a weak
-plane discriminant, as we found for Al Haouz and Chile. For a subduction thrust the shallow-dipping
-NP2 is the megathrust interface and fits marginally better; we \emph{prefer NP2} but show both.
-Both give \Mw~7.29 (matching $M_{ww}$), a compact updip asperity, and $\sim$20 s duration.}
+\caption{Both planes fit almost identically --- teleseismic waveforms are a weak plane discriminant,
+as we found for Al Haouz and Chile. For a subduction thrust the shallow-dipping NP2 is the megathrust
+interface and fits marginally better; we \emph{prefer NP2} but show both. Both give \Mw~7.29
+(matching $M_{ww}$), a compact updip asperity, and $\sim$20 s duration. The time-shift step improved
+each fit $\sim$13--16\% and slightly sharpened the slip (NP2 peak 2.29$\to$2.54 m).}
 \end{table}
 
 \begin{figure}[H]\centering
-\includegraphics[width=0.88\textwidth]{../20260717144839/ffm.0/NP2/plots/SlipIsochrone_trueScale.png}
+\includegraphics[width=0.88\textwidth]{../20260717144839/ffm.0/NP2_shift/plots/SlipIsochrone_trueScale.png}
 \caption{Preferred (NP2, shallow interface) on-fault slip at true 1:1 scale; star $=$ hypocentre,
 white contours $=$ rupture front every 5 s, arrows $=$ thrust slip. Compact updip asperity, peak
-2.3 m, slip $\sim$5--30 km depth.}
+2.5 m, slip $\sim$5--24 km depth (shifted model).}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.55\textwidth]{../20260717144839/ffm.0/NP2/plots/MomentRate.png}
+\includegraphics[width=0.55\textwidth]{../20260717144839/ffm.0/NP2_shift/plots/MomentRate.png}
 \caption{Moment-rate function (NP2): peak at $\sim$11 s, total duration $\sim$20 s.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../20260717144839/ffm.0/NP2/plots/Map.png}
+\includegraphics[width=0.92\textwidth]{../20260717144839/ffm.0/NP2_shift/plots/Map.png}
 \caption{Map view of the NP2 slip projected to the surface.}
 \end{figure}
 \begin{figure}[H]\centering
-\includegraphics[width=0.92\textwidth]{../20260717144839/ffm.0/NP2/plots/P_body_waves.png}
+\includegraphics[width=0.92\textwidth]{../20260717144839/ffm.0/NP2_shift/plots/P_body_waves.png}
 \caption{WISP teleseismic P-wave fits (NP2). Black observed, red synthetic.}
 \end{figure}
 
@@ -119,7 +123,7 @@ white contours $=$ rupture front every 5 s, arrows $=$ thrust slip. Compact updi
 \item \textbf{Mechanism:} shallow subduction thrust; preferred plane $\approx$285/27/75 (megathrust
 interface), or steep conjugate 123/64.
 \item \textbf{\Mw:} 7.29--7.30 ($M_0 \approx 1.1\times10^{20}$ N\,m), matching $M_{ww}$.
-\item \textbf{Peak slip:} $\sim$2.3--2.8 m; \textbf{slip depth} $\sim$5--30 km; single compact updip
+\item \textbf{Peak slip:} $\sim$2.5--3.4 m; \textbf{slip depth} $\sim$5--25 km; single compact updip
 asperity near/above the hypocentre.
 \item \textbf{Duration:} $\sim$20 s, moment-rate peak at $\sim$10 s.
 \end{itemize}
