@@ -1,0 +1,134 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,booktabs,float,xcolor,hyperref}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newcommand{\Mw}{$M_{\mathrm w}$}
+\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+\title{\textbf{Prospective source model of the 2026 \Mw~7.3 Mexico (Chiapas) earthquake}\\
+\large A blind test of our MTUQ$+$WISP pipeline, produced before the USGS finite fault}
+\author{Automated pipeline (17.Venezuela\_2026)}
+\date{Frozen 2026-07-18, hours after origin --- for later comparison with the USGS solution}
+\begin{document}\maketitle
+
+\section*{Purpose}
+The USGS had not yet posted a finite-fault model for \texttt{us7000t1bu} when this was produced.
+This is a \textbf{prospective (blind) test}: we run our teleseismic MTUQ moment-tensor $+$ WISP
+finite-fault pipeline on open GSN data and freeze the prediction here so it can be compared with the
+USGS solution once posted. Everything below uses \emph{only} teleseismic body $+$ surface waves and
+the USGS W-phase moment tensor as the seed; \textbf{no InSAR, regional, or geodetic data} (which
+USGS will likely add, and which --- per our Al Haouz study --- tends to yield a smaller, more
+compact source).
+
+\section{Event and USGS preliminary benchmark (frozen)}
+\begin{table}[H]\centering\small
+\begin{tabular}{ll}
+\toprule
+Origin & 2026-07-17T14:48:39.77 UTC, 14.604$^\circ$N, 92.952$^\circ$W, depth 18.6 km \\
+Magnitude & \Mw~7.3 (W-phase); $M_0 = 1.1\times10^{20}$ N\,m; centroid depth 15.5 km \\
+Tectonics & Middle America subduction zone (Cocos plate), \textbf{shallow thrust} \\
+W-phase NP1 (steep) & strike 122.75, dip 63.86, rake 97.74 \\
+W-phase NP2 (shallow) & strike 285.6, dip 27.19, rake 74.65 \quad(likely megathrust interface) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This is analogous in size to the 2024/2026 Atacama and 2026 Venezuela events we have modelled, but
+it is a \emph{shallow subduction thrust}, so we apply the shallow-source lessons from our Al Haouz
+(Morocco) study.
+
+\section{Data}
+23 GSN broadband stations (networks IU, II, G, GE, \ldots) at 31--86$^\circ$, fetched from IRIS.
+WISP uses 15 with usable P; MTUQ uses 11 three-component stations. The azimuthal coverage has a
+$\sim$87$^\circ$ gap over the Pacific (few island stations) --- adequate but not ideal.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.7\textwidth]{../fig_mexico_stations.png}
+\caption{Teleseismic station distribution (azimuthal-equidistant, rings at 30/60/90$^\circ$).}
+\end{figure}
+
+\section{Moment tensor (MTUQ) --- the shallow-thrust trap, a third time}
+For this shallow source the same pattern we documented on Al Haouz reappears, now at \Mw~7.3:
+
+\begin{table}[H]\centering\small
+\begin{tabular}{llll}
+\toprule
+MTUQ solution & strike/dip/rake & \Mw & verdict \\
+\midrule
+\textbf{DC, body-only (adopted)} & \textbf{284/30/79} & \textbf{7.30} & $\approx$ W-phase NP2 (shallow interface) \\
+DC, surface waves & 121/85/88 & 7.45 & dip 85$^\circ$ (too steep --- shallow indeterminacy) \\
+full moment tensor & 126/81/81 & 7.60 & destabilised ($w=0.90$, huge non-DC) \\
+W-phase (USGS) & 122.75/63.86/98 \;/\; 285.6/27.19/75 & 7.3 & reference \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The \textbf{body-only DC recovers the W-phase mechanism and moment} (284/30 matches the shallow NP2;
+\Mw~7.30 matches $M_{ww}$). The surface-wave DC pushes the dip to 85$^\circ$ (the Kanamori--Given
+shallow dip-slip indeterminacy), and the full moment tensor is destabilised into a large spurious
+non-double-couple with \Mw~7.60. This is the third independent confirmation of our rule:
+\textbf{for a shallow source, invert body waves for the mechanism.} We adopt the body-only DC.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.42\textwidth]{../../results/mtuq_dc_2026mexico/2026mexico_beachball.png}
+\caption{Adopted body-only DC moment tensor (284/30/79) with the station distribution --- a shallow
+subduction thrust, consistent with the W-phase.}
+\end{figure}
+
+\section{Finite fault (WISP), both nodal planes}
+WISP \texttt{auto\_model} on both W-phase nodal planes, \textbf{seeded from the W-phase moment}
+(the key lesson from our Al Haouz ablation: seed from the authoritative $M_{ww}$). Teleseismic body
+$+$ surface waves.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{llllll}
+\toprule
+plane & strike/dip & \Mw & misfit & $L\times W$ / peak slip & slip depth / T$_{5-95}$ \\
+\midrule
+NP1 steep & 123/64 & 7.29 & 0.1120 & 82$\times$41 km / 2.83 m & 1--34 km / 19.9 s \\
+\textbf{NP2 shallow (interface)} & \textbf{286/27} & \textbf{7.29} & \textbf{0.1114} & 82$\times$68 km / 2.29 m & 3--30 km / 20.8 s \\
+\bottomrule
+\end{tabular}
+\caption{Both planes fit almost identically (0.1120 vs 0.1114) --- teleseismic waveforms are a weak
+plane discriminant, as we found for Al Haouz and Chile. For a subduction thrust the shallow-dipping
+NP2 is the megathrust interface and fits marginally better; we \emph{prefer NP2} but show both.
+Both give \Mw~7.29 (matching $M_{ww}$), a compact updip asperity, and $\sim$20 s duration.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.88\textwidth]{../20260717144839/ffm.0/NP2/plots/SlipIsochrone_trueScale.png}
+\caption{Preferred (NP2, shallow interface) on-fault slip at true 1:1 scale; star $=$ hypocentre,
+white contours $=$ rupture front every 5 s, arrows $=$ thrust slip. Compact updip asperity, peak
+2.3 m, slip $\sim$5--30 km depth.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../20260717144839/ffm.0/NP2/plots/MomentRate.png}
+\caption{Moment-rate function (NP2): peak at $\sim$11 s, total duration $\sim$20 s.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260717144839/ffm.0/NP2/plots/Map.png}
+\caption{Map view of the NP2 slip projected to the surface.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260717144839/ffm.0/NP2/plots/P_body_waves.png}
+\caption{WISP teleseismic P-wave fits (NP2). Black observed, red synthetic.}
+\end{figure}
+
+\section{Prospective prediction (compare against the USGS FFM when posted)}
+\begin{itemize}
+\item \textbf{Mechanism:} shallow subduction thrust; preferred plane $\approx$285/27/75 (megathrust
+interface), or steep conjugate 123/64.
+\item \textbf{\Mw:} 7.29--7.30 ($M_0 \approx 1.1\times10^{20}$ N\,m), matching $M_{ww}$.
+\item \textbf{Peak slip:} $\sim$2.3--2.8 m; \textbf{slip depth} $\sim$5--30 km; single compact updip
+asperity near/above the hypocentre.
+\item \textbf{Duration:} $\sim$20 s, moment-rate peak at $\sim$10 s.
+\end{itemize}
+
+\textbf{Honest caveats.} (1) Teleseismic-only: no InSAR/regional yet. Per our Al Haouz study, adding
+geodesy usually shrinks the source and raises peak slip; our 82-km-long fault may be over-sized for
+\Mw~7.3. (2) Location is the catalogue hypocentre (not relocated to a geodetic centroid). (3) The
+$\sim$87$^\circ$ Pacific azimuthal gap limits resolution on the down-dip/along-strike updip
+direction. These are exactly the axes on which we expect the USGS seismogeodetic model to improve;
+the \emph{mechanism, moment, and first-order slip depth} should be robust.
+
+\end{document}

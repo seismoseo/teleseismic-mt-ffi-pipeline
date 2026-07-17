@@ -143,6 +143,7 @@ def main():
     ap.add_argument("--swts", type=float, default=None)
     ap.add_argument("--nobody", action="store_true", help="surface waves only")
     ap.add_argument("--bwband", default=None, help="body band override: Tmin,Tmax,winlen[,ts]")
+    ap.add_argument("--sh", action="store_true", help="include transverse (SH) in body-wave time-shift group")
     a = ap.parse_args()
     run(a.event, a.lat, a.lon, a.depth, a.time, a.mag, a.npts, swband=a.swband, swts=a.swts, nobody=a.nobody, bwband=a.bwband, onlybody=a.onlybody, sh=a.sh)
 
