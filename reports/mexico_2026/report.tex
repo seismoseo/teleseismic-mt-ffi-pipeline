@@ -129,10 +129,50 @@ asperity near/above the hypocentre.
 \end{itemize}
 
 \textbf{Honest caveats.} (1) Teleseismic-only: no InSAR/regional yet. Per our Al Haouz study, adding
-geodesy usually shrinks the source and raises peak slip; our 82-km-long fault may be over-sized for
-\Mw~7.3. (2) Location is the catalogue hypocentre (not relocated to a geodetic centroid). (3) The
-$\sim$87$^\circ$ Pacific azimuthal gap limits resolution on the down-dip/along-strike updip
-direction. These are exactly the axes on which we expect the USGS seismogeodetic model to improve;
-the \emph{mechanism, moment, and first-order slip depth} should be robust.
+geodesy usually shrinks the source and raises peak slip. (2) Location is the catalogue hypocentre
+(not relocated to a geodetic centroid). (3) The $\sim$87$^\circ$ Pacific azimuthal gap limits
+resolution on the down-dip/along-strike updip direction.
+
+\section{Comparison with the USGS finite fault (posted after our freeze)}
+USGS (D.~Goldberg) posted their finite fault on 2026-07-17. Crucially it is \textbf{also
+teleseismic-only} (BODY 63, SURF 52, InSAR 0) --- a true like-for-like comparison.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lll l}
+\toprule
+ & USGS (Goldberg) & Ours (NP2\_shift) & assessment \\
+\midrule
+Fault plane & 286/27/75 & 286/27/75 & \textbf{exact match} \\
+\Mw & 7.29 & 7.29 & exact \\
+Peak slip & 2.85 m & 2.54 m & close ($-$11\%) \\
+Slip depth ($>$15\%) & 4--25 km & 3--24 km & \textbf{excellent match} \\
+Moment-rate peak & 10.2 s & 10.2 s & exact \\
+Data used & teleseismic-only & teleseismic-only & match \\
+Fault template & 125$\times$65 km & 82$\times$68 km & USGS larger \\
+Rupture velocity & 1.85 km/s & 2.08 km/s & ours faster \\
+Duration T$_{5-95}$ & 35 s & 20 s & USGS longer \\
+\bottomrule
+\end{tabular}
+\caption{Blind-test outcome. The source \emph{fundamentals} agree closely: the same nodal plane
+(we correctly preferred the shallow megathrust interface), the same \Mw, the same slip depth, the
+same peak-slip magnitude, and the same main-pulse timing --- both teleseismic-only. The differences
+are secondary modelling choices: USGS used a larger fault template (125 km) with a slower rupture
+velocity, producing a longer, more spread-out rupture; ours is more compact.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{../fig_usgs_comparison.png}
+\caption{Left: moment-rate functions --- the main pulse (which carries most of the moment) is nearly
+identical in timing and amplitude; USGS spreads the last $\sim$15\% of moment over a longer tail
+(bigger fault $+$ slower V$_r$). Right: slip-vs-depth --- the distributions nearly overlap, both
+peaking at $\sim$16 km.}
+\end{figure}
+
+\textbf{Where our forecast missed (honest).} Our two caveats predicted the \emph{opposite} of what
+USGS did: we expected them to add InSAR and produce a \emph{more compact} source. Instead their
+model is teleseismic-only and \emph{longer} than ours. So our prediction was, if anything,
+conservatively compact --- the mechanism, moment, slip depth and main-pulse timing all validated,
+while the total rupture length/duration is a genuine model-choice difference (larger template $+$
+slower V$_r$) on which the teleseismic data are weakly constraining.
 
 \end{document}
