@@ -1,3 +1,9 @@
+"""DEPRECATED — use fetch_teleseismic.py instead.
+This fetcher under-sampled: it REQUIRED all three components (dropping every BHZ-only P station)
+and used per-station get_waveforms with a bare except, silently dropping timeouts / not-yet-arrived
+data. On the 2026 Mw 7.3 Mexico event it kept 15 of 81 usable stations (87 deg azimuthal gap);
+fetch_teleseismic.py keeps 54 (60 deg gap). Kept for provenance of earlier runs.
+"""
 """
 wisp_fetch_fallback.py — obspy-based replacement for `ffm get-data teleseismic` when the
 CLI fails on IRIS http:// service discovery. Writes WISP's expected layout into CWD:
