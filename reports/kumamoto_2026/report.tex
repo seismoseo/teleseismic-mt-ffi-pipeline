@@ -1,0 +1,131 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,booktabs,float,xcolor,hyperref}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newcommand{\Mw}{$M_{\mathrm w}$}
+\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+\title{\textbf{Prospective source model of the 2026 \Mw~6.8 Kumamoto (Japan) earthquake}\\
+\large A blind test of the MTUQ$+$WISP pipeline, produced before the USGS finite fault}
+\author{Automated pipeline (17.Venezuela\_2026)}
+\date{Frozen 2026-07-28, hours after origin --- for comparison with the USGS solution when posted}
+\begin{document}\maketitle
+
+\section*{Purpose}
+No USGS finite-fault model existed for \texttt{us6000tgb9} when this was produced. We run the
+teleseismic pipeline on open GSN/FDSN data and freeze the prediction so it can be compared with the
+USGS (and JMA/NIED) solutions once published. Only teleseismic body $+$ surface waves and the public
+W-phase moment tensor (as seed) are used --- no strong motion, no GNSS, no InSAR.
+
+\section{Event and frozen benchmark}
+\begin{table}[H]\centering\small
+\begin{tabular}{ll}
+\toprule
+Origin & 2026-07-28T07:27:15.5 UTC, 32.682$^\circ$N, 130.722$^\circ$E, depth 10 km \\
+Magnitude & \Mw~6.8 (W-phase); $M_0 = 1.73\times10^{19}$ N\,m; centroid 11.5 km; DC 87.6\,\% \\
+Tectonics & shallow crustal \textbf{strike-slip}, Kumamoto fault zone (2016 \Mw 7.0 sequence region) \\
+W-phase NP1 & 212.5/75.1/$-$163.8 \quad right-lateral, NE--SW Futagawa--Hinagu trend \\
+W-phase NP2 & 118.2/74.3/$-$15.5 \quad left-lateral conjugate \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Data}
+The rewritten fetcher delivered the best coverage of any event in this project: \textbf{241
+three-component stations (641 channels), 32--89$^\circ$, maximum azimuthal gap 30$^\circ$}. WISP
+applied its own quality control on top; MTUQ used response-corrected subsets of 25 and 60 stations.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.7\textwidth]{../fig_kumamoto_stations.png}
+\caption{Teleseismic stations (azimuthal-equidistant; rings 30/60/90$^\circ$).}
+\end{figure}
+
+\section{Finite fault (WISP), both nodal planes, \texttt{shift\_match} applied}
+WISP \texttt{auto\_model} on both W-phase planes, seeded from the W-phase moment, followed by the
+cross-correlation time-shift step and re-inversion (standing rule; it improved the misfit by
+9\,\% and 6\,\%).
+
+\begin{table}[H]\centering\small
+\begin{tabular}{llllll}
+\toprule
+plane & strike/dip/rake & \Mw & misfit (pre$\to$post shift) & peak slip & T$_{5-95}$ / V$_r$ \\
+\midrule
+\textbf{NP2 = Futagawa trend} & \textbf{212/75/$-$164} & 6.75 & 0.1607 $\to$ \textbf{0.1507} & 1.88 m & 13.6 s / 2.05 \\
+NP1 = conjugate & 118/74/$-$16 & 6.75 & 0.1667 $\to$ 0.1523 & 1.63 m & 14.8 s / 2.09 \\
+\bottomrule
+\end{tabular}
+\caption{The tectonically expected right-lateral plane fits marginally better ($\sim$1\,\%). As in
+our Morocco/Chile/Mexico studies the teleseismic fit is a weak plane discriminant; here the weak
+preference at least points the same way as the regional tectonics.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.88\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/SlipIsochrone_trueScale.png}
+\caption{Preferred plane (212/75/$-$164): single compact asperity slightly updip of the 10-km
+hypocentre, slip $\sim$2--16 km depth, peak 1.88 m, rupture front spanning $\sim$14 s at
+V$_r\approx$2.1 km s$^{-1}$ --- a smaller sibling of the 2016 Kumamoto rupture.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/MomentRate.png}
+\caption{Moment-rate function (preferred plane).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/Map.png}
+\caption{Map view of the preferred-plane slip.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/P_body_waves.png}
+\caption{Teleseismic P fits (preferred plane, shifted).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/SH_body_waves.png}
+\caption{Teleseismic SH fits (preferred plane, shifted).}
+\end{figure}
+
+\section{Moment tensor (MTUQ) --- an honest failure mode, documented}
+The independent MTUQ mechanism estimates were \emph{unstable} for this event, in an instructive way:
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lllll}
+\toprule
+variant & stations / gap & mechanism & \Mw & Kagan vs W-phase \\
+\midrule
+DC, body P only & 25 / 97$^\circ$ & 94/59/$-$29 & (edge) & 27.1$^\circ$ \\
+DC, body P$+$SH & 25 / 97$^\circ$ & 58/50/$-$83 & 6.30 & 67.1$^\circ$ \\
+DC, joint & 25 / 97$^\circ$ & 184/82/11 & 6.65 & $\sim$78$^\circ$ \\
+full MT (surface) & 25 / 97$^\circ$ & 198/81/9 ($\gamma$=$\delta$=0) & 6.60 & 78.0$^\circ$ \\
+\textbf{DC, joint, 60 stations} & \textbf{60 / 80$^\circ$} & \textbf{130/88/7} & \textbf{6.80} & \textbf{27.3$^\circ$} \\
+DC, body P$+$SH, 60 stations & 60 / 80$^\circ$ & 212/85/$-$2 & 6.75 & 91.1$^\circ$ \\
+\bottomrule
+\end{tabular}
+\caption{MTUQ variants. With the 25-station subset (14 of 25 stations inside one 45$^\circ$
+southern azimuth band) the surface-wave solutions lock onto a mechanism rotated $\sim$90$^\circ$
+from the W-phase --- the four-lobe aliasing expected for vertical strike-slip radiation, whose
+patterns repeat every 90$^\circ$ of azimuth. Doubling the stations (gap 97$^\circ\to$80$^\circ$) snapped the joint solution out of the rotated minimum (78$^\circ\to$27.3$^\circ$) and recovered $M_w$ 6.80 --- confirming the aliasing diagnosis. The body P$+$SH variant remains aliased; teleseismic SH is unusable at this azimuth geometry. The pipeline's independent mechanism precision here ($\sim$27$^\circ$) is honestly below the 5--19$^\circ$ achieved for the thrust events.}
+\end{table}
+
+Two things follow. First, for \textbf{strike-slip} events azimuthal \emph{balance} matters more
+than for dip-slip events, because clustered sampling aliases the four-lobed radiation pattern;
+station count alone is not protection. Second, the shallow-event ``body-only'' rule from our
+Morocco/Mexico work is a \emph{dip-slip} cure (Kanamori--Given indeterminacy of $M_{rt},M_{rp}$)
+and does not transfer to vertical strike-slip, where the long-period surface waves are, in
+principle, well behaved --- given adequate azimuthal sampling.
+
+\section{Frozen prospective prediction}
+\begin{itemize}
+\item \textbf{Fault plane:} right-lateral \textbf{212/75/$-$164} (Futagawa--Hinagu trend), weakly
+preferred by the waveform fit and strongly by tectonic context.
+\item \textbf{\Mw:} 6.75 (WISP, both planes), vs W-phase 6.8.
+\item \textbf{Slip:} single compact asperity, peak $\sim$1.9 m, $\sim$2--16 km depth, centred at /
+slightly updip of the hypocentre; no shallow slip maximum at the surface.
+\item \textbf{Duration:} T$_{5-95}\approx$14 s, moment-rate peak at $\sim$3.5 s; V$_r\approx$2.1
+km s$^{-1}$.
+\end{itemize}
+
+\textbf{Caveats.} Teleseismic-only; the plane preference is $\sim$1\,\% in misfit (weak); the
+independent point-source mechanism could not be stabilised from the azimuthally clustered
+long-period subset (documented above), so the mechanism statement leans on the W-phase planes plus
+the relative WISP fit. USGS will likely add regional/InSAR data; per our Al Haouz study their model
+may be more compact than ours.
+
+\end{document}
