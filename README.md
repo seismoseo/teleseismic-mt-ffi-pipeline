@@ -22,8 +22,8 @@ notebooks/    23 = the step-by-step COOKBOOK (start here)
               26 = case study: 2023 Al Haouz (Morocco) M6.8 retrospective vs published models
               27 = BLIND TEST: 2026 Mexico M7.3 — prediction frozen before the USGS finite
                    fault, then compared head-to-head (executed)
-              28 = BLIND TEST: 2026 Kumamoto M6.8 strike-slip — prediction frozen before the
-                   USGS finite fault; comparison pending (executed)
+              28 = BLIND TEST: 2026 Kumamoto M6.8 strike-slip — prediction frozen 3.2 h before
+                   the USGS finite fault, then compared head-to-head (executed)
 reports/      self-contained PDF reports for both case studies (tectonic context, methods
               primer for non-specialists, full inversion narrative, reproducibility appendix)
 ```
@@ -83,16 +83,20 @@ surface-wave windows — a plausible operational explanation for the missing USG
 product.
 
 **2026 Kumamoto M6.8 (us6000tgb9), shallow strike-slip, Japan — blind test, frozen
-2026-07-28 before any USGS finite fault** — `notebooks/28`,
+2026-07-28 13:19 UTC, 3.2 h before USGS posted their finite fault** — `notebooks/28`,
 `reports/kumamoto_2026/report.pdf` + `prediction_frozen.md`. Prediction: right-lateral
 212/75/−164 (Futagawa–Hinagu trend, ~1% misfit preference over the conjugate), Mw 6.75,
 single compact asperity (peak 1.9 m, 2–16 km depth, no shallow slip maximum), T5-95 ≈ 14 s,
-Vr ≈ 2.1 km/s — a smaller sibling of the 2016 Kumamoto rupture. Also documents a new
-strike-slip failure mode: an azimuthally clustered 25-station subset aliased the four-lobed
-radiation pattern (surface-wave solutions locked ~90° rotated, Kagan 67–78°); a 60-station
-azimuth-balanced set snapped the joint DC back to Kagan 27° — for strike-slip, azimuthal
-*balance* beats station count, and the shallow-event "body-only" rule (a dip-slip cure) does
-not transfer.
+Vr ≈ 2.1 km/s — a smaller sibling of the 2016 Kumamoto rupture. **Outcome: every headline
+verified** — USGS chose the identical plane (212/75/−164), Mw 6.754 vs our 6.75, peak slip
+2.01 vs 1.88 m at the same place and depth, and the moment-rate functions overlay almost
+perfectly including the secondary pulses (caveat: WISP is the USGS code family, so this
+validates data handling/seeding/QC, not an independent method; Vr, weakly constrained, differs
+2.05 vs 2.46 km/s). Also documents a new strike-slip failure mode: an azimuthally clustered
+25-station subset aliased the four-lobed radiation pattern (surface-wave solutions locked ~90°
+rotated, Kagan 67–78°); a 60-station azimuth-balanced set snapped the joint DC back to Kagan
+27° — for strike-slip, azimuthal *balance* beats station count, and the shallow-event
+"body-only" rule (a dip-slip cure) does not transfer.
 
 ## Data & code availability
 

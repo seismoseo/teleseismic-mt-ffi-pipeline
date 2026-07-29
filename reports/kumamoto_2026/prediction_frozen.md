@@ -32,3 +32,13 @@ MTUQ point source (independent check):
 
 To compare when USGS posts their FFM: plane choice, Mw, peak slip amplitude + depth extent,
 single-vs-multiple asperities, duration/moment-rate shape, rupture velocity.
+
+## Post-freeze comparison (added 2026-07-29, USGS FFM posted 2026-07-28T16:33 UTC = 3.2 h AFTER our frozen commit ba7d8aa)
+
+USGS: strike 212 dip 75 rake -164 (IDENTICAL plane), Mw 6.754 (ours 6.75), peak slip 2.01 m
+(ours 1.88), slip >15% peak at 0.7-17 km depth (ours ~2-16), single compact asperity within
++-5 km of epicentre at 3-12 km (same), T5-95 11.9 s (ours 13.6), STF peak 3.4 s (ours ~3.7),
+avVr 2.46 (ours 2.05), fault 60x31 km (ours 50x30). Moment-rate functions overlay almost
+perfectly incl. secondary pulses at ~8 and ~13 s. Main difference: low-slip tail NE (ours) vs
+SW (USGS). Caveat: WISP is the USGS NEIC code (shared parameterization family); station sets
+and settings differ (USGS 42 body + 32 surface, 4 time windows).

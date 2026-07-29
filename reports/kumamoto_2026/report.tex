@@ -8,7 +8,8 @@
 \title{\textbf{Prospective source model of the 2026 \Mw~6.8 Kumamoto (Japan) earthquake}\\
 \large A blind test of the MTUQ$+$WISP pipeline, produced before the USGS finite fault}
 \author{Automated pipeline (17.Venezuela\_2026)}
-\date{Frozen 2026-07-28, hours after origin --- for comparison with the USGS solution when posted}
+\date{Frozen 2026-07-28 13:19 UTC, hours after origin --- USGS posted their finite fault 3.2 h
+later (16:33 UTC); the head-to-head comparison in Section 6 was added after the freeze}
 \begin{document}\maketitle
 
 \section*{Purpose}
@@ -104,6 +105,14 @@ from the W-phase --- the four-lobe aliasing expected for vertical strike-slip ra
 patterns repeat every 90$^\circ$ of azimuth. Doubling the stations (gap 97$^\circ\to$80$^\circ$) snapped the joint solution out of the rotated minimum (78$^\circ\to$27.3$^\circ$) and recovered $M_w$ 6.80 --- confirming the aliasing diagnosis. The body P$+$SH variant remains aliased; teleseismic SH is unusable at this azimuth geometry. The pipeline's independent mechanism precision here ($\sim$27$^\circ$) is honestly below the 5--19$^\circ$ achieved for the thrust events.}
 \end{table}
 
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../../results/mtuq_dc_2026kumamoto/2026kumamoto_waveforms_sw60.png}
+\caption{Waveform fits of the adopted joint DC (130/88/7, 60 stations; black observed, red
+synthetic), regenerated at the fixed solution with \texttt{16\_plot\_mtuq\_fixed.py} --- the
+runner overwrites its fit figure on every variant run, so the on-disk figure belonged to the
+last (aliased) variant, not the adopted one.}
+\end{figure}
+
 Two things follow. First, for \textbf{strike-slip} events azimuthal \emph{balance} matters more
 than for dip-slip events, because clustered sampling aliases the four-lobed radiation pattern;
 station count alone is not protection. Second, the shallow-event ``body-only'' rule from our
@@ -127,5 +136,51 @@ independent point-source mechanism could not be stabilised from the azimuthally 
 long-period subset (documented above), so the mechanism statement leans on the W-phase planes plus
 the relative WISP fit. USGS will likely add regional/InSAR data; per our Al Haouz study their model
 may be more compact than ours.
+
+\section{Head-to-head with the USGS finite fault (added after the freeze)}
+USGS (D.~Goldberg) posted their model at \textbf{16:33 UTC on 2026-07-28 --- 3.2 h after our
+frozen commit} (\texttt{ba7d8aa}, 13:19 UTC), so the test is genuinely blind.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lll}
+\toprule
+quantity & ours (frozen) & USGS \\
+\midrule
+fault plane & \textbf{212/75/$-$164} & \textbf{212/75/$-$164} --- identical \\
+\Mw\ ($M_0$) & 6.75 ($1.69\times10^{19}$ N\,m) & 6.754 ($1.70\times10^{19}$ N\,m) \\
+peak slip & 1.88 m & 2.01 m \\
+slip depth extent & $\sim$2--16 km & 0.7--17 km ($>$15\,\% of peak) \\
+asperity & single compact, at/updip of hypocentre & single compact, $\pm$5 km along strike, 3--12 km \\
+T$_{5-95}$ & 13.6 s & 11.9 s \\
+moment-rate peak & $\sim$3.7 s & 3.4 s \\
+V$_r$ & 2.05 km s$^{-1}$ & 2.46 km s$^{-1}$ (avg) \\
+fault dimensions & 50 $\times$ 30 km & 60 $\times$ 31.2 km \\
+\bottomrule
+\end{tabular}
+\caption{Every headline prediction verified: plane choice, moment, a single compact asperity at
+the same place and depth, duration, no shallow slip maximum. The main difference is the low-slip
+tail: our model puts somewhat more residual slip NE of the epicentre, USGS more SW.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.9\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/Compare_STF.png}
+\caption{Moment-rate functions overlay almost perfectly --- including the secondary pulses near
+8 s and 13 s.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.75\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/Compare_slip_map.png}
+\caption{Map-view slip: the same NE--SW high-slip streak in both models.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.9\textwidth]{../20260728072715/ffm.0/NP2_shift/plots/Compare_slip_profile.png}
+\caption{Along-strike slip profile (positive toward azimuth 212$^\circ$): identical central
+asperity; the models disagree only on which side carries the low-slip tail.}
+\end{figure}
+
+\textbf{Caveat on the agreement.} WISP \emph{is} the USGS NEIC operational code, so the
+parameterization family is shared: this blind test validates our data selection, Mww seeding, QC
+and plane handling rather than an independent inversion method (station sets and settings do
+differ: USGS used 42 body $+$ 32 surface stations and 4 time windows). V$_r$ differs by 20\,\% ---
+teleseismic data constrain it weakly, consistent with the Mexico lesson.
 
 \end{document}
