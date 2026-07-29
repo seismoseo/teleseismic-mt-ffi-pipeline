@@ -183,4 +183,37 @@ and plane handling rather than an independent inversion method (station sets and
 differ: USGS used 42 body $+$ 32 surface stations and 4 time windows). V$_r$ differs by 20\,\% ---
 teleseismic data constrain it weakly, consistent with the Mexico lesson.
 
+\section{Hypocentre depth and directivity}
+\textbf{Hypocentre depth: 10 km} (USGS origin, adopted by both inversions as the nucleation
+point; our WISP nucleation subfault 10.0 km, USGS on-fault 10.8 km, W-phase centroid 11.5 km)
+--- near the \emph{bottom} of the main slip patch ($\sim$2--16 km). Moment-weighted centroids
+and early-vs-late rupture centroid motion, computed identically from both slip models:
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lll}
+\toprule
+metric & ours & USGS \\
+\midrule
+moment NE vs SW of epicentre & 57\,\% / 20\,\% & 33\,\% / 56\,\% \\
+centroid motion early$\to$late, along-strike & $-1.9 \to -9.4$ km (NE) & $+0.6 \to +9.5$ km (SW) \\
+centroid motion early$\to$late, depth & $8.3 \to 17$ km & $7.8 \to 12$ km \\
+moment updip vs downdip of hypocentre & 43\,\% / 45\,\% & 55\,\% / 32\,\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Agreement (robust):} the dominant moment-rate pulse (peak 3.4--3.7 s) breaks a compact
+asperity at and \emph{slightly updip} of the hypocentre (early moment centroid $\sim$8 km depth
+in both models) --- a modest \textbf{vertical (updip) directivity} component, the classic
+nucleate-at-the-bottom, rupture-up pattern; thereafter rupture spreads \textbf{bilaterally} at
+low slip, with $>$75\,\% of the moment within $\pm$10 km of the epicentre.
+
+\textbf{Disagreement (therefore unresolved):} the late low-slip tail goes NE in our model but SW
+in USGS's --- opposite senses of late centroid motion. When two inversions of the same data
+family put the directivity tail on opposite sides, \textbf{horizontal directivity is not
+resolved}. This is physically expected: a $\sim$14 s, $\sim$20--30 km rupture produces azimuthal
+duration differences of only $\sim\pm$3--4 s, marginal at $>$10 s teleseismic periods (unlike the
+Mexico M7.3 or the Venezuela doublet, where longer ruptures made directivity robust). Near-field
+strong motion (JMA/NIED) or InSAR would be needed to settle it.
+
 \end{document}
