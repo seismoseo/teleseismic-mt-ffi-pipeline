@@ -5,7 +5,7 @@ A reproducible, battle-tested workflow for determining the **point-source moment
 moderate-to-large earthquake from openly available teleseismic data — from data fetching to
 publication-grade figures and a PDF report.
 
-Built and validated on seven real cases (2023–2026), each of which broke the standard workflow
+Built and validated on eight real cases (2023–2026), each of which broke the standard workflow
 in a different, instructive way. Every failure mode found along the way is encoded in the scripts
 or documented in the cookbook, so the next event starts from here instead of rediscovering
 them.
@@ -24,6 +24,8 @@ notebooks/    23 = the step-by-step COOKBOOK (start here)
                    fault, then compared head-to-head (executed)
               28 = BLIND TEST: 2026 Kumamoto M6.8 strike-slip — prediction frozen 3.2 h before
                    the USGS finite fault, then compared head-to-head (executed)
+              29 = RESOLUTION TEST: 2023 Mariana M6.1 — smallest event attempted; Hartzell-style
+                   teleseismic FFI where USGS publishes no finite fault (executed)
 reports/      self-contained PDF reports for both case studies (tectonic context, methods
               primer for non-specialists, full inversion narrative, reproducibility appendix)
 ```
@@ -97,6 +99,18 @@ validates data handling/seeding/QC, not an independent method; Vr, weakly constr
 rotated, Kagan 67–78°); a 60-station azimuth-balanced set snapped the joint DC back to Kagan
 27° — for strike-slip, azimuthal *balance* beats station count, and the shallow-event
 "body-only" rule (a dip-slip cure) does not transfer.
+
+**2023 Mariana Islands M6.1 (us6000kzv3), oblique normal/strike-slip — resolution test at a
+magnitude where USGS publishes no finite fault** — `notebooks/29`,
+`reports/mariana_2023/report.pdf`. Following Hartzell, Mendoza & Zeng (2013, GRL; teleseismic-P
+FFI of the M5.8 Mineral, Virginia earthquake): P waves to 1 Hz, 2.4×2.0 km subfaults, 205
+stations (gap 28°). **Resolved** (plane-stable, physically checked): a single compact ~10-km
+asperity at 2–13 km depth centred on the hypocentre, the STF including its two-pulse structure
+(cross-plane r=0.98), M0 to 1% of the W-phase, Vr≈2.0 km/s, stress drop 1.0–3.7 MPa. **Not
+resolved**: the fault plane (2.2% margin — consistent with the rupture-size criterion),
+independent point-source mechanism (MTUQ Kagan 52–86°) and centroid depth (misfit flat to 0.2%
+over 6–33 km) — at M≲6.5 take both from the W-phase and spend the teleseismic data on the
+finite fault. Extends the validated range from M6.8 down to M6.1.
 
 ## Data & code availability
 

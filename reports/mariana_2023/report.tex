@@ -1,0 +1,156 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,booktabs,float,xcolor,hyperref,amssymb}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newcommand{\Mw}{$M_{\mathrm w}$}
+\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+\title{\textbf{Can teleseismic data resolve a finite-fault model of an \Mw~6.1?}\\
+\large The 2023 Mariana Islands earthquake (us6000kzv3) as a resolution test of the
+MTUQ$+$WISP pipeline}
+\author{Automated pipeline (17.Venezuela\_2026)}
+\date{2026-07-29}
+\begin{document}\maketitle
+
+\section*{Purpose}
+USGS publishes finite-fault models routinely for \Mw$\gtrsim$6.5; for the 2023 \Mw~6.1 Mariana
+Islands earthquake no finite-fault product exists. Hartzell, Mendoza \& Zeng (2013, GRL)
+nevertheless resolved the \Mw~5.8 Mineral, Virginia rupture from teleseismic P waves alone ---
+their enabling ingredients being P waves to $\sim$1 Hz (attenuation $t^*\!\approx\!1$ s still
+passes source detail at teleseismic range), resolution carried by \emph{timing} rather than
+amplitude, km-scale subfaults, and a compact fault. This report applies that recipe with the
+MTUQ$+$WISP pipeline and states explicitly what is, and is not, resolved.
+
+\section{Event and reference solution}
+\begin{table}[H]\centering\small
+\begin{tabular}{ll}
+\toprule
+Origin & 2023-08-14T13:51:53.8 UTC, 13.347$^\circ$N, 147.530$^\circ$E, depth 8 km \\
+Magnitude & \Mw~6.1 (W-phase); $M_0=1.74\times10^{18}$ N\,m; centroid 13.5 km; DC 91\,\% \\
+Tectonics & oblique normal $+$ strike-slip east of Guam, near the trench (outer-rise style) \\
+W-phase NP1 & 253.3/56.1/$-$28.7 \\
+W-phase NP2 & 000.3/66.5/$-$142.6 \\
+USGS products & MT, ShakeMap, PAGER, DYFI --- \textbf{no finite fault} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Data}
+205 three-component stations, 32--89$^\circ$, maximum azimuthal gap 28$^\circ$ --- the densest
+coverage of any event in this project, which matters doubly here: the mechanism has a large
+strike-slip component, and the Kumamoto blind test showed clustered azimuths alias strike-slip
+radiation. MTUQ used an azimuth-balanced 60-station response-corrected subset; WISP applied its
+own quality control. WISP's body-wave filter is 0.01--1.0 Hz --- the Hartzell band --- with
+auto-sized $2.4\times2.0$ km subfaults (255 total).
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.62\textwidth]{../fig_mariana_stations.png}
+\caption{Teleseismic stations (azimuthal-equidistant; rings 30/60/90$^\circ$).}
+\end{figure}
+
+\section{Moment tensor (MTUQ): the independent point source fails at \Mw~6.1}
+At $M_0\sim2\times10^{18}$ N\,m the standard teleseismic bands (body 10--33 s, surface
+50--100 s) are low-SNR at 30--90$^\circ$, and it shows:
+
+\begin{table}[H]\centering\small
+\begin{tabular}{llll}
+\toprule
+variant & mechanism & \Mw & Kagan vs W-phase \\
+\midrule
+DC joint, 60 stations & 68/82/$-$2 & 6.25 & 52.5$^\circ$ \\
+DC body P$+$SH, 60 stations & 122/54/52 & 5.80 (lower grid edge) & 85.7$^\circ$ \\
+depth scan 6--33 km & mechanism drifts & --- & misfit varies 0.2\,\% \\
+\bottomrule
+\end{tabular}
+\caption{Neither the mechanism nor the centroid depth is independently resolvable; the
+depth-misfit curve is flat to 0.2\,\% over 6--33 km. This is not an azimuth-coverage problem
+(gap 28$^\circ$) --- it is a signal-to-noise floor. Pipeline rule for \Mw$\lesssim$6.5: take
+mechanism and depth from the W-phase and spend the teleseismic data on the finite fault ---
+exactly the Hartzell strategy.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\textwidth]{../fig_mariana_mtuq_beachballs.png}
+\caption{W-phase reference vs the two MTUQ attempts.}
+\end{figure}
+
+\section{Finite fault (WISP): both W-phase planes, Mww-seeded, \texttt{shift\_match} applied}
+\begin{table}[H]\centering\small
+\begin{tabular}{lllll}
+\toprule
+plane & strike/dip/rake & misfit (post-shift) & peak slip & T$_{5-95}$ \\
+\midrule
+\textbf{NP1 (preferred)} & \textbf{253/56/$-$29} & \textbf{0.2012} & 24.9 cm & 8.2 s \\
+NP2 & 0/66/$-$143 & 0.2058 & 24.9 cm & 7.9 s \\
+\bottomrule
+\end{tabular}
+\caption{Recovered $M_0=1.76\times10^{18}$ N\,m vs W-phase $1.74\times10^{18}$ --- 1\,\%
+agreement. The 2.2\,\% NP1 preference sits between the Calama near-tie (1.6\,\%, $\sim$10 km
+rupture) and the SPdA decisive margin (10\,\%, $\sim$50 km rupture): suggestive, not
+conclusive, exactly as the rupture-size criterion predicts.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\textwidth]{../20230814135153/ffm.0/NP1_shift/plots/SlipIsochrone_trueScale.png}
+\caption{Preferred plane (253/56/$-$29), true 1:1 scale: a single compact asperity
+$\sim$10 km across at 2--13 km depth, centred on the 8-km hypocentre; peak slip 25 cm;
+concentric 1-s isochrones spanning 0--5 s (V$_r\approx2.0$ km s$^{-1}$, subshear); oblique
+right-lateral$+$normal slip vectors.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../20230814135153/ffm.0/NP1_shift/plots/MomentRate.png}
+\caption{Moment-rate function (preferred plane).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20230814135153/ffm.0/NP1_shift/plots/Map.png}
+\caption{Map view.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20230814135153/ffm.0/NP1_shift/plots/P_body_waves.png}
+\caption{Teleseismic P fits (preferred plane, shifted) --- the dataset that carries the
+Hartzell-style timing resolution.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20230814135153/ffm.0/NP1_shift/plots/SH_body_waves.png}
+\caption{Teleseismic SH fits (preferred plane, shifted).}
+\end{figure}
+
+\section{Resolution assessment}
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{../fig_mariana_resolution.png}
+\caption{Left: the source-time function is stable across the two (very different) assumed
+planes, $r=0.98$, including its two-pulse structure at 2.8 and 5.4 s --- the plane-independent,
+therefore data-driven, part of the model. The Ekstr\"om-scaling duration band ($2\cdot
+h_{dur}=5.8$ s) captures the STF body; the tail beyond it is regularization. Centre: the MTUQ
+point-source depth scan is flat to 0.2\,\% --- depth must come from the W-phase. Right: the
+NP1-vs-NP2 misfit margin in the context of the pipeline's plane-discrimination criterion.}
+\end{figure}
+
+\textbf{Resolved} (stable across planes, passing physical checks):
+\begin{itemize}
+\item a single compact asperity $\sim$10 km across at 2--13 km depth, centred on the
+hypocentre --- consistent with \Mw~6.1 source scaling;
+\item the STF shape including its two-pulse structure (2.8 $+$ 5.4 s), cross-plane $r=0.98$;
+\item $M_0$ to 1\,\% of the W-phase; rupture front spanning 0--5 s, V$_r\approx2.0$ km s$^{-1}$;
+\item stress drop 1.0 MPa (effective-area convention, $(\Sigma u)^2/\Sigma u^2 \to 263$ km$^2$)
+to 3.7 MPa (half-peak area, 110 km$^2$) --- in the physically expected 1--10 MPa range.
+\end{itemize}
+
+\textbf{Not resolved} (and stated so):
+\begin{itemize}
+\item the fault plane: the 2.2\,\% NP1 margin is suggestive, not decisive, at 10-km rupture size;
+\item an independent point-source mechanism or centroid depth (Section 3);
+\item fine slip detail and the duration tail: T$_{5-95}=8.2$ s exceeds the 5.8-s scaling
+expectation because smoothing spreads low-level slip; the 25-cm peak is a lower bound;
+\item absolute updip/downdip placement within the compact patch.
+\end{itemize}
+
+\section{Verdict}
+\textbf{Yes: a reliable first-order finite-fault model of an \Mw~6.1 is recoverable from
+teleseismic data} --- when the Hartzell recipe is followed (W-phase-fixed mechanism, P waves to
+1 Hz, km-scale subfaults, claims restricted to plane-stable features). What cannot be claimed
+at this magnitude: the fault plane, an independent mechanism, or a centroid depth from
+teleseismic point-source inversion. This extends the pipeline's validated range from \Mw~6.8
+down to \Mw~6.1, one magnitude unit above the Hartzell et al.\ (2013) \Mw~5.8 benchmark.
+
+\end{document}

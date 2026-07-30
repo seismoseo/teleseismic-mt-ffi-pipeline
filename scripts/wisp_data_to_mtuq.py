@@ -46,6 +46,9 @@ for (net, sta, loc), chans in byst.items():
     if not all(c in chans for c in "ZNE"):
         continue
     s0 = read(chans["Z"], format="sac")[0].stats.sac
+    if s0.get("stla") is None or s0.get("stlo") is None:
+        print(f"skip {net}.{sta}: no station coords in SAC header (no PZ match)")
+        continue
     d_m, az, baz = gps2dist_azimuth(lat, lon, s0["stla"], s0["stlo"])
     dist = kilometers2degrees(d_m / 1000.0)
     if not (mindeg <= dist <= maxdeg):
