@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,booktabs,float,xcolor,hyperref,amssymb}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newcommand{\Mw}{$M_{\mathrm w}$}
+\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+\title{\textbf{Prospective source model of the 2026 \Mw~7.4 San Jos\'e del Palmar (Colombia)
+intermediate-depth earthquake}\\
+\large A blind test of the MTUQ$+$WISP pipeline, frozen before the USGS finite fault ---
+and the discovery of a 35-s emergent nucleation phase}
+\author{Automated pipeline (17.Venezuela\_2026)}
+\date{Frozen 2026-08-11 --- no USGS finite-fault product existed at freeze time}
+\begin{document}\maketitle
+
+\section*{Purpose and headline}
+The \Mw~7.4 earthquake of 2026-08-10 beneath western Colombia (110 km deep) has, at freeze
+time, no published finite-fault model. We freeze a teleseismic-only source model for later
+head-to-head comparison. Two findings lead: (1) the event is \textbf{not} a Bucaramanga-nest
+earthquake --- it belongs to the Cauca intermediate-depth cluster of the subducting Nazca slab,
+407 km southwest of the nest; (2) the rupture began with a \textbf{$\sim$35-s weak emergent
+nucleation phase} before the main moment release 29 km south of the epicentre --- a property
+that breaks naive origin-anchored inversions and had to be handled explicitly.
+
+\section{Event, tectonic setting, and the Bucaramanga question}
+\begin{table}[H]\centering\small
+\begin{tabular}{ll}
+\toprule
+Origin & 2026-08-10T12:34:28.1 UTC, 4.844$^\circ$N, 76.242$^\circ$W, depth 110.3 km \\
+Magnitude & \Mw~7.4 (W-phase); $M_0=1.66\times10^{20}$ N\,m; centroid 120.5 km; DC 87\,\% \\
+W-phase NP1 & 124.0/58.6/158.5 \\
+W-phase NP2 & 225.6/71.8/33.2 \quad (NE--SW, steep, oblique reverse) \\
+W-phase centroid & 4.585$^\circ$N, 76.161$^\circ$W (29 km S of epicentre), \textbf{12:35:02.6 = origin $+$ 34.5 s} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Bucaramanga nest? No.} The nest --- the world's densest intermediate-depth seismic
+nest --- sits at $\sim$6.82$^\circ$N, 73.15$^\circ$W, 140--160 km depth beneath Santander, NE
+Colombia. This event is \textbf{407 km to the southwest} at 4.84$^\circ$N, 76.24$^\circ$W,
+110--120 km deep: the \textbf{Cauca intermediate-depth cluster} of the subducting Nazca slab
+(cf.\ Chang et al.\ 2019), a different slab segment with its own seismicity. It ranks among
+the largest instrumental events of that segment.
+
+\section{Data}
+120 three-component stations (316 channels), 30--90$^\circ$, maximum azimuthal gap 47$^\circ$
+(the Pacific). MTUQ used an azimuth-balanced 36-station response-corrected subset with the
+deep-event bands (body 25--60 s, mantle surface waves 200--450 s). Both nodal planes extend
+below the 126.5-km WISP surface-wave GF cap, so the finite-fault plane comparison is
+\textbf{body-only on both planes --- fair by construction} (the San Pedro de Atacama rule).
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.6\textwidth]{../fig_colombia_stations.png}
+\caption{Teleseismic stations (azimuthal-equidistant; rings 30/60/90$^\circ$).}
+\end{figure}
+
+\section{The emergent nucleation phase --- and why origin-anchored inversions fail}
+The observed P wavetrains begin weakly and emergently; the main impulsive packet arrives only
+$\sim$45--55 s after origin (its pP/sP depth-phase echoes at $\sim$75--90 s). Independently,
+the W-phase centroid time lags the origin by 34.5 s and sits 29 km south. The implied
+nucleation-to-asperity apparent velocity is $\sim$0.8 km\,s$^{-1}$ --- far below any
+physical rupture speed --- so a finite fault nucleating at the cataloged hypocentre at the
+cataloged time \emph{cannot} place the moment where the data demand it. Our first
+(origin-anchored) inversion demonstrated the failure exactly: slip piled at the fault edge
+(86\,\% of peak in an edge row --- a violated containment rule), the STF peaked at an
+unreachable 40 s, and the synthetics fit only the long-period envelope. Origin-cut MTUQ
+windows likewise missed the main energy (\Mw\ pinned at the grid edge).
+
+\textbf{The fix} (the operational Yeck-style relocation): re-anchor the entire analysis ---
+window cutting, Green's functions, fault geometry, nucleation --- at the \textbf{W-phase
+centroid in space and time}. The 35-s precursor then lies outside the modelling window (its
+moment is a few per cent at most), and the main rupture is imaged about its true origin.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../20260810123428/ffm.0/NP1_shift/plots/MomentRate.png}
+\caption{The INVALID origin-anchored model's STF, shown as the diagnostic: the peak at
+$\sim$40 s is kinematically unreachable from the hypocentre, so the inversion smeared slip to
+the fault edges.}
+\end{figure}
+
+\section{Finite fault (WISP, centroid-anchored): both planes, \texttt{shift\_match}, body-only}
+\begin{table}[H]\centering\small
+\begin{tabular}{llll}
+\toprule
+plane (W-phase labels) & misfit (post-shift) & edge slip top/bottom & peak slip \\
+\midrule
+\textbf{226/72/33 (preferred)} & \textbf{0.1363} & 1\,\% / 3\,\% & 1.63 m \\
+124/59/159 conjugate & 0.1485 & \textbf{40\,\%} / 2\,\% & 1.12 m \\
+\bottomrule
+\end{tabular}
+\caption{An \textbf{8.2\,\% margin plus the conjugate's top-edge violation = a near-decisive
+plane call} for the NE--SW steep oblique-reverse plane --- exactly where the rupture-size
+criterion (Calama 1.6\,\% tie at 10 km; SPdA 10\,\% decisive at 50 km) predicts discrimination
+turns on. WISP's directory labels are swapped vs USGS (WISP \texttt{NP1} = W-phase NP2), as at
+Kumamoto. Recovered $M_0=1.68\times10^{20}$ N\,m (W-phase 1.66).}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/SlipIsochrone_trueScale.png}
+\caption{Preferred plane (226/72/33), true scale: a single dominant asperity $\sim$30 km NE
+along strike and up-dip of the centroid nucleation, slip at 85--125 km depth, peak 1.63 m,
+cleanly contained (edge slip 1--3\,\%). Effective area 2695 km$^2$ $\to$ radius 29 km $\to$
+stress drop $\approx$2.9 MPa.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/SlipDist_plane0_5s.png}
+\caption{Same model with 5-s rupture-front isochrones: main-phase duration T$_{5-95}$
+$\approx$ 18.7 s (times relative to the centroid nucleation; the $\sim$35-s precursor precedes
+this and is below our band).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/MomentRate.png}
+\caption{Main-phase moment-rate function (centroid-anchored, preferred plane).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.9\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/Map.png}
+\caption{Map view of the preferred-plane slip.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/P_body_waves.png}
+\caption{Teleseismic P fits (preferred plane, shifted): the main packet and its depth phases
+are now aligned and fit.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/SH_body_waves.png}
+\caption{Teleseismic SH fits (preferred plane, shifted).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\textwidth]{../20260810123502/ffm.0/NP2_shift/plots/SlipIsochrone_trueScale.png}
+\caption{Conjugate plane (124/59/159) for comparison: 8.2\,\% worse fit and 40\,\% of peak
+slip at its top edge.}
+\end{figure}
+
+\section{Moment tensor (MTUQ): the point source breaks on this complex source}
+\begin{table}[H]\centering\small
+\begin{tabular}{llll}
+\toprule
+variant & mechanism & \Mw & Kagan vs W-phase \\
+\midrule
+joint DC @120.5 km & 202/81/$-$65 & 7.10 (grid edge) & 95.3$^\circ$ \\
+body P$+$SH @120.5 km & 220/61/$-$52 & 7.10 (grid edge) & 83.6$^\circ$ \\
+body depth scan (60--150 km) & minimum at 70--90 km & 7.05--7.25 & unstable 28.6--93$^\circ$ \\
+\bottomrule
+\end{tabular}
+\caption{The body-wave depth curve bottoms at 70--90 km --- shallower than the W-phase
+centroid --- and the mechanism is stable nowhere except $\sim$90 km, where it snaps to 225/71/4
+(28.6$^\circ$). A 40-km-offset late asperity, a 35-s precursor and a 40-km-tall slip zone
+violate the point-source approximation. The robust element --- strike $\sim$207--225$^\circ$ ---
+matches the preferred finite-fault plane. Pipeline rule: for complex sources, take mechanism
+and depth from the W-phase and spend the teleseismic data on the finite fault.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.9\textwidth]{../fig_colombia_mtuq_beachballs.png}
+\caption{W-phase reference vs MTUQ attempts.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{../fig_colombia_assessment.png}
+\caption{Left: the main-phase STF is stable across the two assumed planes. Centre: the
+point-source depth curve vs the finite-source depth extent --- the point source is biased
+shallow by finiteness. Right: the plane-discrimination margin in the pipeline's rupture-size
+context.}
+\end{figure}
+
+\section{Frozen prospective prediction}
+\begin{itemize}
+\item \textbf{Fault plane: 226/72/33} (NE--SW, steep, oblique reverse) --- 8.2\,\% margin plus
+the conjugate's edge violation.
+\item \textbf{Two-stage rupture:} a $\sim$35-s weak emergent nucleation from the cataloged
+hypocentre, then the main asperity \textbf{29 km south, up-dip, 85--125 km depth}; peak slip
+$\approx$1.6 m; main-phase T$_{5-95}\approx$19 s; $\Delta\sigma\approx$2.9 MPa.
+\item \textbf{$M_0$} $1.68\times10^{20}$ N\,m (\Mw~7.42), matching the W-phase to 1\,\%.
+\item \textbf{Scorecard when USGS posts:} plane choice; whether they relocate the
+hypocentre/nucleation; asperity position (NE $+$ up-dip); depth extent; peak slip; duration.
+\end{itemize}
+
+\textbf{Caveats.} Teleseismic-only; the precursor's own moment and location are below our band
+and not imaged; the mechanism statement rests on the W-phase (MTUQ instability documented
+above); body-only fits on both planes (surface-wave GF cap).
+
+\end{document}

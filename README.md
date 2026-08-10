@@ -5,7 +5,7 @@ A reproducible, battle-tested workflow for determining the **point-source moment
 moderate-to-large earthquake from openly available teleseismic data — from data fetching to
 publication-grade figures and a PDF report.
 
-Built and validated on eight real cases (2023–2026), each of which broke the standard workflow
+Built and validated on nine real cases (2023–2026), each of which broke the standard workflow
 in a different, instructive way. Every failure mode found along the way is encoded in the scripts
 or documented in the cookbook, so the next event starts from here instead of rediscovering
 them.
@@ -26,6 +26,8 @@ notebooks/    23 = the step-by-step COOKBOOK (start here)
                    the USGS finite fault, then compared head-to-head (executed)
               29 = RESOLUTION TEST: 2023 Mariana M6.1 — smallest event attempted; Hartzell-style
                    teleseismic FFI where USGS publishes no finite fault (executed)
+              30 = BLIND TEST: 2026 Colombia M7.4, 110 km deep — emergent 35-s nucleation
+                   discovered; prediction frozen before the USGS finite fault (executed)
 reports/      self-contained PDF reports for both case studies (tectonic context, methods
               primer for non-specialists, full inversion narrative, reproducibility appendix)
 ```
@@ -111,6 +113,21 @@ resolved**: the fault plane (2.2% margin — consistent with the rupture-size cr
 independent point-source mechanism (MTUQ Kagan 52–86°) and centroid depth (misfit flat to 0.2%
 over 6–33 km) — at M≲6.5 take both from the W-phase and spend the teleseismic data on the
 finite fault. Extends the validated range from M6.8 down to M6.1.
+
+**2026 San José del Palmar (Colombia) M7.4, 110 km deep — blind test, frozen 2026-08-11
+before any USGS finite fault** — `notebooks/30`, `reports/colombia_2026/report.pdf` +
+`prediction_frozen.md`. Not a Bucaramanga-nest event: it belongs to the Cauca
+intermediate-depth cluster of the Nazca slab, 407 km SW of the nest. Discovery: a **~35-s
+weak emergent nucleation phase** (W-phase centroid time = origin + 34.5 s, 29 km S) makes
+origin-anchored inversions kinematically impossible (slip piles at the fault edge; MTUQ
+windows miss the main energy) — both analyses re-anchored at the W-phase centroid in space
+and time. Frozen prediction: plane **226/72/33** (8.2% margin + conjugate edge violation =
+near-decisive at this rupture size), single asperity 29 km S of the epicentre, up-dip,
+85–125 km depth, peak 1.6 m, main-phase T5-95 ≈ 19 s, Δσ ≈ 2.9 MPa, M0 to 1% of W-phase.
+MTUQ point source documented as breaking on this complex source (mechanism stable nowhere
+except ~90 km) — for complex sources, mechanism+depth from the W-phase, teleseismic data
+into the finite fault. Also hardened `wisp_shift_match.py` for deep faults (body-only
+fallback below the surface-wave GF cap).
 
 ## Data & code availability
 

@@ -37,16 +37,32 @@ def run_plane(ffm0, plane, manual_modelling, shift_match2, save_waveforms, defau
         shutil.rmtree(dst / "plots")
     ti = json.load(open(dst / "tensor_info.json"))
     sd = json.load(open(dst / "segments_data.json"))
+    # Deep faults exceed the ~126.5 km surface-wave GF cap; auto_model silently drops
+    # surf there but manual_modelling hard-errors, so shift only what the plane can use.
+    # surf_waves.json exists whenever data prep ran; synthetics_surf.txt exists only
+    # if the plane actually MODELLED surface waves (deep faults silently drop them).
+    types = ["body"] + (["surf"] if (src / "synthetics_surf.txt").exists() else [])
 
-    manual_modelling(ti, ["body", "surf"], default_dirs, sd, directory=dst)
+    def modelling():
+        try:
+            manual_modelling(ti, types, default_dirs, sd, directory=dst)
+        except Exception as e:
+            if "surface waves" in str(e) and "surf" in types:
+                types.remove("surf")
+                print(f"{plane}: fault below surface-wave GF cap -> body-only shift", flush=True)
+                manual_modelling(ti, types, default_dirs, sd, directory=dst)
+            else:
+                raise
+
+    modelling()
     m0 = misfit(dst)
     cwd = os.getcwd(); os.chdir(dst)
     try:
-        save_waveforms("body", shift_match2("body", directory=dst))
-        save_waveforms("surf", shift_match2("surf", directory=dst))
+        for t in types:
+            save_waveforms(t, shift_match2(t, directory=dst))
     finally:
         os.chdir(cwd)
-    manual_modelling(ti, ["body", "surf"], default_dirs, sd, directory=dst)
+    modelling()
     m1 = misfit(dst)
     print(f"{plane}: pre-shift {m0:.4f}  post-shift {m1:.4f}  (delta {m0 - m1:+.4f})  -> {dst}", flush=True)
 
