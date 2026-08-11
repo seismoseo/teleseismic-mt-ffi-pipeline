@@ -39,7 +39,7 @@ surface-wave GF cap -> fair two-plane comparison; shift_match applied):
   vs conjugate 124/59/159: 0.1485 -> 8.2% margin, near-decisive; conjugate additionally
   violates the edge rule (40% of peak at its top edge; preferred plane 1-3%).
   NOTE: WISP directory labels are SWAPPED vs USGS (WISP NP1 = W-phase NP2), as for Kumamoto.
-- Slip: single dominant asperity ~30 km NE along strike of the centroid, up-dip,
+- Slip: single dominant asperity ~17 km SSW of the centroid (~45 km SSW of the epicentre), up-dip,
   85-125 km depth, peak 1.63 m; edge slip 1-3% (clean containment)
 - M0 1.68e20 N-m (W-phase 1.66e20); main-phase T5-95 ~18.7 s (excludes the precursor)
 - Effective area 2695 km2 -> radius 29 km -> stress drop ~2.9 MPa (physical)
@@ -54,5 +54,15 @@ MTUQ point source (honest failure, documented):
   spend teleseismic data on the finite fault.
 
 To compare when USGS posts their FFM: plane choice (226/72 vs 124/59), asperity position
-(NE + up-dip of centroid), depth extent 85-125 km, peak slip ~1.6 m, main-phase duration
+(SSW + up-dip of centroid), depth extent 85-125 km, peak slip ~1.6 m, main-phase duration
 ~19 s, the precursor treatment (do they relocate the hypocentre?).
+
+## Directivity (added 2026-08-11, same freeze window; corrects an axis-misread 'NE' in the
+first push - geographic computation below is authoritative)
+Two-stage, predominantly unilateral SOUTHWARD + UP-DIP directivity:
+1) model-independent: epicentre -> W-phase centroid = 30 km toward azimuth 163 (SSE),
+   110->120.5 km, ~34.5 s (apparent 0.9 km/s);
+2) preferred plane: early->late moment centroid 27 km toward azimuth 220 (SW), depth
+   110->101 km (up-dip), 75%/24% forward/backward moment = unilateral;
+3) up-dip shallowing robust on BOTH planes; horizontal direction on the (rejected) conjugate
+   is northward and inconsistent with (1), further supporting the 226/72/33 plane.

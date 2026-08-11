@@ -122,7 +122,7 @@ weak emergent nucleation phase** (W-phase centroid time = origin + 34.5 s, 29 km
 origin-anchored inversions kinematically impossible (slip piles at the fault edge; MTUQ
 windows miss the main energy) — both analyses re-anchored at the W-phase centroid in space
 and time. Frozen prediction: plane **226/72/33** (8.2% margin + conjugate edge violation =
-near-decisive at this rupture size), single asperity 29 km S of the epicentre, up-dip,
+near-decisive at this rupture size), single asperity ~45 km SSW of the epicentre, up-dip,
 85–125 km depth, peak 1.6 m, main-phase T5-95 ≈ 19 s, Δσ ≈ 2.9 MPa, M0 to 1% of W-phase.
 MTUQ point source documented as breaking on this complex source (mechanism stable nowhere
 except ~90 km) — for complex sources, mechanism+depth from the W-phase, teleseismic data
