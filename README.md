@@ -28,6 +28,9 @@ notebooks/    23 = the step-by-step COOKBOOK (start here)
                    teleseismic FFI where USGS publishes no finite fault (executed)
               30 = BLIND TEST: 2026 Colombia M7.4, 110 km deep — emergent 35-s nucleation
                    discovered; prediction frozen before the USGS finite fault (executed)
+              31 = deep dive: the 35-s two-stage nucleation of the Colombia M7.4 — raw-data
+                   evidence, the diagnostic inversion failure, the centroid re-anchoring fix,
+                   and the foreshock-cascade-vs-slow-slip discrimination (executed)
 reports/      self-contained PDF reports for both case studies (tectonic context, methods
               primer for non-specialists, full inversion narrative, reproducibility appendix)
 ```
