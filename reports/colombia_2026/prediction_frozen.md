@@ -66,3 +66,19 @@ Two-stage, predominantly unilateral SOUTHWARD + UP-DIP directivity:
    110->101 km (up-dip), 75%/24% forward/backward moment = unilateral;
 3) up-dip shallowing robust on BOTH planes; horizontal direction on the (rejected) conjugate
    is northward and inconsistent with (1), further supporting the 226/72/33 plane.
+
+## Post-freeze comparison (USGS FFM posted 2026-08-14T19:14 UTC = 4 days AFTER our frozen 42b65a2)
+
+VERIFIED: plane 225.57/71.78/33.23 (bit-for-bit our preferred plane = W-phase NP2); M0 1.72e20
+vs ours 1.68e20 (2.5%); main asperity 31 km SSW (az 209) of the epicentre at 100 km depth
+(ours ~44 km S, 85-125 km; theirs 91-108); unilateral SW directivity 46 km @ az 225 (ours
+27 @ 220); main-phase duration 24 s (ours ~19); main-phase front speed 2.34 km/s by the same
+metric (ours 2.52).
+THE NUCLEATION QUESTION (frozen scorecard item): USGS ALSO could not use the cataloged
+hypocentre - they relocated it (24 km NE of catalog, 125 km deep; neither catalog nor W-phase
+centroid) and let a single front CRAWL silently (~30 s, avVr header 1.28 km/s) to the asperity:
+their STF carries 0.2% of moment in the first 25 s - independent confirmation of our stage-1
+moment bound. Two parameterizations of the same two-stage physics.
+Real differences: peak slip 3.98 vs 1.63 m and dsigma 8.1 vs 2.9 MPa (their 6-km subfaults /
+less smoothing = more compact asperity); initiation point location remains the genuinely
+ill-determined element.

@@ -117,8 +117,8 @@ independent point-source mechanism (MTUQ Kagan 52–86°) and centroid depth (mi
 over 6–33 km) — at M≲6.5 take both from the W-phase and spend the teleseismic data on the
 finite fault. Extends the validated range from M6.8 down to M6.1.
 
-**2026 San José del Palmar (Colombia) M7.4, 110 km deep — blind test, frozen 2026-08-11
-before any USGS finite fault** — `notebooks/30`, `reports/colombia_2026/report.pdf` +
+**2026 San José del Palmar (Colombia) M7.4, 110 km deep — blind test, frozen 2026-08-11,
+USGS posted 2026-08-14: VERIFIED** — `notebooks/30`, `reports/colombia_2026/report.pdf` +
 `prediction_frozen.md`. Not a Bucaramanga-nest event: it belongs to the Cauca
 intermediate-depth cluster of the Nazca slab, 407 km SW of the nest. Discovery: a **~35-s
 weak emergent nucleation phase** (W-phase centroid time = origin + 34.5 s, 29 km S) makes
@@ -130,7 +130,15 @@ near-decisive at this rupture size), single asperity ~45 km SSW of the epicentre
 MTUQ point source documented as breaking on this complex source (mechanism stable nowhere
 except ~90 km) — for complex sources, mechanism+depth from the W-phase, teleseismic data
 into the finite fault. Also hardened `wisp_shift_match.py` for deep faults (body-only
-fallback below the surface-wave GF cap).
+fallback below the surface-wave GF cap). **Outcome (USGS posted 4 days after the freeze):
+every physical headline verified — identical plane (225.57/71.78/33.23), M0 to 2.5%, same
+SSW asperity at ~100 km, same unilateral SW directivity (46 km @ az 225 vs our 27 @ 220),
+same main-phase duration and speed (2.34 vs 2.52 km/s, same metric) — and the methodological
+prediction too: USGS also abandoned the cataloged hypocentre (relocated 24 km NE, then let a
+single front crawl silently ~30 s; their STF has 0.2% of moment in the first 25 s,
+independently confirming our stage-1 bound). Honest differences: their 6-km subfaults give a
+compacter asperity (peak 3.98 vs 1.63 m; Δσ 8.1 vs 2.9 MPa), and the initiation point —
+catalog vs NE relocation vs W-phase centroid — remains the ill-determined element.**
 
 ## Data & code availability
 

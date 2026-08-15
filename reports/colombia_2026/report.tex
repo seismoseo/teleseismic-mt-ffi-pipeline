@@ -10,7 +10,7 @@ intermediate-depth earthquake}\\
 \large A blind test of the MTUQ$+$WISP pipeline, frozen before the USGS finite fault ---
 and the discovery of a 35-s emergent nucleation phase}
 \author{Automated pipeline (17.Venezuela\_2026)}
-\date{Frozen 2026-08-11 --- no USGS finite-fault product existed at freeze time}
+\date{Frozen 2026-08-11; USGS posted their finite fault 2026-08-14 --- head-to-head in Section 10}
 \begin{document}\maketitle
 
 \section*{Purpose and headline}
@@ -254,5 +254,47 @@ hypocentre/nucleation; asperity position (SSW $+$ up-dip); depth extent; peak sl
 \textbf{Caveats.} Teleseismic-only; the precursor's own moment and location are below our band
 and not imaged; the mechanism statement rests on the W-phase (MTUQ instability documented
 above); body-only fits on both planes (surface-wave GF cap).
+
+\section{Head-to-head with the USGS finite fault (posted 4 days after the freeze)}
+\begin{table}[H]\centering\small
+\begin{tabular}{lll}
+\toprule
+quantity & ours (frozen) & USGS \\
+\midrule
+fault plane & \textbf{226/72/33} & \textbf{225.57/71.78/33.23 --- identical} \\
+$M_0$ (\Mw) & $1.68\times10^{20}$ (7.42) & $1.72\times10^{20}$ (7.424) \\
+main asperity & $\sim$44 km S of epicentre, $\sim$105 km & 31 km SSW (az 209$^\circ$), 100 km \\
+slip depth ($>$15\,\% peak) & 85--125 km & 91--108 km \\
+directivity & unilateral SW, 27 km @ 220$^\circ$ & unilateral SW, 46 km @ 225$^\circ$ \\
+main-phase duration & $\sim$19 s & $\sim$24 s \\
+main-phase V$_r$ (same metric) & 2.52 km s$^{-1}$ & 2.34 km s$^{-1}$ \\
+nucleation handling & re-anchored at W-phase centroid & \textbf{also relocated} (24 km NE, 125 km) $+$ silent crawl \\
+stage-1 moment & excluded, bounded $\leq$ few \,\% & \textbf{0.2\,\% in the first 25 s} \\
+peak slip & 1.63 m & 3.98 m \\
+$\Delta\sigma$ (effective-area) & 2.9 MPa & 8.1 MPa \\
+\bottomrule
+\end{tabular}
+\caption{Every physical headline of the frozen prediction verified, including the
+methodological one: USGS could not nucleate at the cataloged hypocentre either. Their model
+represents the two-stage source as a silent slow crawl (header avV$_r$ 1.28 km s$^{-1}$) from a
+relocated initiation point; ours excludes stage 1 by re-anchoring. Their near-zero early moment
+independently confirms our stage-1 bound. Honest differences: peak slip ($\times$2.4) and
+stress drop track their smaller subfaults/weaker smoothing; the initiation point --- catalog vs
+their NE relocation vs the W-phase centroid --- remains the genuinely ill-determined element,
+while the moment-release location is now triple-consistent.}
+\end{table}
+\begin{figure}[H]\centering
+\includegraphics[width=0.95\textwidth]{../usgs_ffm/Compare_STF_absolute.png}
+\caption{Moment rate in absolute time: USGS (grey) and ours shifted to absolute time (red).
+Both models carry essentially no moment during stage 1.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/Compare_slip_map.png}
+\caption{Map-view slip, this study vs USGS.}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.9\textwidth]{../20260810123502/ffm.0/NP1_shift/plots/Compare_slip_profile.png}
+\caption{Along-strike slip profiles (azimuth 225.6$^\circ$ through the epicentre).}
+\end{figure}
 
 \end{document}
