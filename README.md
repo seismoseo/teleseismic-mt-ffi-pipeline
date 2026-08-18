@@ -5,7 +5,7 @@ A reproducible, battle-tested workflow for determining the **point-source moment
 moderate-to-large earthquake from openly available teleseismic data — from data fetching to
 publication-grade figures and a PDF report.
 
-Built and validated on nine real cases (2023–2026), each of which broke the standard workflow
+Built and validated on ten real cases (2023–2026), each of which broke the standard workflow
 in a different, instructive way. Every failure mode found along the way is encoded in the scripts
 or documented in the cookbook, so the next event starts from here instead of rediscovering
 them.
@@ -31,6 +31,8 @@ notebooks/    23 = the step-by-step COOKBOOK (start here)
               31 = deep dive: the 35-s two-stage nucleation of the Colombia M7.4 — raw-data
                    evidence, the diagnostic inversion failure, the centroid re-anchoring fix,
                    and the foreshock-cascade-vs-slow-slip discrimination (executed)
+              32 = case study: 2026 N Sumatra M6.9 intraslab, 172 km deep — the pipeline's
+                   cleanest event; fault-enlargement changes the plane verdict (executed)
 reports/      self-contained PDF reports for both case studies (tectonic context, methods
               primer for non-specialists, full inversion narrative, reproducibility appendix)
 ```
@@ -139,6 +141,20 @@ single front crawl silently ~30 s; their STF has 0.2% of moment in the first 25 
 independently confirming our stage-1 bound). Honest differences: their 6-km subfaults give a
 compacter asperity (peak 3.98 vs 1.63 m; Δσ 8.1 vs 2.9 MPa), and the initiation point —
 catalog vs NE relocation vs W-phase centroid — remains the ill-determined element.**
+
+**2026 North Sumatra M6.9 (us6000tkyk), 172 km deep intraslab, Toba region** —
+`notebooks/32`, `reports/sumatra_2026/report.pdf`. The pipeline's **cleanest event**: 231
+stations at a 21° gap, a 98.6%-DC source, body misfits of 0.080 (lowest here), M0 recovered
+to <1% of the W-phase, and an independent MTUQ mechanism at **Kagan 7.4°** (best in project;
+contrast Colombia's 52–95° and Mariana's 52–86°). Two lessons: (1) first-pass slip violated
+the edge rule (29–47% at the bottom row) and enlarging the fault *identically on both planes*
+moved the plane margin from a meaningless 1.6% tie to a suggestive **4.1% for NP2
+(208/58/1)** — the plane MTUQ independently found; (2) depth is **not** resolved by the misfit
+minimum (flat to 0.3% over 140–220 km) but *is* resolved by mechanism stability (chaotic
+below 170 km, locked onto the W-phase at ≥180 km), corroborating the 180.5 km centroid.
+Kinematics: unilateral northward + down-dip, Vr/Vs ≈ 0.55 (the same dissipative regime as the
+Colombia M7.4), Δσ 0.65–0.83 MPa. Largest deep event within 150 km (previous max M6.3, 2006).
+No USGS finite-fault product exists for this event.
 
 ## Data & code availability
 

@@ -1,0 +1,166 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,booktabs,float,xcolor,hyperref,amssymb}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newcommand{\Mw}{$M_{\mathrm w}$}
+\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+\title{\textbf{Source model of the 2026 \Mw~6.9 North Sumatra intraslab earthquake}\\
+\large A 172-km-deep rupture beneath the Toba region --- and the cleanest test yet of the
+teleseismic MT$+$FFI pipeline}
+\author{Automated pipeline (17.Venezuela\_2026)}
+\date{2026-08-15 --- no USGS finite-fault product exists for this event}
+\begin{document}\maketitle
+
+\section*{Summary}
+The \Mw~6.9 earthquake of 2026-08-15 beneath north Sumatra ruptured the subducted
+Indo-Australian (Sunda) slab at 172--181 km depth, below the Toba caldera region --- an
+intraslab event, not a megathrust rupture. With 231 teleseismic stations at a 21$^\circ$
+maximum azimuthal gap and a 98.6\,\% double-couple source, this is the pipeline's cleanest
+case: body-wave misfits of 0.080 (lowest of any event studied here), $M_0$ recovered to
+$<$1\,\% of the W-phase value, and an \emph{independent} MTUQ mechanism within 7.4$^\circ$
+(Kagan) of the W-phase solution --- also the best of any event here. It is the largest deep
+earthquake recorded within 150 km of its epicentre (previous maximum \Mw~6.3, 2006).
+
+\section{Event and setting}
+\begin{table}[H]\centering\small
+\begin{tabular}{ll}
+\toprule
+Origin & 2026-08-15T10:54:51.8 UTC, 3.086$^\circ$N, 99.015$^\circ$E, depth 172.5 km \\
+Magnitude & \Mw~6.9 (W-phase); $M_0=2.62\times10^{19}$ N\,m; centroid 180.5 km; DC 98.6\,\% \\
+W-phase NP1 & 207.96/58.15/1.48 \quad (left-lateral, moderately dipping) \\
+W-phase NP2 & 117.18/88.75/148.14 \quad (near-vertical, right-lateral oblique) \\
+W-phase centroid & 3.080$^\circ$N, 99.013$^\circ$E, origin $+$10.9 s (0.6 km offset) \\
+Setting & intraslab, Sunda slab beneath the Toba caldera region \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The hypocentre--centroid check (Colombia lesson) is benign here: a 0.6 km spatial offset with a
+$+$10.9 s time shift is a normal centroid lag for an \Mw~6.9 with a $\sim$7 s half duration,
+not a delayed main rupture, so the origin-anchored inversion is valid.
+
+\textbf{Regional significance.} ComCat 1980--2026 within 0.5--5.5$^\circ$N, 96.5--101.5$^\circ$E
+lists 718 events \Mw$\geq$4 deeper than 60 km (266 deeper than 150 km): a continuous, active
+intermediate-depth zone. Within 150 km of this epicentre and deeper than 120 km the largest
+prior event was \Mw~6.3 (2006-12-01, 204 km depth, 35 km away), with all others
+\Mw$\leq$5.6 --- this event releases roughly eight times that moment.
+
+\section{Data}
+231 three-component stations, 31--90$^\circ$, maximum azimuthal gap 21$^\circ$ --- the best
+coverage of any event in this project. The mechanism is a strike-slip pair, and clustered
+azimuths are known to alias four-lobed strike-slip radiation (the 2026 Kumamoto lesson); a
+21$^\circ$ gap removes that risk. At 180 km the fault lies far below WISP's $\sim$126.5 km
+surface-wave Green's-function cap, so surface waves are dropped on \emph{both} planes and the
+two-plane comparison is body-only and fair by construction.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.6\textwidth]{../fig_sumatra_stations.png}
+\caption{Teleseismic stations (azimuthal-equidistant; rings 30/60/90$^\circ$).}
+\end{figure}
+
+\section{Moment tensor (MTUQ)}
+\begin{table}[H]\centering\small
+\begin{tabular}{llll}
+\toprule
+variant & mechanism & \Mw & Kagan vs W-phase \\
+\midrule
+\textbf{DC body P$+$SH @180.5 km} & \textbf{202/56/$-$7} & 6.75 & \textbf{7.4$^\circ$} \\
+DC joint @180.5 km & 202/49/2 & 6.75 & 11.3$^\circ$ \\
+depth-scan solution at 180.5 km & 207/58/$-$4 & 6.75 & 5.5$^\circ$ \\
+\bottomrule
+\end{tabular}
+\caption{The best independent mechanism recovery in this project. For contrast, the 2026
+Colombia \Mw~7.4 gave 52--95$^\circ$ (point source broken by source complexity) and the 2023
+Mariana \Mw~6.1 gave 52--86$^\circ$ (signal-to-noise floor). Here a simple 98.6\,\%-DC source,
+a 21$^\circ$ azimuthal gap and the raised deep-event body band (25--60 s) combine to recover
+the W-phase mechanism almost exactly. \Mw~6.75 versus 6.9 is a modest underestimate.}
+\end{table}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../fig_sumatra_beachballs.png}
+\caption{W-phase reference and the three MTUQ recoveries.}
+\end{figure}
+
+\section{Finite fault (WISP): the fault had to be enlarged}
+First-pass \texttt{auto\_model} fits were excellent (misfit 0.080--0.082) but violated the
+edge-containment rule: 29\,\% (NP1) and 47\,\% (NP2) of peak slip lay in the deepest fault row.
+Following the San Pedro de Atacama rule the fault was enlarged \emph{identically on both
+planes} (69$\times$57 km $\to$ 97$\times$114 km) and both were re-inverted and re-shifted.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lll}
+\toprule
+ & first pass (69$\times$57 km) & enlarged (97$\times$114 km) \\
+\midrule
+edge slip top / bottom & 2--4\,\% / \textbf{29--47\,\%} & 2--3\,\% / \textbf{2--4\,\%} \\
+misfit NP1 / NP2 & 0.0816 / 0.0803 & 0.0829 / \textbf{0.0795} \\
+plane margin & 1.6\,\% (meaningless) & \textbf{4.1\,\%, NP2 preferred} \\
+peak slip & 0.53--0.57 m & 0.44--0.50 m \\
+$\Delta\sigma$ (effective-area) & 1.2 MPa & 0.65--0.83 MPa \\
+\bottomrule
+\end{tabular}
+\caption{The enlargement changed the conclusion: with the boundary artefact removed the plane
+margin grew from a meaningless tie to a suggestive 4.1\,\% favouring NP2 (208/58/1) --- the
+plane MTUQ independently converged on. Both models recover $M_0=2.64\times10^{19}$ N\,m
+($<$1\,\% from the W-phase) with T$_{5-95}\approx$15.5 s, and the source-time function is
+plane-independent ($r=0.972$): well-determined moment release on a weakly-determined plane.}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.82\textwidth]{../20260815105451/ffm.0/NP2_big_shift/plots/SlipIsochrone_trueScale.png}
+\caption{Preferred plane (208/58/1), true scale: compact slip at 165--207 km depth, peak
+0.50 m, cleanly contained after enlargement (edge slip 2\,\%).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.55\textwidth]{../20260815105451/ffm.0/NP2_big_shift/plots/MomentRate.png}
+\caption{Moment-rate function (preferred plane).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260815105451/ffm.0/NP2_big_shift/plots/P_body_waves.png}
+\caption{Teleseismic P fits (preferred plane, shifted).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\textwidth]{../20260815105451/ffm.0/NP2_big_shift/plots/SH_body_waves.png}
+\caption{Teleseismic SH fits (preferred plane, shifted).}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=0.82\textwidth]{../20260815105451/ffm.0/NP1_big_shift/plots/SlipIsochrone_trueScale.png}
+\caption{Conjugate plane (117/89/148) for comparison: 4.1\,\% worse fit.}
+\end{figure}
+
+\section{Assessment}
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{../fig_sumatra_assessment.png}
+\caption{Left: the depth scan --- misfit (blue) is flat to 0.3\,\% across 140--220 km, but the
+Kagan angle (red) reveals a sharp transition: the mechanism is chaotic at 140--170 km
+(85--99$^\circ$) and locks onto the W-phase from 180.5 km downward (5.5--18$^\circ$). Centre:
+the source-time function is plane-independent. Right: the plane-discrimination margin in the
+project's rupture-size context.}
+\end{figure}
+
+\textbf{Depth --- a split verdict worth stating carefully.} The body-wave misfit minimum does
+\emph{not} resolve depth (0.3\,\% variation over an 80-km range; its nominal minimum at 155 km
+is meaningless at that flatness). What does resolve it is \emph{mechanism stability}: the body
+waves only fit coherently once the depth phases are correctly timed, which occurs at
+$\geq$180 km. Together with the WISP slip centroid at 181 km, this independently corroborates
+the USGS 180.5 km centroid over the 172.5 km hypocentre.
+
+\textbf{Kinematics (preferred plane).} The slip centroid lies 8.4 km from the epicentre at
+azimuth 349$^\circ$, 181 km deep; the moment centroid migrates 13.7 km toward azimuth
+354$^\circ$ (north) while deepening from 176 to 188 km, with 66\,\%/23\,\% forward/backward
+moment --- a moderately unilateral, northward and down-dip rupture. The realized rupture-front
+speed is 2.52 km s$^{-1}$ (16--84\,\%: 2.24--2.95), giving $V_r/V_s\approx0.55$ at
+$V_s\approx4.6$ km s$^{-1}$: the same slow, dissipative regime found for the 2026 Colombia
+\Mw~7.4 (0.56), and matching the slow first stage rather than the fast runaway stage of
+Poli et al.\ (2016). The stress drop, 0.65--0.83 MPa, is low.
+
+\section{Caveats and next steps}
+Teleseismic-only; no USGS finite fault exists for comparison; the plane preference (4.1\,\%) is
+suggestive rather than decisive, though corroborated by the independent MTUQ mechanism; depth
+rests on mechanism stability rather than a misfit minimum; peak slip is smoothing-limited and
+therefore a lower bound. Natural next steps: a radiated-energy and efficiency measurement (does
+this event also sit in the low-$\eta$ dissipative regime found for Colombia?); BMKG regional
+waveforms for an independent plane test; and comparison with the 2006 \Mw~6.3 mechanism to test
+whether this slab segment ruptures repeatedly in the same geometry.
+
+\end{document}
